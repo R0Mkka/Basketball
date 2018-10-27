@@ -14,12 +14,13 @@ export class ContentComponent {
   @Input() isTeams: boolean;
   @Output() teamsLoaded = new EventEmitter<boolean>();
 
-  // teams: Array<any>;
+  teams: Array<any>;
   players: Array<any>;
 
   constructor(private teamsService: TeamsService,
               private playersService: PlayersService) {
     this.initPlayers();
+    this.initTeams();
   }
 
   private initPlayers() {
@@ -27,7 +28,10 @@ export class ContentComponent {
       .pipe(
         retry(3),
         tap(
-          (value: Array<any>) => this.players = value.slice(0, 10),
+          (value: Array<any>) => {
+              this.players = value.slice(0, 10);
+              console.log(value);
+            },
           () => console.error('Error with getting players!!!'),
           () => {
             this.teamsLoaded.emit();
@@ -35,6 +39,16 @@ export class ContentComponent {
               this.players[index].image = url;
             });
           }
+        ),
+        catchError(() => ([]))
+      ).subscribe();
+  }
+
+  private initTeams() {
+    this.teamsService.getTeams()
+      .pipe(
+        tap(
+          value => console.log(value)
         ),
         catchError(() => ([]))
       ).subscribe();

@@ -5,8 +5,29 @@
   background-color: #000;
 }
 
-.header .burger {
+.menu-and-nba-stats {
+  display: flex;
+}
+
+.menu-and-nba-stats .burger {
+  height: 32px;
+}
+
+.menu-and-nba-stats .logo {
+  position: relative;
+  top: 13px;
   height: 30px;
+  width: 70px;
+}
+
+.menu-and-nba-stats p {
+  position: relative;
+  top: 12px;
+  margin: 0px 0px 0px 1px;
+  padding: 0px;
+  font-size: 30px;
+  font-weight: 700;
+  color: #fff;
 }
 
 .slide-toggle-and-favorites {

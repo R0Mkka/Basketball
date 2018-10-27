@@ -1,15 +1,25 @@
+<div *ngIf="showModal" class="backdrop" (click)="closeModal()"></div>
+<app-player-modal *ngIf="showModal" [player]="player" (modalClosed)="closeModal()"></app-player-modal>
 <mat-card class="card" appCardHover>
   <div *ngIf="!isImageLoaded" class="card__spinner">
     <mat-spinner></mat-spinner>
   </div>
-  <img mat-card-image [src]="imageSrc" [alt]="title" (load)="imageLoaded()">
-  <mat-card-title> {{title}} </mat-card-title>
+  <img mat-card-image [src]="imageSrc" [alt]="name" (load)="imageLoaded()">
+  <mat-card-title> {{name}} </mat-card-title>
   <mat-card-content>
-    <p> {{content}} </p>
+    <img *ngIf="isImageLoaded" class="team-image" [src]="teamImage">
+    <p>Team: {{team}}</p>
+    <p>Games played: {{gamesPlayed}}</p>
+    <p>Three point percentage: {{tpp}}</p>
   </mat-card-content>
   <mat-card-actions>
-    <img class="heart"
+    <img class="edit"
+         title="Edit player"
+         src="/src/assets/images/edit.png"
+         (click)="editPlayer()">
+    <img class="favorite"
+         title="Add to favorites"
          [src]="heartImage"
-         (click)="changeHeartColor()">
+         (click)="toggleHeartColor()">
   </mat-card-actions>
 </mat-card>

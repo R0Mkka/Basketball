@@ -1,0 +1,47 @@
+<mat-card class="modal" appCardHover>
+  <div *ngIf="!isImageLoaded" class="modal__spinner">
+    <mat-spinner></mat-spinner>
+  </div>
+  <img mat-card-image [src]="player.image" [alt]="player.name" (load)="imageLoaded()">
+  <mat-card-title> {{player.name}} </mat-card-title>
+  <mat-card-content>
+    <img *ngIf="isImageLoaded"
+         class="team-image"
+         [src]="player.team_image">
+    <mat-form-field>
+      <input matInput placeholder="Favorite food" value="Sushi">
+    </mat-form-field>
+    <mat-form-field>
+      <input matInput placeholder="Favorite food" value="Sushi">
+    </mat-form-field>
+    <mat-form-field>
+      <input matInput placeholder="Favorite food" value="Sushi">
+    </mat-form-field>
+    <mat-form-field>
+      <input matInput placeholder="Favorite food" value="Sushi">
+    </mat-form-field>
+    <mat-form-field>
+      <input matInput placeholder="Favorite food" value="Sushi">
+    </mat-form-field>
+    <mat-form-field>
+      <input matInput placeholder="Favorite food" value="Sushi">
+    </mat-form-field>
+    <mat-form-field>
+      <input matInput placeholder="Favorite food" value="Sushi">
+    </mat-form-field>
+    <mat-form-field>
+      <input matInput placeholder="Favorite food" value="Sushi">
+    </mat-form-field>
+    <mat-form-field>
+      <input matInput placeholder="Favorite food" value="Sushi">
+    </mat-form-field>
+  </mat-card-content>
+  <mat-card-actions>
+    <img class="close"
+         src="/src/assets/images/close.png"
+         (click)="closeModal()">
+    <img class="favorite"
+         [src]="heartImage"
+         (click)="toggleHeartColor()">
+  </mat-card-actions>
+</mat-card>

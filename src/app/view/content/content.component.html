@@ -4,8 +4,10 @@
               <!--[content]="player.name"-->
               <!--[image]="player.image"></app-team>-->
     <app-player *ngIf="!isTeams"
-                [title]="player.team_name"
-                [content]="player.name"
+                [name]="player.name"
+                [team]="player.team_name"
+                [gamesPlayed]="player.games_played"
+                [tpp]="player.three_point_percentage"
                 [imageSrc]="player.image"></app-player>
   </ng-container>
 </section>

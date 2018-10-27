@@ -8,6 +8,6 @@ export class TeamsService {
   constructor(private http: HttpClient) {}
 
   getTeams() {
-    return this.http.get<Array<Object>>(this.baseUrl + 'players-stats');
+    return this.http.get<Array<Object>>(this.baseUrl + 'teams');
   }
 }

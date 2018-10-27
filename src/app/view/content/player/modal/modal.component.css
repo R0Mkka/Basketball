@@ -1,16 +1,9 @@
-.backdrop {
+.modal {
   position: fixed;
-  left: 0px;
-  top: 0px;
-  width: 100%;
-  height: 100vh;
-  background-color: rgba(0, 0, 0, 0.7);
-  z-index: 15;
-}
-
-.card {
-  width: 350px;
-  margin: 10px;
+  top: 20px;
+  left: calc(100vh - 250px);
+  width: 500px;
+  z-index: 20;
 }
 
 .card__spinner {
@@ -22,8 +15,8 @@
   position: absolute;
   top: 10px;
   right: 16px;
-  width: 70px;
-  height: 70px;
+  width: 100px;
+  height: 100px;
 }
 
 mat-card-content p {
@@ -31,14 +24,14 @@ mat-card-content p {
   padding: 0px;
 }
 
-.edit, .favorite {
+.close, .favorite {
   cursor: pointer;
   position: absolute;
   width: 25px;
   height: 25px;
 }
 
-.edit {
+.close {
   right: 66px;
   bottom: 16px;
 }
@@ -46,11 +39,4 @@ mat-card-content p {
 .favorite {
   right: 16px;
   bottom: 16px;
-}
-
-.hovered {
-  transform: scale(1.03);
-  box-shadow: 0 0 10px rgba(0, 0, 0, .5);
-  transition: .2s all ease-in-out;
-  z-index: 10;
 }
