@@ -1,27 +1,49 @@
 .modal {
   position: fixed;
-  top: 20px;
-  left: calc(100vh - 250px);
-  width: 500px;
+  top: 50px;
+  left: calc(100vh - 350px);
+  display: flex;
+  justify-content: space-between;
+  width: 700px;
+  height: 400px;
+  padding: 10px 50px 100px 0px;
+  border-radius: 5px;
+  background-color: #fff;
   z-index: 20;
 }
 
-.card__spinner {
-  display: flex;
-  justify-content: center;
+.player-image {
+  position: absolute;
+  bottom: 0px;
+  left: 0px;
+  width: 300px;
+  margin: 0px;
+  padding: 0px;
 }
 
 .team-image {
   position: absolute;
   top: 10px;
-  right: 16px;
-  width: 100px;
-  height: 100px;
+  left: 10px;
+  width: 300px;
 }
 
-mat-card-content p {
-  margin: 5px 0 0 0;
-  padding: 0px;
+.modal__title {
+  width: 100%;
+  margin: 20px 0px;
+  font-size: 30px;
+  text-align: center;
+}
+
+.modal__content {
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  margin-left: 330px;
+}
+
+.modal__content mat-form-field {
+  width: 21%;
 }
 
 .close, .favorite {
@@ -32,11 +54,11 @@ mat-card-content p {
 }
 
 .close {
-  right: 66px;
+  right: 16px;
   bottom: 16px;
 }
 
 .favorite {
-  right: 16px;
+  right: 66px;
   bottom: 16px;
 }

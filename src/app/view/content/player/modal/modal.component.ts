@@ -10,12 +10,7 @@ export class ModalComponent {
   @Input() player: Player;
   @Output() modalClosed = new EventEmitter<any>();
 
-  isImageLoaded = false;
   heartImage = '/src/assets/images/favorite-grey.png';
-
-  imageLoaded() {
-    this.isImageLoaded = true;
-  }
 
   toggleHeartColor() {
     if (this.heartImage === '/src/assets/images/favorite-grey.png') {
