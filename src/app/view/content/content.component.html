@@ -1,0 +1,11 @@
+<section class="content">
+  <ng-container *ngFor="let player of players">
+    <!--<app-team [title]="player.team_name"-->
+              <!--[content]="player.name"-->
+              <!--[image]="player.image"></app-team>-->
+    <app-player *ngIf="!isTeams"
+                [title]="player.team_name"
+                [content]="player.name"
+                [imageSrc]="player.image"></app-player>
+  </ng-container>
+</section>

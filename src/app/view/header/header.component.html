@@ -1,0 +1,20 @@
+<div class="header">
+  <button mat-button [matMenuTriggerFor]="menu" title="Menu">
+    <img class="invert-color burger" src="../../../assets/images/menu_burger.svg" alt="Menu">
+  </button>
+  <mat-menu #menu="matMenu">
+    <button mat-menu-item> Item 1 </button>
+    <button mat-menu-item> Item 2 </button>
+    <button mat-menu-item> Item 3 </button>
+  </mat-menu>
+
+  <div class="slide-toggle-and-favorites">
+    <p>Players</p>
+    <mat-slide-toggle class="slide-toggle"
+                      color="primary"
+                      [checked]="isTeams"
+                      (change)="changeContent()"></mat-slide-toggle>
+    <p>Teams</p>
+    <img class="favorites-button" src="/src/assets/images/favorites.png">
+  </div>
+</div>

@@ -1,0 +1,9 @@
+<div class="view">
+  <app-header (stateChanged)="changeContent($event)"></app-header>
+  <mat-progress-bar class="progress-bar"
+                    mode="determinate"
+                    color="primary"
+                    [value]="progress"></mat-progress-bar>
+  <app-content [isTeams]="isTeams" (teamsLoaded)="teamsLoaded($event)"></app-content>
+</div>
+
