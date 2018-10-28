@@ -1,13 +1,24 @@
 <section class="content">
-  <ng-container *ngFor="let player of players">
-    <!--<app-team [title]="player.team_name"-->
-              <!--[content]="player.name"-->
-              <!--[image]="player.image"></app-team>-->
-    <app-player *ngIf="!isTeams"
-                [name]="player.name"
-                [team]="player.team_name"
-                [gamesPlayed]="player.games_played"
-                [tpp]="player.three_point_percentage"
-                [imageSrc]="player.image"></app-player>
+  <ng-container *ngIf="!isTeams">
+    <div class="navigation">
+      <button class="btn" (click)="prevSet()">
+        <img src="/src/assets/images/prev.png">
+      </button>
+      <div class="set-info">
+        Page {{getCurrentSet()}} from {{getSetsCount()}}
+      </div>
+      <button class="btn" (click)="nextSet()">
+        <img src="/src/assets/images/next.png">
+      </button>
+    </div>
+    <div class="players">
+      <ng-container *ngFor="let player of currentSet">
+        <app-player [name]="player.name"
+                    [team]="player.team_name"
+                    [gamesPlayed]="player.games_played"
+                    [tpp]="player.three_point_percentage"
+                    [imageSrc]="player.image"></app-player>
+      </ng-container>
+    </div>
   </ng-container>
 </section>

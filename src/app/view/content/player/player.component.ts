@@ -22,7 +22,9 @@ export class PlayerComponent {
   teamImage = '';
   heartImage = '/src/assets/images/favorite-grey.png';
 
-  constructor(private playersService: PlayersService) {}
+  constructor(private playersService: PlayersService) {
+    this.checkForPlayerImage();
+  }
 
   imageLoaded() {
     this.isImageLoaded = true;
@@ -66,5 +68,14 @@ export class PlayerComponent {
 
   closeModal() {
     this.showModal = false;
+  }
+
+  private checkForPlayerImage() {
+    setTimeout(() => {
+      if (!this.isImageLoaded) {
+        this.imageSrc = '/src/assets/images/noQuestion.png';
+        this.isImageLoaded = true;
+      }
+    }, 5000);
   }
 }
