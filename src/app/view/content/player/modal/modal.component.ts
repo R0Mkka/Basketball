@@ -14,6 +14,8 @@ export class ModalComponent implements OnInit {
   heartImage = '';
 
   ngOnInit() {
+    console.log(this.player.is_favorite);
+
     this.heartImage = (this.player.is_favorite)
       ? '/src/assets/images/favorite-pink.png'
       : '/src/assets/images/favorite-grey.png';

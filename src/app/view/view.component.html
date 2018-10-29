@@ -1,9 +1,12 @@
 <div class="view">
-  <app-header (stateChanged)="changeContent($event)"></app-header>
+  <app-header (stateChanged)="changeContent($event)" 
+              (toggleFavorites)="toggleFavoritesShow($event)"></app-header>
   <mat-progress-bar class="progress-bar"
                     mode="determinate"
                     color="primary"
                     [value]="progress"></mat-progress-bar>
-  <app-content [isTeams]="isTeams" (teamsLoaded)="teamsLoaded($event)"></app-content>
+  <app-content [isTeams]="isTeams"
+               [isFavorites]="isFavorites" 
+               (teamsLoaded)="teamsLoaded($event)"></app-content>
 </div>
 

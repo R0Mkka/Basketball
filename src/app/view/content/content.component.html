@@ -1,6 +1,6 @@
 <section class="content">
   <!--<button (click)="showFavorites = !showFavorites">Show favorites</button>-->
-  <ng-container *ngIf="showFavorites">
+  <ng-container *ngIf="isFavorites">
     <div class="favorites">
       <ng-container *ngFor="let player of favorites">
         <app-player [name]="player.name"
@@ -13,7 +13,7 @@
     </div>
   </ng-container>
 
-  <ng-container *ngIf="isTeams">
+  <ng-container *ngIf="isTeams && !isFavorites">
     <div class="teams">
       <ng-container *ngFor="let team of teamsNames">
         <app-team [team]="team"
@@ -23,18 +23,7 @@
     </div>
   </ng-container>
 
-  <ng-container *ngIf="!isTeams">
-    <div class="navigation">
-      <button class="btn" (click)="prevSet()">
-        <img src="/src/assets/images/prev.png">
-      </button>
-      <div class="set-info">
-        Page {{getCurrentSet()}} from {{getSetsCount()}}
-      </div>
-      <button class="btn" (click)="nextSet()">
-        <img src="/src/assets/images/next.png">
-      </button>
-    </div>
+  <ng-container *ngIf="!isTeams && !isFavorites">
     <div class="players">
       <ng-container *ngFor="let player of currentSet">
         <app-player [name]="player.name"
@@ -44,6 +33,20 @@
                     [imageSrc]="player.image"
                     (favoriteEvent)="toggleFavorites($event)"></app-player>
       </ng-container>
+    </div>
+    <div class="navigation">
+      <button class="btn" (click)="prevSet()">
+        <img src="/src/assets/images/prev.png">
+      </button>
+      <div class="set-info">
+        Page <input type="number" 
+                    [value]="currentSetIndex"
+                    (input)="moveToSet($event)"
+                    #setNumber> from {{getSetsCount()}}
+      </div>
+      <button class="btn" (click)="nextSet()">
+        <img src="/src/assets/images/next.png">
+      </button>
     </div>
   </ng-container>
 </section>

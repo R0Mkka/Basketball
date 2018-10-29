@@ -19,6 +19,8 @@
                       [checked]="isTeams"
                       (change)="changeContent()"></mat-slide-toggle>
     <p>Teams</p>
-    <img class="favorites-button" src="/src/assets/images/favorites.png">
+    <img class="favorites-button" 
+         src="/src/assets/images/favorites.png"
+         (click)="toggleFavoritesShow()">
   </div>
 </div>

@@ -14,6 +14,7 @@ import { Player } from './player/player';
 })
 export class ContentComponent {
   @Input() isTeams: boolean;
+  @Input() isFavorites: boolean;
   @Output() teamsLoaded = new EventEmitter<boolean>();
 
   teams: Array<any>;
@@ -34,43 +35,53 @@ export class ContentComponent {
   }
 
   prevSet() {
-    if (this.currentSetIndex === 0) {
-      this.currentSetIndex = this.playersSets.length - 1;
+    if (this.currentSetIndex === 1) {
+      this.currentSetIndex = this.playersSets.length;
     } else {
-      this.currentSetIndex -= 1;
+      this.currentSetIndex--;
     }
 
-    this.currentSet = this.playersSets[this.currentSetIndex];
+    this.currentSet = this.playersSets[this.currentSetIndex - 1];
   }
 
   nextSet() {
-    console.log(this.currentSet);
-    if (this.currentSetIndex === this.playersSets.length - 1) {
-      this.currentSetIndex = 0;
+    if (this.currentSetIndex === this.playersSets.length) {
+      this.currentSetIndex = 1;
     } else {
-      this.currentSetIndex += 1;
+      this.currentSetIndex++;
     }
 
-    this.currentSet = this.playersSets[this.currentSetIndex];
+    this.currentSet = this.playersSets[this.currentSetIndex - 1];
   }
 
-  getCurrentSet() {
-    return this.currentSetIndex + 1;
+  moveToSet($event) {
+    const target = $event.target;
+
+    if (target.value > 0 && target.value < 51) {
+      this.currentSetIndex = target.value;
+    } else {
+      target.value = 1;
+      this.currentSetIndex = 1;
+    }
+
+    this.currentSet = this.playersSets[this.currentSetIndex - 1];
   }
 
   getSetsCount() {
     return this.playersSets.length;
   }
 
-  toggleFavorites($event: Player) {
-    if (!$event.is_favorite) {
+  toggleFavorites(player: Player) {
+    if (!player.is_favorite) {
       this.favorites.forEach((favorite, index) => {
-        if (favorite.name === $event.name) {
+        if (favorite.name === player.name) {
+          this.playersService.remove(favorite.name);
           this.favorites.splice(index, 1);
         }
       });
     } else {
-      this.favorites.push($event);
+      this.playersService.set(player.name, player.name);
+      this.favorites.push(player);
     }
   }
 
@@ -88,8 +99,9 @@ export class ContentComponent {
               this.players[index].image = url;
             });
             this.getSetsFromPlayers();
-            this.currentSetIndex = 0;
-            this.currentSet = this.playersSets[this.currentSetIndex];
+            this.currentSetIndex = 1;
+            this.currentSet = this.playersSets[this.currentSetIndex - 1];
+            this.initFavorites();
           }
         ),
         catchError(() => ([]))
@@ -133,5 +145,15 @@ export class ContentComponent {
         ),
         catchError(() => ([]))
       ).subscribe();
+  }
+
+  private initFavorites() {
+    const storagePlayers = Object.keys(this.playersService.storage);
+
+    this.players.forEach((player: Player) => {
+      if (~storagePlayers.indexOf(player.name)) {
+        this.favorites.push(player);
+      }
+    });
   }
 }

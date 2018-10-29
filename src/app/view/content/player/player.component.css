@@ -1,19 +1,22 @@
 .card {
-  width: 350px;
-  margin: 10px;
+  width: 270px;
+  min-height: 359px;
+  max-height: 359px;
+  margin: 8px;
 }
 
 .card__spinner {
   display: flex;
   justify-content: center;
+  padding: 70px 0px;
 }
 
 .team-image {
   position: absolute;
   top: 10px;
   right: 16px;
-  width: 70px;
-  height: 70px;
+  width: 60px;
+  height: 60px;
 }
 
 mat-card-content p {
@@ -29,7 +32,7 @@ mat-card-content p {
 }
 
 .edit {
-  right: 66px;
+  right: 56px;
   bottom: 16px;
 }
 

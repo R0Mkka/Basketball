@@ -1,6 +1,6 @@
-import { Component, Input, Output, EventEmitter } from '@angular/core';
+import { Component, Input, Output, EventEmitter, OnInit } from '@angular/core';
 import { PlayersService } from './players.service';
-import {Player} from './player';
+import { Player } from './player';
 
 @Component({
   selector: 'app-player',
@@ -8,7 +8,7 @@ import {Player} from './player';
   styleUrls: ['./player.component.css'],
   providers: [ PlayersService ]
 })
-export class PlayerComponent {
+export class PlayerComponent implements OnInit {
   @Input() name: string;
   @Input() team: string;
   @Input() gamesPlayed: string;
@@ -27,6 +27,13 @@ export class PlayerComponent {
 
   constructor(private playersService: PlayersService) {
     this.checkForPlayerImage();
+  }
+
+  ngOnInit() {
+    if (this.playersService.has(this.name)) {
+      this.isFavorite = true;
+      this.heartImage = '/src/assets/images/favorite-pink.png';
+    }
   }
 
   imageLoaded() {
@@ -99,8 +106,7 @@ export class PlayerComponent {
           () => {
             this.player.image = this.imageSrc;
             this.player.team_image = this.teamImage;
-            this.player.is_favorite = !this.isFavorite;
-            this.isFavorite = this.player.is_favorite;
+            this.player.is_favorite = this.isFavorite;
 
             this.showModal = true;
             this.isPlayerInit = true;
@@ -117,8 +123,14 @@ export class PlayerComponent {
   private checkForPlayerImage() {
     setTimeout(() => {
       if (!this.isImageLoaded) {
-        this.imageSrc = '/src/assets/images/default_player.png';
-        this.isImageLoaded = true;
+        this.imageSrc = this.playersService.tryGetImageAgain(this.name);
+
+        setTimeout(() => {
+          if (!this.isImageLoaded) {
+            this.imageSrc = '/src/assets/images/default_player.png';
+            this.isImageLoaded = true;
+          }
+        }, 3000);
       }
     }, 5000);
   }

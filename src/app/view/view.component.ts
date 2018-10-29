@@ -8,15 +8,20 @@ import { Component, OnInit } from '@angular/core';
 export class ViewComponent implements OnInit {
   progress = 0;
   isTeams = true;
+  isFavorites = false;
 
-  private progressId: number;
+  private progressId: any;
+
+  ngOnInit() {
+    this.runProgressBar();
+  }
 
   changeContent($event: boolean) {
     this.isTeams = $event;
   }
 
-  ngOnInit() {
-    this.runProgressBar();
+  toggleFavoritesShow(showFavorites: boolean) {
+    this.isFavorites = showFavorites;
   }
 
   teamsLoaded() {
@@ -32,7 +37,7 @@ export class ViewComponent implements OnInit {
       if (this.progress >= 100) {
         clearInterval(this.progressId);
       }
-    }, 30);
+    }, 40);
   }
 }
 

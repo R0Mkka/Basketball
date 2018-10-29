@@ -5,9 +5,9 @@
                   (modalClosed)="closeModal()"></app-player-modal>
 <mat-card class="card" appCardHover>
   <div *ngIf="!isImageLoaded" class="card__spinner">
-    <mat-spinner></mat-spinner>
+    <mat-spinner [diameter]="50"></mat-spinner>
   </div>
-  <img mat-card-image [src]="imageSrc" [alt]="name" (load)="imageLoaded()">
+  <img mat-card-image [src]="imageSrc" (load)="imageLoaded()">
   <mat-card-title> {{name}} </mat-card-title>
   <mat-card-content>
     <img *ngIf="isImageLoaded" class="team-image" [src]="teamImage">
