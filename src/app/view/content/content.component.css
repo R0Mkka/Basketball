@@ -1,5 +1,12 @@
 .content {
+  min-height: 100vh;
   background-color: #ddd;
+}
+
+.teams {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
 }
 
 .navigation {
@@ -18,13 +25,20 @@
   cursor: pointer;
   background-color: transparent;
   border: none;
-  border-radius: 50%;
+  /*border-radius: 50%;*/
+  border-radius: 20px;
   transition: .2s background-color ease-in-out;
   outline: none;
 }
 
 .navigation .btn:hover {
-  background-color: #aaaaaa;
+  background-color: #bbbbbb;
+}
+
+.favorites {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
 }
 
 .players {

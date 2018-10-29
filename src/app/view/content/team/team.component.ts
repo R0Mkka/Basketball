@@ -8,9 +8,20 @@ import { TeamsService } from './teams.service';
   providers: [ TeamsService ]
 })
 export class TeamComponent {
-  @Input() title: string;
-  @Input() content: string;
-  @Input() image: string;
+  @Input() team: string;
+  @Input() acronym: string;
+  @Input() imageSrc: string;
+  @Input() info: string;
 
-  constructor() {}
+  isImageLoaded = false;
+
+  getTeamName() {
+    const splitTeamName = this.team.split('_');
+
+    return splitTeamName.join(' ');
+  }
+
+  imageLoaded() {
+    this.isImageLoaded = true;
+  }
 }

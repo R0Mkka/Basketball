@@ -17,10 +17,15 @@ export class ContentComponent {
   @Output() teamsLoaded = new EventEmitter<boolean>();
 
   teams: Array<any>;
+  teamsNames: Array<string>;
+
   players: Array<Player>;
   playersSets: Array<any> = [];
   currentSetIndex: number;
   currentSet: Array<Player>;
+
+  favorites: Array<Player> = [];
+  showFavorites = false;
 
   constructor(private teamsService: TeamsService,
               private playersService: PlayersService) {
@@ -57,6 +62,18 @@ export class ContentComponent {
     return this.playersSets.length;
   }
 
+  toggleFavorites($event: Player) {
+    if (!$event.is_favorite) {
+      this.favorites.forEach((favorite, index) => {
+        if (favorite.name === $event.name) {
+          this.favorites.splice(index, 1);
+        }
+      });
+    } else {
+      this.favorites.push($event);
+    }
+  }
+
   private initPlayers() {
     this.playersService.getPlayers()
       .pipe(
@@ -64,11 +81,9 @@ export class ContentComponent {
         tap(
           (playersTotal: Array<any>) => {
               this.players = playersTotal;
-
             },
           () => console.error('Error with getting players!!!'),
           () => {
-            this.teamsLoaded.emit();
             this.playersService.getPlayersImages(this.players).forEach((url, index) => {
               this.players[index].image = url;
             });
@@ -107,7 +122,14 @@ export class ContentComponent {
     this.teamsService.getTeams()
       .pipe(
         tap(
-          value => console.log(value)
+          value => {
+            this.teams = value;
+            this.teamsNames = Object.keys(value);
+          },
+          () => console.error('Error with getting teams!!!'),
+          () => {
+            this.teamsLoaded.emit();
+          }
         ),
         catchError(() => ([]))
       ).subscribe();

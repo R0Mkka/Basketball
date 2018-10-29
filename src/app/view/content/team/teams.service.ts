@@ -3,11 +3,11 @@ import { HttpClient } from '@angular/common/http';
 
 @Injectable()
 export class TeamsService {
-  private baseUrl = 'https://nba-players.herokuapp.com/';
+  private baseUrl = '/src/assets/teams.json';
 
   constructor(private http: HttpClient) {}
 
   getTeams() {
-    return this.http.get<Array<Object>>(this.baseUrl + 'teams');
+    return this.http.get<Array<Object>>(this.baseUrl);
   }
 }

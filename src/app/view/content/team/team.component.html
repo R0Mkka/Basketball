@@ -1,1 +1,19 @@
-<app-card [title]="title" [content]="content" [imageSrc]="image"></app-card>
+<mat-card class="card" appCardHover>
+  <div *ngIf="!isImageLoaded" class="card__spinner">
+    <mat-spinner></mat-spinner>
+  </div>
+  <img class="team-image"
+       [src]="imageSrc"
+       [alt]="getTeamName()"
+       (load)="imageLoaded()">
+  <mat-card-title class="title"> {{getTeamName()}} </mat-card-title>
+  <mat-card-content>
+    <p class="content"> Team acronym: <span>"{{acronym}}"</span> </p>
+    <p> {{info}} </p>
+  </mat-card-content>
+  <!--<mat-card-actions>-->
+    <!--<img class="heart"-->
+         <!--[src]="heartImage"-->
+         <!--(click)="changeHeartColor()">-->
+  <!--</mat-card-actions>-->
+</mat-card>

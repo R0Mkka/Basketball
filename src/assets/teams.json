@@ -1,0 +1,123 @@
+{
+  "Atlanta_Hawks": {
+    "image": "/src/assets/images/teams/AtlantaHawks.png",
+    "acronym": "atl",
+    "info": "The Atlanta Hawks are an American professional basketball team. The team is based in Atlanta, Georgia and competes in the National Basketball Association (NBA) as a member of the league's Eastern Conference Southeast Division. The team plays its home games at State Farm Arena."
+  },
+  "Boston_Celtics": {
+    "image": "/src/assets/images/teams/BostonCeltics.png",
+    "acronym": "bos"
+  },
+  "Brooklyn_Nets": {
+    "image": "/src/assets/images/teams/BrooklynNets.png",
+    "acronym": "bkn"
+  },
+  "Charlotte_Hornets": {
+    "image": "/src/assets/images/teams/CharlotteHornets.png",
+    "acronym": "cha"
+  },
+  "Chicago_Bulls": {
+    "image": "/src/assets/images/teams/ChicagoBulls.png",
+    "acronym": "chi"
+  },
+  "Cleveland_Cavaliers": {
+    "image": "/src/assets/images/teams/ClevelandCavaliers.png",
+    "acronym": "cle"
+  },
+  "Dallas_Mavericks": {
+    "image": "/src/assets/images/teams/DallasMavericks.png",
+    "acronym": "dal"
+  },
+  "Denver_Nuggets": {
+    "image": "/src/assets/images/teams/DenverNuggets.png",
+    "acronym": "den"
+  },
+  "Detroit_Pistons": {
+    "image": "/src/assets/images/teams/DetroitPistons.png",
+    "acronym": "det"
+  },
+  "Golden_State_Warriors": {
+    "image": "/src/assets/images/teams/GoldenStateWarriors.png",
+    "acronym": "gsw"
+  },
+  "Houston_Rockets": {
+    "image": "/src/assets/images/teams/HoustonRockets.png",
+    "acronym": "hou"
+  },
+  "Indiana_Pacers": {
+    "image": "/src/assets/images/teams/IndianaPacers.png",
+    "acronym": "ind"
+  },
+  "Los_Angeles_Clippers": {
+    "image": "/src/assets/images/teams/LosAngelesClippers.png",
+    "acronym": "lac"
+  },
+  "Los_Angeles_Lakers": {
+    "image": "/src/assets/images/teams/LosAngelesLakers.png",
+    "acronym": "lal"
+  },
+  "Memphis_Grizzlies": {
+    "image": "/src/assets/images/teams/MemphisGrizzlies.png",
+    "acronym": "mem"
+  },
+  "Miami_Heat": {
+    "image": "/src/assets/images/teams/MiamiHeat.png",
+    "acronym": "mia"
+  },
+  "Milwaukee_Bucks": {
+    "image": "/src/assets/images/teams/MilwaukeeBucks.png",
+    "acronym": "mil"
+  },
+  "Minnesota_Timberwolves": {
+    "image": "/src/assets/images/teams/MinnesotaTimberwolves.png",
+    "acronym": "min"
+  },
+  "New_Orleans_Pelicans": {
+    "image": "/src/assets/images/teams/NewOrleansPelicans.png",
+    "acronym": "nop"
+  },
+  "New_York_Knicks": {
+    "image": "/src/assets/images/teams/NewYorkKnicks.png",
+    "acronym": "nyk"
+  },
+  "Oklahoma_City_Thunder": {
+    "image": "/src/assets/images/teams/OklahomaCityThunder.png",
+    "acronym": "okc"
+  },
+  "Orlando_Magic": {
+    "image": "/src/assets/images/teams/OrlandoMagic.png",
+    "acronym": "orl"
+  },
+  "Philadelphia_76ers": {
+    "image": "/src/assets/images/teams/Philadelphia76ers.png",
+    "acronym": "phi"
+  },
+  "Phoenix_Suns": {
+    "image": "/src/assets/images/teams/PhoenixSuns.png",
+    "acronym": "phx"
+  },
+  "Portland_Trail_Blazers": {
+    "image": "/src/assets/images/teams/PortlandTrailBlazers.png",
+    "acronym": "por"
+  },
+  "Sacramento_Kings": {
+    "image": "/src/assets/images/teams/SacramentoKings.png",
+    "acronym": "sac"
+  },
+  "San_Antonio_Spurs": {
+    "image": "/src/assets/images/teams/SanAntonioSpurs.png",
+    "acronym": "sas"
+  },
+  "Toronto_Raptors": {
+    "image": "/src/assets/images/teams/TorontoRaptors.png",
+    "acronym": "tor"
+  },
+  "Utah_Jazz": {
+    "image": "/src/assets/images/teams/UtahJazz.png",
+    "acronym": "uta"
+  },
+  "Washington_Wizards": {
+    "image": "/src/assets/images/teams/WashingtonWizards.png",
+    "acronym": "was"
+  }
+}

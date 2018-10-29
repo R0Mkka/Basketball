@@ -1,4 +1,28 @@
 <section class="content">
+  <!--<button (click)="showFavorites = !showFavorites">Show favorites</button>-->
+  <ng-container *ngIf="showFavorites">
+    <div class="favorites">
+      <ng-container *ngFor="let player of favorites">
+        <app-player [name]="player.name"
+                    [team]="player.team_name"
+                    [gamesPlayed]="player.games_played"
+                    [tpp]="player.three_point_percentage"
+                    [imageSrc]="player.image"
+                    (favoriteEvent)="toggleFavorites($event)"></app-player>
+      </ng-container>
+    </div>
+  </ng-container>
+
+  <ng-container *ngIf="isTeams">
+    <div class="teams">
+      <ng-container *ngFor="let team of teamsNames">
+        <app-team [team]="team"
+                  [acronym]="teams[team].acronym"
+                  [imageSrc]="teams[team].image"></app-team>
+      </ng-container>
+    </div>
+  </ng-container>
+
   <ng-container *ngIf="!isTeams">
     <div class="navigation">
       <button class="btn" (click)="prevSet()">
@@ -17,7 +41,8 @@
                     [team]="player.team_name"
                     [gamesPlayed]="player.games_played"
                     [tpp]="player.three_point_percentage"
-                    [imageSrc]="player.image"></app-player>
+                    [imageSrc]="player.image"
+                    (favoriteEvent)="toggleFavorites($event)"></app-player>
       </ng-container>
     </div>
   </ng-container>

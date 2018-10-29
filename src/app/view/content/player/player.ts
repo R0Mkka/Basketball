@@ -22,4 +22,5 @@ export interface Player {
   three_point_made_per_game: string;
   three_point_percentage: string;
   turnovers_per_game: string;
+  is_favorite: boolean;
 }
