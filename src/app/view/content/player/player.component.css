@@ -3,6 +3,7 @@
   min-height: 359px;
   max-height: 359px;
   margin: 8px;
+  overflow: hidden;
 }
 
 .card__spinner {

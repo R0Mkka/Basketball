@@ -51,7 +51,15 @@ export class PlayersService {
   }
 
   tryGetImageAgain(fullName: string) {
-    const splitFullName = fullName.split(' ');
+    let filteredName = '';
+
+    for (let i = 0; i < fullName.length; i++) {
+      if (fullName[i] != "'" && fullName[i] != ".") {
+        filteredName += fullName[i];
+      }
+    }
+
+    const splitFullName = filteredName.split(' ');
 
     return this.baseUrl + `players/${splitFullName[1]}`;
   }

@@ -10,7 +10,7 @@
   },
   "Brooklyn_Nets": {
     "image": "/src/assets/images/teams/BrooklynNets.png",
-    "acronym": "bkn"
+    "acronym": "bro"
   },
   "Charlotte_Hornets": {
     "image": "/src/assets/images/teams/CharlotteHornets.png",
@@ -74,7 +74,7 @@
   },
   "New_Orleans_Pelicans": {
     "image": "/src/assets/images/teams/NewOrleansPelicans.png",
-    "acronym": "nop"
+    "acronym": "nor"
   },
   "New_York_Knicks": {
     "image": "/src/assets/images/teams/NewYorkKnicks.png",
@@ -94,7 +94,7 @@
   },
   "Phoenix_Suns": {
     "image": "/src/assets/images/teams/PhoenixSuns.png",
-    "acronym": "phx"
+    "acronym": "pho"
   },
   "Portland_Trail_Blazers": {
     "image": "/src/assets/images/teams/PortlandTrailBlazers.png",
@@ -114,7 +114,7 @@
   },
   "Utah_Jazz": {
     "image": "/src/assets/images/teams/UtahJazz.png",
-    "acronym": "uta"
+    "acronym": "uth"
   },
   "Washington_Wizards": {
     "image": "/src/assets/images/teams/WashingtonWizards.png",

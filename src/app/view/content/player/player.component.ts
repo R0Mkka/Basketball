@@ -16,6 +16,7 @@ export class PlayerComponent implements OnInit {
   @Input() imageSrc: string;
   @Output() dataChanged = new EventEmitter<Object>();
   @Output() favoriteEvent = new EventEmitter<Player>();
+  @Output() loading = new EventEmitter<boolean>();
 
   player: Player;
   isPlayerInit = false;
@@ -24,6 +25,8 @@ export class PlayerComponent implements OnInit {
   isImageLoaded = false;
   teamImage = '';
   heartImage = '/src/assets/images/favorite-grey.png';
+
+  isEditDisabled = true;
 
   constructor(private playersService: PlayersService) {
     this.checkForPlayerImage();
@@ -39,9 +42,12 @@ export class PlayerComponent implements OnInit {
   imageLoaded() {
     this.isImageLoaded = true;
     this.teamImage = this.getTeamImage();
+    this.isEditDisabled = false;
   }
 
   toggleFavorite() {
+    this.loading.emit(true);
+
     if (!this.isPlayerInit) {
       this.playersService.getPlayerStats(this.name)
         .subscribe(
@@ -55,11 +61,13 @@ export class PlayerComponent implements OnInit {
 
             this.isPlayerInit = true;
             this.favoriteEvent.emit(this.player);
+            this.loading.emit(false);
           });
     } else {
       this.player.is_favorite = !this.isFavorite;
       this.isFavorite = this.player.is_favorite;
       this.favoriteEvent.emit(this.player);
+      this.loading.emit(false);
     }
 
     this.toggleHeartColor();
@@ -98,21 +106,29 @@ export class PlayerComponent implements OnInit {
   }
 
   editPlayer() {
-    if (!this.isPlayerInit) {
-      this.playersService.getPlayerStats(this.name)
-        .subscribe(
-          (playerStats: Player) => this.player = playerStats,
-          () => console.error(`Error with getting ${this.name} stats!`),
-          () => {
-            this.player.image = this.imageSrc;
-            this.player.team_image = this.teamImage;
-            this.player.is_favorite = this.isFavorite;
+    if (!this.isEditDisabled) {
+      this.loading.emit(true);
 
-            this.showModal = true;
-            this.isPlayerInit = true;
-          });
-    } else {
-      this.showModal = true;
+      if (!this.isPlayerInit) {
+        this.playersService.getPlayerStats(this.name)
+          .subscribe(
+            (playerStats: Player) => {
+              this.player = playerStats;
+            },
+            () => console.error(`Error with getting ${this.name} stats!`),
+            () => {
+              this.player.image = this.imageSrc;
+              this.player.team_image = this.teamImage;
+              this.player.is_favorite = this.isFavorite;
+  
+              this.showModal = true;
+              this.isPlayerInit = true;
+              this.loading.emit(false);
+            });
+      } else {
+        this.showModal = true;
+        this.loading.emit(false);
+      }
     }
   }
 

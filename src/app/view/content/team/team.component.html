@@ -1,4 +1,4 @@
-<mat-card class="card" appCardHover>
+<mat-card class="card" appCardHover (click)="showTeamPlayers()">
   <div *ngIf="!isImageLoaded" class="card__spinner">
     <mat-spinner [diameter]="50"></mat-spinner>
   </div>

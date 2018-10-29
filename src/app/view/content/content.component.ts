@@ -1,4 +1,4 @@
-import {Component, EventEmitter, Input, Output} from '@angular/core';
+import {Component, EventEmitter, Input, Output, OnChanges, SimpleChanges} from '@angular/core';
 
 import { TeamsService } from './team/teams.service';
 import { PlayersService } from './player/players.service';
@@ -12,10 +12,13 @@ import { Player } from './player/player';
   styleUrls: ['./content.component.css'],
   providers: [ TeamsService, PlayersService ]
 })
-export class ContentComponent {
+export class ContentComponent implements OnChanges {
   @Input() isTeams: boolean;
   @Input() isFavorites: boolean;
+  @Input() isClearFavorites: boolean;
   @Output() teamsLoaded = new EventEmitter<boolean>();
+
+  isLoading = false;
 
   teams: Array<any>;
   teamsNames: Array<string>;
@@ -28,10 +31,31 @@ export class ContentComponent {
   favorites: Array<Player> = [];
   showFavorites = false;
 
+  isTeamPlayers: boolean;
+  teamPlayers: Array<Player>;
+
   constructor(private teamsService: TeamsService,
               private playersService: PlayersService) {
     this.initPlayers();
     this.initTeams();
+  }
+
+  ngOnChanges() {
+    this.isTeamPlayers = false;
+    if (this.isClearFavorites) {
+      this.isLoading = true;
+      this.favorites = [];
+      this.players.forEach((player) => {
+        player.is_favorite = false;
+      });
+
+      this.isClearFavorites = false;
+      this.isLoading = false;
+    }
+  }
+
+  setLoadingStatus($event: boolean) {
+    this.isLoading = $event;
   }
 
   prevSet() {
@@ -69,6 +93,12 @@ export class ContentComponent {
 
   getSetsCount() {
     return this.playersSets.length;
+  }
+
+  displayTeam(team: Array<Player>) {
+    this.teamPlayers = team;
+    this.isTeamPlayers = true;
+    this.isFavorites = false;
   }
 
   toggleFavorites(player: Player) {

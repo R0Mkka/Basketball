@@ -51,14 +51,14 @@ input[type="number"]::-webkit-inner-spin-button {
   background-color: #bbbbbb;
 }
 
-.favorites {
+.favorites, .players, .team-players {
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
 }
 
-.players {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
+.favorites .clear-list {
+  margin-top: 20px;
+  font-size: 25px;
+  font-weight: 300;
 }

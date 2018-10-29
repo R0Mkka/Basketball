@@ -1,29 +1,49 @@
 <section class="content">
-  <!--<button (click)="showFavorites = !showFavorites">Show favorites</button>-->
-  <ng-container *ngIf="isFavorites">
+  <app-loading *ngIf="isLoading"></app-loading>
+
+  <ng-container *ngIf="isTeamPlayers">
+    <div class="team-players">
+      <ng-container *ngFor="let player of teamPlayers">
+        <app-player [name]="player.name"
+                    [team]="player.team_name"
+                    [gamesPlayed]="player.games_played"
+                    [tpp]="player.three_point_percentage"
+                    [imageSrc]="player.image"
+                    (loading)="setLoadingStatus($event)"
+                    (favoriteEvent)="toggleFavorites($event)"></app-player>
+      </ng-container>
+    </div>
+  </ng-container>
+
+  <ng-container *ngIf="isFavorites ">
     <div class="favorites">
+      <ng-container *ngIf="favorites.length === 0">
+          <p class="clear-list">List of favorites is clear.</p>
+      </ng-container>
       <ng-container *ngFor="let player of favorites">
         <app-player [name]="player.name"
                     [team]="player.team_name"
                     [gamesPlayed]="player.games_played"
                     [tpp]="player.three_point_percentage"
                     [imageSrc]="player.image"
+                    (loading)="setLoadingStatus($event)"
                     (favoriteEvent)="toggleFavorites($event)"></app-player>
       </ng-container>
     </div>
   </ng-container>
 
-  <ng-container *ngIf="isTeams && !isFavorites">
+  <ng-container *ngIf="isTeams && !isFavorites && !isTeamPlayers">
     <div class="teams">
       <ng-container *ngFor="let team of teamsNames">
         <app-team [team]="team"
                   [acronym]="teams[team].acronym"
-                  [imageSrc]="teams[team].image"></app-team>
+                  [imageSrc]="teams[team].image"
+                  (showTeam)="displayTeam($event)"></app-team>
       </ng-container>
     </div>
   </ng-container>
 
-  <ng-container *ngIf="!isTeams && !isFavorites">
+  <ng-container *ngIf="!isTeams && !isFavorites && !isTeamPlayers">
     <div class="players">
       <ng-container *ngFor="let player of currentSet">
         <app-player [name]="player.name"
@@ -31,6 +51,7 @@
                     [gamesPlayed]="player.games_played"
                     [tpp]="player.three_point_percentage"
                     [imageSrc]="player.image"
+                    (loading)="setLoadingStatus($event)"
                     (favoriteEvent)="toggleFavorites($event)"></app-player>
       </ng-container>
     </div>

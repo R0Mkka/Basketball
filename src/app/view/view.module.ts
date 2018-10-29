@@ -12,6 +12,7 @@ import { HoverDirective } from './content/card/card.directive';
 import { PlayerComponent } from './content/player/player.component';
 import { TeamComponent } from './content/team/team.component';
 import { ModalComponent } from './content/player/modal/modal.component';
+import { LoadingModalComponent } from './content/loading-modal/loading-modal.component';
 
 @NgModule({
   imports: [
@@ -31,7 +32,8 @@ import { ModalComponent } from './content/player/modal/modal.component';
     PlayerComponent,
     TeamComponent,
     HoverDirective,
-    ModalComponent
+    ModalComponent,
+    LoadingModalComponent
   ]
 })
 export class ViewModule { }

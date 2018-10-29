@@ -9,6 +9,7 @@ export class ViewComponent implements OnInit {
   progress = 0;
   isTeams = true;
   isFavorites = false;
+  isClearFavorites = false;
 
   private progressId: any;
 
@@ -20,8 +21,15 @@ export class ViewComponent implements OnInit {
     this.isTeams = $event;
   }
 
-  toggleFavoritesShow(showFavorites: boolean) {
-    this.isFavorites = showFavorites;
+  toggleFavoritesShow(favoritesState: boolean) {
+    this.isFavorites = favoritesState;
+  }
+
+  clearFavorites() {
+    this.isClearFavorites = true;
+    setTimeout(() => {
+      this.isClearFavorites = false;
+    }, 1000);
   }
 
   teamsLoaded() {
