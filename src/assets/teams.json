@@ -6,118 +6,147 @@
   },
   "Boston_Celtics": {
     "image": "/src/assets/images/teams/BostonCeltics.png",
-    "acronym": "bos"
+    "acronym": "bos",
+    "info": "The Boston Celtics are an American professional basketball team based in Boston, Massachusetts. The Celtics compete in the National Basketball Association (NBA) as a member of the league's Eastern Conference Atlantic Division. Founded in 1946 as one of the original eight NBA teams to survive the league's first decade, the team is owned by Boston Basketball Partners LLC. The Celtics play their home games at the TD Garden, which they share with the National Hockey League (NHL)'s Boston Bruins. The franchise has won the most championships in NBA history with 17, accounting for 23.9 percent of all NBA championships since the league's founding."
   },
   "Brooklyn_Nets": {
     "image": "/src/assets/images/teams/BrooklynNets.png",
-    "acronym": "bro"
+    "acronym": "bro",
+    "info": "The Brooklyn Nets are an American professional basketball team based in the borough of Brooklyn, in New York City. The Nets compete in the National Basketball Association (NBA) as a member of the Atlantic Division of the Eastern Conference. The team plays its home games at Barclays Center. They are one of two NBA teams located in New York City; the other is the New York Knicks."
   },
   "Charlotte_Hornets": {
     "image": "/src/assets/images/teams/CharlotteHornets.png",
-    "acronym": "cha"
+    "acronym": "cha",
+    "info": "The Charlotte Hornets is an American professional basketball team based in Charlotte, North Carolina. The Hornets compete in the National Basketball Association (NBA), as a member of the league's Eastern Conference Southeast Division. The team is largely owned by retired NBA player Michael Jordan, who acquired controlling interest in the team in 2010. The Hornets play their home games at the Spectrum Center in Uptown Charlotte."
   },
   "Chicago_Bulls": {
     "image": "/src/assets/images/teams/ChicagoBulls.png",
-    "acronym": "chi"
+    "acronym": "chi",
+    "info": "The Chicago Bulls are an American professional basketball team based in Chicago, Illinois. The Bulls compete in the National Basketball Association (NBA) as a member of the league's Eastern Conference Central Division. The team was founded on January 16, 1966. The team plays its home games at the United Center, an arena shared with the Chicago Blackhawks of the National Hockey League (NHL)."
   },
   "Cleveland_Cavaliers": {
     "image": "/src/assets/images/teams/ClevelandCavaliers.png",
-    "acronym": "cle"
+    "acronym": "cle",
+    "info": "The Cleveland Cavaliers, often referred to as the Cavs, are an American professional basketball team based in Cleveland, Ohio. The Cavs compete in the National Basketball Association (NBA) as a member of the league's Eastern Conference Central Division. The team began play as an expansion team in 1970, along with the Portland Trail Blazers and Buffalo Braves. Home games were first held at Cleveland Arena from 1970 to 1974, followed by the Richfield Coliseum from 1974 to 1994."
   },
   "Dallas_Mavericks": {
     "image": "/src/assets/images/teams/DallasMavericks.png",
-    "acronym": "dal"
+    "acronym": "dal",
+    "info": "The Dallas Mavericks (often referred to as the Mavs) are an American professional basketball team based in Dallas, Texas. The Mavericks compete in the National Basketball Association (NBA) as a member club of the league's Western Conference Southwest Division. The team plays its home games at the American Airlines Center, which it shares with the National Hockey League's Dallas Stars."
   },
   "Denver_Nuggets": {
     "image": "/src/assets/images/teams/DenverNuggets.png",
-    "acronym": "den"
+    "acronym": "den",
+    "info": "The Denver Nuggets are an American professional basketball team based in Denver, Colorado. The Nuggets compete in the National Basketball Association (NBA) as a member club of the league's Western Conference Northwest Division. The team was founded as the Denver Larks in 1967 as a charter franchise of the American Basketball Association (ABA), but changed its name to Rockets before the first season. It changed its name again to the Nuggets in 1974. After the name change, the Nuggets played for the final ABA Championship title in 1976, losing to the New York Nets."
   },
   "Detroit_Pistons": {
     "image": "/src/assets/images/teams/DetroitPistons.png",
-    "acronym": "det"
+    "acronym": "det",
+    "info": "The Detroit Pistons are an American professional basketball team based in Detroit, Michigan. The Pistons compete in the National Basketball Association (NBA) as a member of the league's Eastern Conference Central Division. The team plays its home games at Little Caesars Arena and was founded in Fort Wayne, Indiana as the Fort Wayne (Zollner) Pistons in 1941, a member of the National Basketball League (NBL) where it won two NBL championships: in 1944 and 1945. The Pistons joined the Basketball Association of America (BAA) in 1948."
   },
   "Golden_State_Warriors": {
     "image": "/src/assets/images/teams/GoldenStateWarriors.png",
-    "acronym": "gsw"
+    "acronym": "gsw",
+    "info": "The Golden State Warriors are an American professional basketball team based in the San Francisco Bay Area in Oakland, California. The Warriors compete in the National Basketball Association (NBA) as a member of the league's Western Conference Pacific Division. The Warriors play their home games at the Oracle Arena in Oakland. The Warriors have reached ten NBA Finals, winning the championship in 1947, 1956, 1975, 2015, 2017, and 2018. Golden State's six NBA championships are tied for third-most in NBA history with the Chicago Bulls, and behind only the Boston Celtics and Los Angeles Lakers."
   },
   "Houston_Rockets": {
     "image": "/src/assets/images/teams/HoustonRockets.png",
-    "acronym": "hou"
+    "acronym": "hou",
+    "info": "The Houston Rockets are an American professional basketball team based in Houston, Texas. The Rockets compete in the National Basketball Association (NBA), as a member of the league's Western Conference Southwest Division. The team plays its home games at the Toyota Center, located in downtown Houston. The Rockets have won two NBA championships and four Western Conference titles. The team was established as the San Diego Rockets, an expansion team originally based in San Diego, in 1967. In 1971, the Rockets moved to Houston."
   },
   "Indiana_Pacers": {
     "image": "/src/assets/images/teams/IndianaPacers.png",
-    "acronym": "ind"
+    "acronym": "ind",
+    "info": "The Indiana Pacers are an American professional basketball team based in Indianapolis, Indiana. The Pacers compete in the National Basketball Association (NBA) as a member club of the league's Eastern Conference Central Division. The Pacers were first established in 1967 as a member of the American Basketball Association (ABA) and became a member of the NBA in 1976 as a result of the ABA–NBA merger. They play their home games at Bankers Life Fieldhouse. The team is named after Indiana's history with the Indianapolis 500's pace cars and with the harness racing industry."
   },
   "Los_Angeles_Clippers": {
     "image": "/src/assets/images/teams/LosAngelesClippers.png",
-    "acronym": "lac"
+    "acronym": "lac",
+    "info": "The Los Angeles Clippers, abbreviated by the team as the LA Clippers, are an American professional basketball team based in Los Angeles. The Clippers compete in the National Basketball Association (NBA) as a member of the league's Western Conference Pacific Division. The Clippers play their home games at Staples Center in downtown Los Angeles, an arena shared with the Los Angeles Lakers of the NBA, the Los Angeles Sparks of the Women's National Basketball Association (WNBA), and the Los Angeles Kings of the National Hockey League (NHL)."
   },
   "Los_Angeles_Lakers": {
     "image": "/src/assets/images/teams/LosAngelesLakers.png",
-    "acronym": "lal"
+    "acronym": "lal",
+    "info": "The Los Angeles Lakers are an American professional basketball team based in Los Angeles. The Lakers compete in the National Basketball Association (NBA), as a member of the league's Western Conference in the Pacific Division. The Lakers play their home games at Staples Center, an arena shared with the NBA's Los Angeles Clippers, the Los Angeles Sparks of the Women's National Basketball Association, and the Los Angeles Kings of the National Hockey League.[10] The Lakers are one of the most successful teams in the history of the NBA, and have won 16 NBA championships, the second-most behind the Boston Celtics."
   },
   "Memphis_Grizzlies": {
     "image": "/src/assets/images/teams/MemphisGrizzlies.png",
-    "acronym": "mem"
+    "acronym": "mem",
+    "info": "The Memphis Grizzlies are an American professional basketball team based in Memphis, Tennessee. The Grizzlies compete in the National Basketball Association (NBA) as a member team of the league's Western Conference Southwest Division. The Grizzlies play their home games at FedExForum. The team is owned by Robert Pera. The Grizzlies are currently the only team in the major professional North American sports leagues based in the city of Memphis. The team was originally established as the Vancouver Grizzlies, an expansion team that joined the NBA for the 1995–96 season. After the 2000–01 season concluded, the Grizzlies moved to Memphis."
   },
   "Miami_Heat": {
     "image": "/src/assets/images/teams/MiamiHeat.png",
-    "acronym": "mia"
+    "acronym": "mia",
+    "info": "The Miami Heat are an American professional basketball team based in Miami. The Heat compete in the National Basketball Association (NBA) as a member of the league's Eastern Conference Southeast Division. They play their home games at the American Airlines Arena in downtown Miami. The team owner is Carnival Corporation owner Micky Arison, the team president and general manager is Pat Riley, and the head coach is Erik Spoelstra. The mascot is Burnie, an anthropomorphic fireball."
   },
   "Milwaukee_Bucks": {
     "image": "/src/assets/images/teams/MilwaukeeBucks.png",
-    "acronym": "mil"
+    "acronym": "mil",
+    "info": "The Milwaukee Bucks are an American professional basketball team based in Milwaukee, Wisconsin. The Bucks compete in the National Basketball Association (NBA) as a member club of the league's Eastern Conference Central Division. The team was founded in 1968 as an expansion team, and play at the Fiserv Forum. Former U.S. Senator Herb Kohl was the long-time owner of the team, but on April 16, 2014, a group led by billionaire hedge fund managers Wesley Edens and Marc Lasry agreed to purchase a majority interest in the team from Kohl, a sale which was approved by the owners of the NBA and its Board of Governors one month later on May 16."
   },
   "Minnesota_Timberwolves": {
     "image": "/src/assets/images/teams/MinnesotaTimberwolves.png",
-    "acronym": "min"
+    "acronym": "min",
+    "info": "The Minnesota Timberwolves (also commonly known as the Wolves) are an American professional basketball team based in Minneapolis, Minnesota. The Timberwolves compete in the National Basketball Association (NBA) as a member club of the league's Western Conference Northwest Division. Founded in 1989, the team is owned by Glen Taylor who also owns the WNBA's Minnesota Lynx. The Timberwolves play their home games at Target Center, their home since 1990."
   },
   "New_Orleans_Pelicans": {
     "image": "/src/assets/images/teams/NewOrleansPelicans.png",
-    "acronym": "nor"
+    "acronym": "nor",
+    "info": "The New Orleans Pelicans are an American professional basketball team based in New Orleans, Louisiana. The Pelicans compete in the National Basketball Association (NBA) as a member club of the league's Western Conference Southwest Division. The team plays their home games in the Smoothie King Center (formerly known as the New Orleans Arena). The Pelicans were established as the New Orleans Hornets in the 2002–03 season when then-owner of the Charlotte Hornets, George Shinn, relocated the franchise to New Orleans."
   },
   "New_York_Knicks": {
     "image": "/src/assets/images/teams/NewYorkKnicks.png",
-    "acronym": "nyk"
+    "acronym": "nyk",
+    "info": "The New York Knickerbockers, more commonly referred to as the Knicks, are an American professional basketball team based in the borough of Manhattan, in New York City. The Knicks compete in the National Basketball Association (NBA) as a member of the Atlantic Division of the Eastern Conference. The team plays its home games at Madison Square Garden. They are one of two NBA teams located in New York City; the other is the Brooklyn Nets. The team, established by Ned Irish in 1946, was one of the founding members of the Basketball Association of America (BAA), which became the NBA after merging with the rival National Basketball League (NBL) in 1949."
   },
   "Oklahoma_City_Thunder": {
     "image": "/src/assets/images/teams/OklahomaCityThunder.png",
-    "acronym": "okc"
+    "acronym": "okc",
+    "info": "The Oklahoma City Thunder is an American professional basketball team based in Oklahoma City, Oklahoma. The Thunder competes in the National Basketball Association (NBA) as a member of the league's Western Conference Northwest Division. The team plays its home games at Chesapeake Energy Arena. The Thunder's NBA G League affiliate is the Oklahoma City Blue, which it owns. The Thunder are the only team in the major professional North American sports leagues based in the state of Oklahoma. Oklahoma City previously hosted the New Orleans Hornets (now the Pelicans) for two seasons following devastation caused by Hurricane Katrina in New Orleans."
   },
   "Orlando_Magic": {
     "image": "/src/assets/images/teams/OrlandoMagic.png",
-    "acronym": "orl"
+    "acronym": "orl",
+    "info": "The Orlando Magic are an American professional basketball team based in Orlando, Florida. The Magic compete in the National Basketball Association (NBA) as a member of the league's Eastern Conference Southeast Division. The franchise was established in 1989 as an expansion franchise, and such notable NBA stars as Shaquille O'Neal, Penny Hardaway, Patrick Ewing, Grant Hill, Tracy McGrady, Steve Francis, Dwight Howard, Vince Carter, Rashard Lewis, and Hedo Türkoğlu have played for the club throughout its young history."
   },
   "Philadelphia_76ers": {
     "image": "/src/assets/images/teams/Philadelphia76ers.png",
-    "acronym": "phi"
+    "acronym": "phi",
+    "info": "The Philadelphia 76ers (also commonly known as the Sixers) are an American professional basketball team based in the Philadelphia metropolitan area. The 76ers compete in the National Basketball Association (NBA) as a member of the league's Eastern Conference Atlantic Division and play at Wells Fargo Center. Founded in 1946 and originally known as the Syracuse Nationals, they are one of the oldest franchises in the NBA, and one of only eight (out of 23) to survive the league's first decade."
   },
   "Phoenix_Suns": {
     "image": "/src/assets/images/teams/PhoenixSuns.png",
-    "acronym": "pho"
+    "acronym": "pho",
+    "info": "The Phoenix Suns are an American professional basketball team based in Phoenix, Arizona. The Suns compete in the National Basketball Association (NBA) as a member team of the league's Western Conference Pacific Division, and are the only team in their division not to be based in California. Since 1992, the Suns have played their home games at Talking Stick Resort Arena in downtown Phoenix."
   },
   "Portland_Trail_Blazers": {
     "image": "/src/assets/images/teams/PortlandTrailBlazers.png",
-    "acronym": "por"
+    "acronym": "por",
+    "info": "The Portland Trail Blazers, commonly known as the Blazers, are an American professional basketball team based in Portland, Oregon. The Trail Blazers compete in the National Basketball Association (NBA) as a member of the league's Western Conference Northwest Division. The team played its home games in the Memorial Coliseum before moving to Moda Center in 1995 (called the Rose Garden until 2013). The franchise entered the league as an expansion team in 1970, and has enjoyed a strong following: from 1977 through 1995, the team sold out 814 consecutive home games, the longest such streak in American major professional sports at the time, and only since surpassed by the Boston Red Sox."
   },
   "Sacramento_Kings": {
     "image": "/src/assets/images/teams/SacramentoKings.png",
-    "acronym": "sac"
+    "acronym": "sac",
+    "info": "The Sacramento Kings are an American professional basketball team based in Sacramento, California. The Kings compete in the National Basketball Association (NBA) as a member of the Western Conference's Pacific Division. The Kings are the only team in the major professional North American sports leagues located in Sacramento. The team plays its home games at the Golden 1 Center."
   },
   "San_Antonio_Spurs": {
     "image": "/src/assets/images/teams/SanAntonioSpurs.png",
-    "acronym": "sas"
+    "acronym": "sas",
+    "info": "The San Antonio Spurs are an American professional basketball team based in San Antonio, Texas. The Spurs compete in the National Basketball Association (NBA) as a member of the league's Western Conference Southwest Division. The team plays its home games at the AT&T Center in San Antonio. The Spurs are one of four former American Basketball Association (ABA) teams to remain intact in the NBA after the 1976 ABA–NBA merger and the only former ABA team to have won an NBA championship."
   },
   "Toronto_Raptors": {
     "image": "/src/assets/images/teams/TorontoRaptors.png",
-    "acronym": "tor"
+    "acronym": "tor",
+    "info": "The Toronto Raptors are a Canadian professional basketball team based in Toronto, Ontario. The Raptors compete in the National Basketball Association (NBA), as a member club of the league's Eastern Conference Atlantic Division. Founded in 1995 as part of the NBA's expansion into Canada, the Raptors are the only Canadian-based team in the league. They play their home games at the Scotiabank Arena. Like most expansion teams, the Raptors struggled in their early years, but after the acquisition of Vince Carter through a draft day trade in 1998, the team set league-attendance records and made the NBA playoffs in 2000, 2001, and 2002."
   },
   "Utah_Jazz": {
     "image": "/src/assets/images/teams/UtahJazz.png",
-    "acronym": "uth"
+    "acronym": "uth",
+    "info": "The Utah Jazz are an American professional basketball team based in Salt Lake City, Utah. The Jazz compete in the National Basketball Association (NBA) as a member club of the league's Western Conference Northwest Division. Since 1991, the team has played its home games at Vivint Smart Home Arena. The franchise began play in 1974 as the New Orleans Jazz (as a tribute to New Orleans' history of originating Jazz music), an expansion team based in New Orleans; the Jazz moved to Salt Lake City in 1979."
   },
   "Washington_Wizards": {
     "image": "/src/assets/images/teams/WashingtonWizards.png",
-    "acronym": "was"
+    "acronym": "was",
+    "info": "The Washington Wizards are an American professional basketball team based in Washington, D.C. The Wizards compete in the National Basketball Association (NBA) as a member of the league's Eastern Conference Southeast Division. The team plays its home games at the Capital One Arena, in the Chinatown neighborhood of Washington, D.C. The franchise was established in 1961 as the Chicago Packers based in Chicago, Illinois, and were renamed to Chicago Zephyrs the following season. In 1963, they relocated to Baltimore, Maryland and became the Baltimore Bullets, taking the name from a previous team of the same name."
   }
 }

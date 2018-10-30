@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { FormsModule } from '@angular/forms';
 
 import { CustomMaterialModule } from '../core/custom-material/custom-material.module';
 
@@ -13,10 +14,12 @@ import { PlayerComponent } from './content/player/player.component';
 import { TeamComponent } from './content/team/team.component';
 import { ModalComponent } from './content/player/modal/modal.component';
 import { LoadingModalComponent } from './content/loading-modal/loading-modal.component';
+import { ShowImageDirective } from './content/show-image.directive';
 
 @NgModule({
   imports: [
     CommonModule,
+    FormsModule,
     CustomMaterialModule
   ],
   exports: [
@@ -33,7 +36,8 @@ import { LoadingModalComponent } from './content/loading-modal/loading-modal.com
     TeamComponent,
     HoverDirective,
     ModalComponent,
-    LoadingModalComponent
+    LoadingModalComponent,
+    ShowImageDirective
   ]
 })
 export class ViewModule { }

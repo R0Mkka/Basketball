@@ -3,16 +3,16 @@
     <mat-spinner [diameter]="50"></mat-spinner>
   </div>
   <img mat-card-image
+       appShowImage
        [src]="imageSrc"
        (load)="imageLoaded()">
   <mat-card-title class="title"> {{getTeamName()}} </mat-card-title>
   <mat-card-content>
-    <p class="content"> Team acronym: <span>"{{acronym}}"</span> </p>
-    <p> {{info}} </p>
+    <img class="info" 
+         appInfo 
+         [matTooltip]="info" 
+         [matTooltipShowDelay]="400"
+         [matTooltipHideDelay]="300"
+         src="/src/assets/images/info.svg">
   </mat-card-content>
-  <!--<mat-card-actions>-->
-    <!--<img class="heart"-->
-         <!--[src]="heartImage"-->
-         <!--(click)="changeHeartColor()">-->
-  <!--</mat-card-actions>-->
 </mat-card>

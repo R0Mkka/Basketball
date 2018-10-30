@@ -139,14 +139,8 @@ export class PlayerComponent implements OnInit {
   private checkForPlayerImage() {
     setTimeout(() => {
       if (!this.isImageLoaded) {
-        this.imageSrc = this.playersService.tryGetImageAgain(this.name);
-
-        setTimeout(() => {
-          if (!this.isImageLoaded) {
-            this.imageSrc = '/src/assets/images/default_player.png';
-            this.isImageLoaded = true;
-          }
-        }, 3000);
+        this.imageSrc = '/src/assets/images/default_player.png';
+        this.isImageLoaded = true;
       }
     }, 5000);
   }

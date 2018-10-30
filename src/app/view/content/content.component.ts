@@ -1,4 +1,4 @@
-import {Component, EventEmitter, Input, Output, OnChanges, SimpleChanges} from '@angular/core';
+import {Component, EventEmitter, Input, Output, OnChanges } from '@angular/core';
 
 import { TeamsService } from './team/teams.service';
 import { PlayersService } from './player/players.service';
@@ -33,6 +33,8 @@ export class ContentComponent implements OnChanges {
 
   isTeamPlayers: boolean;
   teamPlayers: Array<Player>;
+
+  length: number;
 
   constructor(private teamsService: TeamsService,
               private playersService: PlayersService) {
@@ -129,13 +131,20 @@ export class ContentComponent implements OnChanges {
               this.players[index].image = url;
             });
             this.getSetsFromPlayers();
-            this.currentSetIndex = 1;
-            this.currentSet = this.playersSets[this.currentSetIndex - 1];
+            this.currentSetIndex = 0;
+            this.currentSet = this.playersSets[this.currentSetIndex];
             this.initFavorites();
+
+            this.length = this.players.length;
           }
         ),
         catchError(() => ([]))
       ).subscribe();
+  }
+
+  setNewPageIndex($event) {
+    this.currentSetIndex = $event.pageIndex;
+    this.currentSet = this.playersSets[this.currentSetIndex];
   }
 
   private getSetsFromPlayers() {

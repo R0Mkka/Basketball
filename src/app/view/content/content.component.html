@@ -38,6 +38,7 @@
         <app-team [team]="team"
                   [acronym]="teams[team].acronym"
                   [imageSrc]="teams[team].image"
+                  [info]="teams[team].info"
                   (showTeam)="displayTeam($event)"></app-team>
       </ng-container>
     </div>
@@ -55,7 +56,7 @@
                     (favoriteEvent)="toggleFavorites($event)"></app-player>
       </ng-container>
     </div>
-    <div class="navigation">
+    <!-- <div class="navigation">
       <button class="btn" (click)="prevSet()">
         <img src="/src/assets/images/prev.png">
       </button>
@@ -68,6 +69,15 @@
       <button class="btn" (click)="nextSet()">
         <img src="/src/assets/images/next.png">
       </button>
-    </div>
+    </div> -->
+    <mat-paginator class="paginator"
+                   [length]="length"
+                   [pageSize]="10"
+                   [hidePageSize]="true"
+                   [pageIndex]="currentSetIndex"
+                   [showFirstLastButtons]="true"
+                   (page)="setNewPageIndex($event)">
+    </mat-paginator>
+
   </ng-container>
 </section>
