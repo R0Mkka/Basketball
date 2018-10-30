@@ -7,20 +7,17 @@ import { CustomMaterialModule } from '../core/custom-material/custom-material.mo
 import { HeaderComponent } from './header/header.component';
 import { ContentComponent } from './content/content.component';
 import { ViewComponent } from './view.component';
-import { CardComponent } from './content/card/card.component';
-import { HoverDirective } from './content/card/card.directive';
 
-import { PlayerComponent } from './content/player/player.component';
-import { TeamComponent } from './content/team/team.component';
-import { ModalComponent } from './content/player/modal/modal.component';
 import { LoadingModalComponent } from './content/loading-modal/loading-modal.component';
-import { ShowImageDirective } from './content/show-image.directive';
+
+import { AppRoutingModule } from '../app-routing.module';
 
 @NgModule({
   imports: [
     CommonModule,
     FormsModule,
-    CustomMaterialModule
+    CustomMaterialModule,
+    AppRoutingModule
   ],
   exports: [
     HeaderComponent,
@@ -31,13 +28,7 @@ import { ShowImageDirective } from './content/show-image.directive';
     HeaderComponent,
     ContentComponent,
     ViewComponent,
-    CardComponent,
-    PlayerComponent,
-    TeamComponent,
-    HoverDirective,
-    ModalComponent,
-    LoadingModalComponent,
-    ShowImageDirective
+    LoadingModalComponent
   ]
 })
 export class ViewModule { }

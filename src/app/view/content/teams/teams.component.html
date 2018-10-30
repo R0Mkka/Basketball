@@ -1,3 +1,9 @@
-<div>
-    Teams!!!
+<div class="teams">
+    <ng-container *ngFor="let team of teamsNames">
+        <app-team [teamName]="team"
+                  [acronym]="teamsList[team].acronym"
+                  [imageSrc]="teamsList[team].image"
+                  [info]="teamsList[team].info"
+                  (showTeam)="displayTeam($event)"></app-team>
+    </ng-container>
 </div>

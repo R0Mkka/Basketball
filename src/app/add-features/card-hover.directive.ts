@@ -3,7 +3,7 @@ import { Directive, HostBinding, HostListener } from '@angular/core';
 @Directive({
   selector: '[appCardHover]'
 })
-export class HoverDirective {
+export class CardHoverDirective {
 
   @HostBinding('class.hovered') isHovered = false;
 

@@ -55,6 +55,20 @@ export class PlayersService {
     });
   }
 
+  getPlayerImage(player: Player): string {
+    let filteredName = '';
+
+    for (let i = 0; i < player.name.length; i++) {
+      if (player.name[i] != "'" && player.name[i] != ".") {
+        filteredName += player.name[i];
+      }
+    }
+
+    const splitFullName = filteredName.split(' ');
+
+    return this.baseUrl + `players/${splitFullName[1]}/${splitFullName[0]}`;
+  }
+
   getPlayerStats(fullName: string) {
     let filteredName = '';
 

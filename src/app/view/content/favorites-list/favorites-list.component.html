@@ -1,0 +1,14 @@
+<div class="favorites">
+    <ng-container *ngIf="isFavoritesListEmpty">
+        <p class="clear-list">List of favorites is clear.</p>
+    </ng-container>
+    <ng-container *ngFor="let player of favoritesList">
+        <app-favorite [name]="player.name"
+                      [team]="player.team_name"
+                      [gamesPlayed]="player.games_played"
+                      [tpp]="player.three_point_percentage"
+                      [imageSrc]="player.image"
+                      (loading)="setLoadingStatus($event)"
+                      (favoriteEvent)="toggleFavorites($event)"></app-favorite>
+    </ng-container>
+</div>

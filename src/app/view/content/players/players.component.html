@@ -1,3 +1,20 @@
-<div>
-    Players!!!
+<div class="players">
+    <ng-container *ngFor="let player of currentPageSet">
+        <app-player [name]="player.name"
+                    [team]="player.team_name"
+                    [gamesPlayed]="player.games_played"
+                    [tpp]="player.three_point_percentage"
+                    [imageSrc]="player.image"
+                    (loading)="setLoadingStatus($event)"
+                    (favoriteEvent)="toggleFavorites($event)">
+        </app-player>
+    </ng-container>
 </div>
+<mat-paginator class="paginator"
+               [length]="playersCount"
+               [pageSize]="10"
+               [hidePageSize]="true"
+               [pageIndex]="currentSetIndex"
+               [showFirstLastButtons]="true"
+               (page)="setNewPageIndex($event)">
+</mat-paginator>

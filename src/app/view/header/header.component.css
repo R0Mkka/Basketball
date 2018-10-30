@@ -52,6 +52,7 @@
   margin-right: 25px;
   transform: scale(1);
   transition: .05s transform ease-in-out;
+  outline: none;
 }
 
 .favorites-button:active {

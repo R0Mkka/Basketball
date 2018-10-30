@@ -11,8 +11,12 @@ const appRoutes: Routes = [
         loadChildren: './view/content/teams/teams.module#TeamsModule'
     },
     {
+        path: 'favorites',
+        loadChildren: './view/content/favorites-list/favorites-list.module#FavoritesListModule'
+    },
+    {
         path: '',
-        redirectTo: '',
+        redirectTo: 'teams',
         pathMatch: 'full'
     }
 ];
@@ -21,9 +25,9 @@ const appRoutes: Routes = [
     imports: [
         RouterModule.forRoot(appRoutes)
     ],
+    declarations: [],
     exports: [
         RouterModule
-    ],
-    declarations: []
+    ]    
 })
 export class AppRoutingModule { }

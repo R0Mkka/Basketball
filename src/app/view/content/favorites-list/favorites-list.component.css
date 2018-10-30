@@ -1,0 +1,11 @@
+.favorites {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+  
+.favorites .clear-list {
+    margin-top: 20px;
+    font-size: 25px;
+    font-weight: 300;
+}
