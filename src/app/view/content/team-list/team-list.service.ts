@@ -1,15 +1,13 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { Player } from '../player/player';
 
-interface Team {
-  image: string;
-  acronym: string;
-  info: string;
-}
+import { Player } from 'src/app/dataTypes/player';
+import { Team } from 'src/app/dataTypes/team';
 
-@Injectable()
-export class TeamsService {
+@Injectable({
+  providedIn: 'root'
+})
+export class TeamListService {
   private baseUrl = '/src/assets/teams.json';
 
   constructor(private http: HttpClient) {}

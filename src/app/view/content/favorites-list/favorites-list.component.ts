@@ -1,8 +1,8 @@
 import { Component, DoCheck } from '@angular/core';
 
-import { Player } from '../player/player';
-import { LocalStorageService } from '../../../core/local-storage/local-storage.service';
-import { PlayersService } from '../player/players.service';
+import { LocalStorageService } from 'src/app/core/local-storage/local-storage.service';
+import { PlayerListService } from '../player-list/player-list.service';
+import { Player } from 'src/app/dataTypes/player';
 
 @Component({
     selector: 'app-favorites-list',
@@ -16,7 +16,8 @@ export class FavoritesListComponent {
     public showLoading = false;
     public withBackdrop = false;
 
-    constructor(private playersService: PlayersService, private storage: LocalStorageService) {
+    constructor(private playerListService: PlayerListService, 
+                private storage: LocalStorageService) {
         this.showLoading = true;
         this.initFavorites();
     }
@@ -52,14 +53,14 @@ export class FavoritesListComponent {
     private initFavorites() : void {
         let players = [];
     
-        this.playersService.getPlayers()
+        this.playerListService.getPlayers()
             .subscribe(
                 value => players = value,
                 () => console.error('Error with getting players!!!'),
                 () => {
                     players.forEach((player: Player) => {
                         if (this.storage.has(player.name)) {
-                            player.image = this.playersService.getPlayerImage(player);
+                            player.image = this.playerListService.getPlayerImage(player);
                             player.team_image = this.getTeamImage(player);
 
                             this.favoritesList.push(player);

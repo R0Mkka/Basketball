@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 
-import { AddFeaturesModule } from '../../../add-features/add-features.module';
+import { FeaturesModule } from 'src/app/features/features.module';
 import { PlayerModule } from 'src/app/player/player.module';
 import { FavoritesListRoutingModule } from './favorites-list-routing.module';
 
@@ -12,7 +12,7 @@ import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 
 @NgModule({
     imports: [
-        AddFeaturesModule,
+        FeaturesModule,
         PlayerModule,
         FavoritesListRoutingModule,
         MatCardModule,

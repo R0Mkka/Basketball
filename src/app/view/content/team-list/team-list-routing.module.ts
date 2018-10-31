@@ -1,13 +1,13 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 
-import { TeamsComponent } from './teams.component';
+import { TeamListComponent } from './team-list.component';
 import { TeamPlayersListComponent } from './team-players-list/team-players-list.component';
 
-const teamsRoutes: Routes = [
+const teamListRoutes: Routes = [
     {
         path: '',
-        component: TeamsComponent
+        component: TeamListComponent
     },
     {
         path: ':team',
@@ -16,13 +16,7 @@ const teamsRoutes: Routes = [
 ];
 
 @NgModule({
-    imports: [
-        RouterModule.forChild(teamsRoutes)
-    ],
-    exports: [
-        RouterModule
-    ]
+    imports: [ RouterModule.forChild(teamListRoutes) ],
+    exports: [ RouterModule ]
 })
-export class TeamsRoutingModule {
-
-}
+export class TeamListRoutingModule { }

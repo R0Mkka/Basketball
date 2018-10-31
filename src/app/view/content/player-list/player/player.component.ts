@@ -1,12 +1,14 @@
 import { Component, Input, Output, EventEmitter, OnInit } from '@angular/core';
-import { PlayersService } from './players.service';
-import { Player } from './player';
+
+import { PlayerListService } from '../player-list.service';
+import { Player } from 'src/app/dataTypes/player';
+
+import { LocalStorageService } from 'src/app/core/local-storage/local-storage.service';
 
 @Component({
   selector: 'app-player',
   templateUrl: './player.component.html',
-  styleUrls: ['./player.component.css'],
-  providers: [ PlayersService ]
+  styleUrls: ['./player.component.css']
 })
 export class PlayerComponent implements OnInit {
   @Input() name: string;
@@ -14,26 +16,26 @@ export class PlayerComponent implements OnInit {
   @Input() gamesPlayed: string;
   @Input() tpp: string;
   @Input() imageSrc: string;
-  @Output() dataChanged = new EventEmitter<Object>();
-  @Output() favoriteEvent = new EventEmitter<Player>();
+  @Output() favoriteActionEvent = new EventEmitter<Player>();
   @Output() loading = new EventEmitter<boolean>();
 
   player: Player;
   isPlayerInit = false;
   isFavorite = false;
-  showModal = false;
+  showEditModal = false;
   isImageLoaded = false;
   teamImage = '';
   heartImage = '/src/assets/images/favorite-grey.png';
 
   isEditDisabled = true;
 
-  constructor(private playersService: PlayersService) {
+  constructor(private playerListService: PlayerListService, 
+              private storage: LocalStorageService) {
     this.checkForPlayerImage();
   }
 
   ngOnInit() {
-    if (this.playersService.has(this.name)) {
+    if (this.storage.has(this.name)) {
       this.isFavorite = true;
       this.heartImage = '/src/assets/images/favorite-pink.png';
     }
@@ -45,11 +47,11 @@ export class PlayerComponent implements OnInit {
     this.isEditDisabled = false;
   }
 
-  toggleFavorite() {
+  favoriteStateChange() {
     this.loading.emit(true);
 
     if (!this.isPlayerInit) {
-      this.playersService.getPlayerStats(this.name)
+      this.playerListService.getPlayerStats(this.name)
         .subscribe(
           (playerStats: Player) => this.player = playerStats,
           () => console.error(`Error with getting ${this.name} stats!`),
@@ -59,28 +61,76 @@ export class PlayerComponent implements OnInit {
             this.player.is_favorite = !this.isFavorite;
             this.isFavorite = this.player.is_favorite;
 
+            if (this.isFavorite) {
+              this.storage.set(this.name, "0");
+            } else {
+              this.storage.remove(this.name);
+            }
+
             this.isPlayerInit = true;
-            this.favoriteEvent.emit(this.player);
+            this.favoriteActionEvent.emit(this.player);
             this.loading.emit(false);
           });
     } else {
       this.player.is_favorite = !this.isFavorite;
       this.isFavorite = this.player.is_favorite;
-      this.favoriteEvent.emit(this.player);
+
+      if (this.isFavorite) {
+        this.storage.set(this.name, "0");
+      } else {
+        this.storage.remove(this.name);
+      }
+
+      this.favoriteActionEvent.emit(this.player);
       this.loading.emit(false);
     }
 
     this.toggleHeartColor();
   }
 
-  changeIsFavorite($event: boolean) {
+  changeFavoriteState($event: boolean) {
+    if ($event) {
+      this.storage.set(this.name, "0");
+    } else {
+      this.storage.remove(this.name);
+    }
+
     this.isFavorite = $event;
     this.player.is_favorite = $event;
-    this.favoriteEvent.emit(this.player);
+    this.favoriteActionEvent.emit(this.player);
 
     this.heartImage = (this.isFavorite)
       ? '/src/assets/images/favorite-pink.png'
       : '/src/assets/images/favorite-grey.png';
+  }
+ 
+  editPlayer() {
+    if (!this.isEditDisabled) {
+      this.loading.emit(true);
+
+      if (!this.isPlayerInit) {
+        this.playerListService.getPlayerStats(this.name)
+          .subscribe(
+            (playerInfo: Player) => this.player = playerInfo,
+            () => console.error(`Error with getting ${this.name} stats!`),
+            () => {
+              this.player.image = this.imageSrc;
+              this.player.team_image = this.teamImage;
+              this.player.is_favorite = this.isFavorite;
+              this.isPlayerInit = true;
+
+              this.loading.emit(false);
+              this.showEditModal = true;
+            });
+      } else {
+        this.showEditModal = true;
+        this.loading.emit(false);
+      }
+    }
+  }
+
+  closeModal() {
+    this.showEditModal = false;
   }
 
   private toggleHeartColor() {
@@ -91,7 +141,7 @@ export class PlayerComponent implements OnInit {
     }
   }
 
-  getTeamImage() {
+  private getTeamImage() {
     const splitTeamName = this.team.split(' ');
     const folderPath = '/src/assets/images/teams/';
     let imageName = '';
@@ -103,37 +153,6 @@ export class PlayerComponent implements OnInit {
     imageName = `${imageName}.png`;
 
     return `${folderPath}/${imageName}`;
-  }
-
-  editPlayer() {
-    if (!this.isEditDisabled) {
-      this.loading.emit(true);
-
-      if (!this.isPlayerInit) {
-        this.playersService.getPlayerStats(this.name)
-          .subscribe(
-            (playerStats: Player) => {
-              this.player = playerStats;
-            },
-            () => console.error(`Error with getting ${this.name} stats!`),
-            () => {
-              this.player.image = this.imageSrc;
-              this.player.team_image = this.teamImage;
-              this.player.is_favorite = this.isFavorite;
-  
-              this.showModal = true;
-              this.isPlayerInit = true;
-              this.loading.emit(false);
-            });
-      } else {
-        this.showModal = true;
-        this.loading.emit(false);
-      }
-    }
-  }
-
-  closeModal() {
-    this.showModal = false;
   }
 
   private checkForPlayerImage() {

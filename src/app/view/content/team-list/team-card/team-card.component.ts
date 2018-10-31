@@ -1,16 +1,12 @@
 import { Component, Input, Output, EventEmitter } from '@angular/core';
 import { Router } from '@angular/router';
 
-import { TeamsService } from '../../team/teams.service';
-import { PlayersService } from '../../player/players.service';
-
-import { Player } from '../../player/player';
+import { Player } from 'src/app/dataTypes/player';
 
 @Component({
   selector: 'app-team',
   templateUrl: './team-card.component.html',
-  styleUrls: ['./team-card.component.css'],
-  providers: [ TeamsService, PlayersService ]
+  styleUrls: ['./team-card.component.css']
 })
 export class TeamCardComponent {
     @Input() teamName: string;
@@ -23,27 +19,7 @@ export class TeamCardComponent {
   teamPlayers: Array<Player>;
   isImageLoaded = false;
 
-  constructor(private teamService: TeamsService,
-              private playersService: PlayersService,
-              private router: Router) { }
-
-  // showTeamPlayers() {
-  //   this.teamService.getPlayersOfTheTeam(this.acronym)
-  //     .subscribe(
-  //       (value: Array<Player>) => this.teamPlayers = value,
-  //       (error) => console.error('Error with getting players of the team ' + this.teamName),
-  //       () => {
-  //         this.playersService.getPlayersImages(this.teamPlayers).forEach((url, index) => {
-  //           this.teamPlayers[index].image = url;
-  //         });
-  //         this.teamPlayers.forEach((plyer: Player, index) => {
-  //           this.teamPlayers[index].team_image = this.getTeamImage();
-  //         });
-
-  //         this.showTeam.emit(this.teamPlayers);
-  //       }
-  //     );
-  // }
+  constructor(private router: Router) { }
 
   showTeamPlayers() {
     const splitTeamName = this.teamName.split('_')

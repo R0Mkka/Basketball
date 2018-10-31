@@ -5,7 +5,6 @@ import { FormsModule } from '@angular/forms';
 import { CustomMaterialModule } from '../core/custom-material/custom-material.module';
 
 import { HeaderComponent } from './header/header.component';
-import { ContentComponent } from './content/content.component';
 import { ViewComponent } from './view.component';
 
 import { AppRoutingModule } from '../app-routing.module';
@@ -19,12 +18,10 @@ import { AppRoutingModule } from '../app-routing.module';
   ],
   exports: [
     HeaderComponent,
-    ContentComponent,
     ViewComponent
   ],
   declarations: [
     HeaderComponent,
-    ContentComponent,
     ViewComponent
   ]
 })

@@ -30,4 +30,4 @@ import { LoadingComponent } from './loading/loading.component';
         LoadingComponent
     ]
 })
-export class AddFeaturesModule {}
+export class FeaturesModule {}

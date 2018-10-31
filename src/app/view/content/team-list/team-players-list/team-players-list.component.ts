@@ -1,10 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 
-import { TeamsService } from '../../team/teams.service';
-import { PlayersService } from '../../player/players.service';
+import { TeamListService } from '../../team-list/team-list.service';
+import { PlayerListService } from '../../player-list/player-list.service';
 
-import { Player } from '../../player/player';
+import { Player } from 'src/app/dataTypes/player';
 
 @Component({
     selector: 'app-team-players-list',
@@ -18,8 +18,8 @@ export class TeamPlayersListComponent implements OnInit {
     public showLoading = false;
     public withBackdrop = false;
 
-    constructor(private teamsService: TeamsService,
-                private playersService: PlayersService,
+    constructor(private teamListService: TeamListService,
+                private playerListService: PlayerListService,
                 private route: ActivatedRoute) {}
 
     ngOnInit() {
@@ -28,12 +28,13 @@ export class TeamPlayersListComponent implements OnInit {
         this.route.queryParams.subscribe(params => {
             const acronym = params['acronym'];
 
-            this.teamsService.getPlayersOfTheTeam(acronym)
+            this.teamListService.getPlayersOfTheTeam(acronym)
                 .subscribe(
                     list => this.teamPlayersList = list,
                     () => console.error(`Error with getting ${acronym} players!!!`),
                     () => {
-                        const imagesList = this.playersService.getPlayersImages(this.teamPlayersList);
+                        const imagesList = this.playerListService
+                            .getPlayersImages(this.teamPlayersList);
                         
                         imagesList.forEach((imageUrl: string, index: number) => {
                             this.teamPlayersList[index].image = imageUrl;

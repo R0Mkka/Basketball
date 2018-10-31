@@ -17,6 +17,21 @@ export class ViewComponent implements OnInit {
     this.runProgressBar();
   }
 
+  onActivate($event) {
+    for (let key in $event) {
+      if (key === 'progressBar') {
+        const progressBar = $event[key];
+
+        const tempInterval = setInterval(() => {
+          if ($event[key].value === 100) {
+            this.teamsLoaded();
+            clearInterval(tempInterval);
+          }
+        }, 100);
+      }
+    }
+  }
+
   changeContent($event: boolean) {
     this.isTeams = $event;
   }
@@ -42,7 +57,7 @@ export class ViewComponent implements OnInit {
     this.progressId = setInterval(() => {
       this.progress++;
 
-      if (this.progress >= 100) {
+      if (this.progress >= 90) {
         clearInterval(this.progressId);
       }
     }, 40);

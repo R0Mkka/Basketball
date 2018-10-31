@@ -1,31 +1,30 @@
 import { Component } from '@angular/core';
 import { tap, catchError } from 'rxjs/operators';
 
-import { TeamsService } from '../team/teams.service';
+import { TeamListService } from './team-list.service';
 
 @Component({
     selector: 'app-teams',
-    templateUrl: './teams.component.html',
-    styleUrls: ['./teams.component.css'],
-    providers: [ TeamsService ]
+    templateUrl: './team-list.component.html',
+    styleUrls: ['./team-list.component.css']
 })
-export class TeamsComponent {
-    public teamsList: any[];
+export class TeamListComponent {
+    public teamList: any[];
     public teamsNames: string[];
 
     public showLoading = false;
 
-    constructor(private teamsService: TeamsService) {
+    constructor(private teamListSerivce: TeamListService) {
         this.showLoading = true;
         this.initTeams();
     }
 
     private initTeams() {
-        this.teamsService.getTeams()
+        this.teamListSerivce.getTeams()
             .pipe(
                 tap(
                     value => {
-                        this.teamsList = value;
+                        this.teamList = value;
                         this.teamsNames = Object.keys(value);
                     },
                     () => console.error('Error with getting teams!!!'),

@@ -1,5 +1,5 @@
 import { Component, EventEmitter, Input, Output, OnInit } from '@angular/core';
-import { Player } from '../../view/content/player/player';
+import { Player } from 'src/app/dataTypes/player';
 
 @Component({
   selector: 'app-edit-modal',

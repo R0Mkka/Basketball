@@ -1,15 +1,14 @@
 import { Component, Input, Output, EventEmitter, OnInit } from '@angular/core';
 
-import { PlayersService } from '../../view/content/player/players.service';
-import { Player } from '../player';
+import { LocalStorageService } from 'src/app/core/local-storage/local-storage.service';
 
-import { LocalStorageService } from '../../core/local-storage/local-storage.service';
+import { PlayerListService } from '../../view/content/player-list/player-list.service';
+import { Player } from 'src/app/dataTypes/player';
 
 @Component({
   selector: 'app-player-card',
   templateUrl: './player-card.component.html',
-  styleUrls: ['./player-card.component.css'],
-  providers: [ PlayersService ]
+  styleUrls: ['./player-card.component.css']
 })
 export class PlayerCardComponent implements OnInit {
   @Input() name: string;
@@ -31,12 +30,13 @@ export class PlayerCardComponent implements OnInit {
 
   isEditDisabled = true;
 
-  constructor(private playersService: PlayersService, private storage: LocalStorageService) {
+  constructor(private playerListService: PlayerListService, 
+              private storage: LocalStorageService) {
     this.checkForPlayerImage();
   }
 
   ngOnInit() {
-    if (this.playersService.has(this.name)) {
+    if (this.storage.has(this.name)) {
       this.isFavorite = true;
       this.heartImage = '/src/assets/images/favorite-pink.png';
     }
@@ -53,7 +53,7 @@ export class PlayerCardComponent implements OnInit {
     this.backdrop.emit(true);
 
     if (!this.isPlayerInit) {
-      this.playersService.getPlayerStats(this.name)
+      this.playerListService.getPlayerStats(this.name)
         .subscribe(
           (playerStats: Player) => this.player = playerStats,
           () => console.error(`Error with getting ${this.name} stats!`),
@@ -114,7 +114,7 @@ export class PlayerCardComponent implements OnInit {
       this.backdrop.emit(true);
 
       if (!this.isPlayerInit) {
-        this.playersService.getPlayerStats(this.name)
+        this.playerListService.getPlayerStats(this.name)
           .subscribe(
             (playerInfo: Player) => this.player = playerInfo,
             () => console.error(`Error with getting ${this.name} stats!`),

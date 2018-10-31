@@ -1,12 +1,13 @@
 import { Component, Input, Output, EventEmitter, OnInit } from '@angular/core';
-import { PlayersService } from '../../player/players.service';
-import { Player } from '../../player/player';
+
+import { LocalStorageService } from 'src/app/core/local-storage/local-storage.service';
+import { PlayerListService } from '../../player-list/player-list.service';
+import { Player } from 'src/app/dataTypes/player';
 
 @Component({
   selector: 'app-favorite',
   templateUrl: './favorite-player.component.html',
-  styleUrls: ['./favorite-player.component.css'],
-  providers: [ PlayersService ]
+  styleUrls: ['./favorite-player.component.css']
 })
 export class FavoritePlayerComponent {
   @Input() name: string;
@@ -29,12 +30,13 @@ export class FavoritePlayerComponent {
 
   isEditDisabled = true;
 
-  constructor(private playersService: PlayersService) {
+  constructor(private playerListService: PlayerListService,
+              private storage: LocalStorageService) {
     this.checkForPlayerImage();
   }
 
   ngOnInit() {
-    if (this.playersService.has(this.name)) {
+    if (this.storage.has(this.name)) {
       this.isFavorite = true;
       this.heartImage = '/src/assets/images/favorite-pink.png';
     }
@@ -51,7 +53,7 @@ export class FavoritePlayerComponent {
     this.backdrop.emit(true);
 
     if (!this.isPlayerInit) {
-      this.playersService.getPlayerStats(this.name)
+      this.playerListService.getPlayerStats(this.name)
         .subscribe(
           (playerStats: Player) => this.player = playerStats,
           () => console.error(`Error with getting ${this.name} stats!`),
@@ -115,7 +117,7 @@ export class FavoritePlayerComponent {
       this.backdrop.emit(true);
 
       if (!this.isPlayerInit) {
-        this.playersService.getPlayerStats(this.name)
+        this.playerListService.getPlayerStats(this.name)
           .subscribe(
             (playerStats: Player) => {
               this.player = playerStats;
@@ -149,6 +151,6 @@ export class FavoritePlayerComponent {
         this.imageSrc = '/src/assets/images/default_player.png';
         this.isImageLoaded = true;
       }
-    }, 5000);
+    }, 10000);
   }
 }

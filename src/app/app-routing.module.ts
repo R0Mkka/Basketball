@@ -4,11 +4,11 @@ import { RouterModule, Routes } from '@angular/router';
 const appRoutes: Routes = [
     {
         path: 'players',
-        loadChildren: './view/content/players/players.module#PlayersModule'
+        loadChildren: './view/content/player-list/player-list.module#PlayerListModule'
     },
     { 
         path: 'teams', 
-        loadChildren: './view/content/teams/teams.module#TeamsModule'
+        loadChildren: './view/content/team-list/team-list.module#TeamListModule'
     },
     {
         path: 'favorites',
@@ -22,12 +22,8 @@ const appRoutes: Routes = [
 ];
 
 @NgModule({
-    imports: [
-        RouterModule.forRoot(appRoutes)
-    ],
+    imports: [ RouterModule.forRoot(appRoutes) ],
     declarations: [],
-    exports: [
-        RouterModule
-    ]    
+    exports: [ RouterModule ]    
 })
 export class AppRoutingModule { }

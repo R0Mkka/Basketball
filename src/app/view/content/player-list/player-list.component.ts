@@ -2,17 +2,17 @@ import { Component } from '@angular/core';
 
 import { retry, tap, catchError } from 'rxjs/operators';
 
-import { Player } from '../player/player';
-import { PlayersService } from '../player/players.service';
+import { Player } from 'src/app/dataTypes/player';
+import { PlayerListService } from './player-list.service';
 
-import { LocalStorageService } from '../../../core/local-storage/local-storage.service';
+import { LocalStorageService } from 'src/app/core/local-storage/local-storage.service';
 
 @Component({
     selector: 'app-players',
-    templateUrl: './players.component.html',
-    styleUrls: ['./players.component.css']
+    templateUrl: './player-list.component.html',
+    styleUrls: ['./player-list.component.css']
 })
-export class PlayersComponent {
+export class PlayerListComponent {
     public playersList: Player[];
     public playersCount: number;
     public playersPageSets: any[] = [];
@@ -23,7 +23,12 @@ export class PlayersComponent {
     public showLoading = false;
     public withBackdrop = false;
 
-    constructor(private playersService: PlayersService, private storage: LocalStorageService) {
+    public progressBar = {
+        value: 0
+    }
+
+    constructor(private playerListService: PlayerListService, 
+                private storage: LocalStorageService) {
         this.showLoading = true;
         this.initPlayers();
     }
@@ -50,7 +55,7 @@ export class PlayersComponent {
     }
 
     private initPlayers() {
-        this.playersService.getPlayers()
+        this.playerListService.getPlayers()
         .pipe(
             retry(3),
             tap(
@@ -59,7 +64,7 @@ export class PlayersComponent {
                 },
                 () => console.error('Error with getting players!!!'),
                 () => {
-                    this.playersService.getPlayersImages(this.playersList).forEach((url, index) => {
+                    this.playerListService.getPlayersImages(this.playersList).forEach((url, index) => {
                         this.playersList[index].image = url;
                     });
                     this.getPageSetsFromPlayers();
@@ -68,6 +73,7 @@ export class PlayersComponent {
                     this.playersCount = this.playersList.length;
                     
                     this.showLoading = false;
+                    this.progressBar.value = 100;
                 }
             ),
             catchError(() => ([]))

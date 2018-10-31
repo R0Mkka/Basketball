@@ -8,10 +8,8 @@
                     color="primary"
                     [value]="progress">
   </mat-progress-bar>
-  <app-content [isTeams]="isTeams"
-               [isFavorites]="isFavorites"
-               [isClearFavorites]="isClearFavorites"
-               (teamsLoaded)="teamsLoaded($event)">
-  </app-content>
+  <div class="content">
+    <router-outlet (activate)="onActivate($event)"></router-outlet>
+  </div>
 </div>
 
