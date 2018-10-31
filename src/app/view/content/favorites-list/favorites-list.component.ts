@@ -13,13 +13,41 @@ export class FavoritesListComponent {
     public favoritesList: Player[] = [];
     public isFavoritesListEmpty = false;
 
-    constructor(private storage: LocalStorageService, private playersService: PlayersService) {
+    public showLoading = false;
+    public withBackdrop = false;
+
+    constructor(private playersService: PlayersService, private storage: LocalStorageService) {
+        this.showLoading = true;
         this.initFavorites();
     }
 
-    // ngDoCheck() {
-    //     console.log('doCheck');
-    // }
+    public setLoadingStatus($event: boolean) {
+        this.showLoading = $event;
+    }
+
+    public showBackdrop($event: boolean) {
+        this.withBackdrop = $event;
+    }
+
+    public favoriteStateChange(player: Player) {
+        if (!player.is_favorite) {
+            this.storage.remove(player.name);
+            this.removeFromFavorites(player.name);
+        } else {
+            this.storage.set(player.name, "0");
+        }
+
+        this.isFavoritesListEmpty = this.favoritesList.length === 0;
+    }
+
+    private removeFromFavorites(playerName: string) {
+        this.favoritesList.forEach((favoritePlayer: Player, index: number) => {
+            if (favoritePlayer.name === playerName) {
+                this.favoritesList.splice(index, 1);
+                return;
+            }
+        });
+    }
 
     private initFavorites() : void {
         let players = [];
@@ -39,6 +67,7 @@ export class FavoritesListComponent {
                     });
 
                     this.isFavoritesListEmpty = this.favoritesList.length === 0;
+                    this.showLoading = false;
                 });  
     }
 

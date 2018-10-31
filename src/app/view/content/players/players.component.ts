@@ -5,6 +5,8 @@ import { retry, tap, catchError } from 'rxjs/operators';
 import { Player } from '../player/player';
 import { PlayersService } from '../player/players.service';
 
+import { LocalStorageService } from '../../../core/local-storage/local-storage.service';
+
 @Component({
     selector: 'app-players',
     templateUrl: './players.component.html',
@@ -12,18 +14,37 @@ import { PlayersService } from '../player/players.service';
 })
 export class PlayersComponent {
     public playersList: Player[];
+    public playersCount: number;
     public playersPageSets: any[] = [];
 
     public currentPageSetIndex: number;
     public currentPageSet: Player[];
 
-    public playersCount: number;
+    public showLoading = false;
+    public withBackdrop = false;
 
-    constructor(private playersService: PlayersService) {
+    constructor(private playersService: PlayersService, private storage: LocalStorageService) {
+        this.showLoading = true;
         this.initPlayers();
     }
+    
+    public showBackdrop($event: boolean) {
+        this.withBackdrop = $event;
+    }
 
-    setNewPageIndex($event) {
+    public setLoadingStatus($event: boolean) {
+        this.showLoading = $event;
+    }
+
+    public favoriteStateChange(player: Player) {
+        if (!player.is_favorite) {
+            this.storage.remove(player.name);
+        } else {
+            this.storage.set(player.name, "0");
+        }
+    }
+
+    public setNewPageIndex($event) {
         this.currentPageSetIndex = $event.pageIndex;
         this.currentPageSet = this.playersPageSets[this.currentPageSetIndex];
     }
@@ -45,9 +66,8 @@ export class PlayersComponent {
                     this.currentPageSetIndex = 0;
                     this.currentPageSet = this.playersPageSets[this.currentPageSetIndex];
                     this.playersCount = this.playersList.length;
-                    // this.initFavorites();
-
-                    // this.length = this.playersList.length;
+                    
+                    this.showLoading = false;
                 }
             ),
             catchError(() => ([]))

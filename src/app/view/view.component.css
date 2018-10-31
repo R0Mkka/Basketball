@@ -1,3 +1,5 @@
 .progress-bar {
+  position: relative;
+  z-index: 100;
   height: 10px;
 }

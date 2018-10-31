@@ -2,6 +2,12 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Player } from '../player/player';
 
+interface Team {
+  image: string;
+  acronym: string;
+  info: string;
+}
+
 @Injectable()
 export class TeamsService {
   private baseUrl = '/src/assets/teams.json';
@@ -9,7 +15,7 @@ export class TeamsService {
   constructor(private http: HttpClient) {}
 
   getTeams() {
-    return this.http.get<Array<Object>>(this.baseUrl);
+    return this.http.get<Array<Team>>(this.baseUrl);
   }
 
   getPlayersOfTheTeam(acronym: string) {

@@ -1,12 +1,12 @@
 import { Component, EventEmitter, Input, Output, OnInit } from '@angular/core';
-import { Player } from '../../../player/player';
+import { Player } from '../../view/content/player/player';
 
 @Component({
-  selector: 'app-player-modal',
-  templateUrl: './modal.component.html',
-  styleUrls: ['./modal.component.css']
+  selector: 'app-edit-modal',
+  templateUrl: './edit-modal.component.html',
+  styleUrls: ['./edit-modal.component.css']
 })
-export class ModalComponent implements OnInit {
+export class EditModalComponent implements OnInit {
   @Input() player: Player;
   @Output() favoriteChanged = new EventEmitter<boolean>();
   @Output() modalClosed = new EventEmitter<any>();
@@ -14,8 +14,6 @@ export class ModalComponent implements OnInit {
   heartImage = '';
 
   ngOnInit() {
-    console.log(this.player.is_favorite);
-
     this.heartImage = (this.player.is_favorite)
       ? '/src/assets/images/favorite-pink.png'
       : '/src/assets/images/favorite-grey.png';

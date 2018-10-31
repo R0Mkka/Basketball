@@ -13,7 +13,10 @@ export class TeamsComponent {
     public teamsList: any[];
     public teamsNames: string[];
 
+    public showLoading = false;
+
     constructor(private teamsService: TeamsService) {
+        this.showLoading = true;
         this.initTeams();
     }
 
@@ -27,7 +30,7 @@ export class TeamsComponent {
                     },
                     () => console.error('Error with getting teams!!!'),
                     () => {
-                        // this.teamsLoaded.emit();
+                        this.showLoading = false;
                     }
                 ),
                 catchError(() => ([]))

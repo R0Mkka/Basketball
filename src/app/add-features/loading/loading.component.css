@@ -1,0 +1,14 @@
+.loading {
+    position: fixed;
+    left: calc(50% - 30px);
+    top: calc(50% - 10px);
+    z-index: 100;
+    display: flex;
+    align-items: center;
+    background-color: transparent;
+}
+
+.spinner {
+    margin: 0px;
+    padding: 0px;
+}

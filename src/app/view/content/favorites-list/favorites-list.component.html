@@ -1,6 +1,7 @@
+<app-loading *ngIf="showLoading" [withBackdrop]="withBackdrop"></app-loading>
 <div class="favorites">
     <ng-container *ngIf="isFavoritesListEmpty">
-        <p class="clear-list">List of favorites is clear.</p>
+        <p class="clear-list">List of favorites is empty.</p>
     </ng-container>
     <ng-container *ngFor="let player of favoritesList">
         <app-favorite [name]="player.name"
@@ -9,6 +10,7 @@
                       [tpp]="player.three_point_percentage"
                       [imageSrc]="player.image"
                       (loading)="setLoadingStatus($event)"
-                      (favoriteEvent)="toggleFavorites($event)"></app-favorite>
+                      (backdrop)="showBackdrop($event)"
+                      (favoriteEvent)="favoriteStateChange($event)"></app-favorite>
     </ng-container>
 </div>

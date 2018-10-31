@@ -1,5 +1,10 @@
-import {Component, Output, EventEmitter} from '@angular/core';
+import { Component, Output, EventEmitter, OnInit } from '@angular/core';
 import { PlayersService } from '../content/player/players.service';
+
+import { Router, NavigationStart } from '@angular/router';
+
+import { Observable } from 'rxjs';
+import { filter } from 'rxjs/operators';
 
 @Component({
   selector: 'app-header',
@@ -7,39 +12,43 @@ import { PlayersService } from '../content/player/players.service';
   styleUrls: ['./header.component.css'],
   providers: [ PlayersService ]
 })
-export class HeaderComponent {
-  @Output() stateChanged = new EventEmitter<boolean>();
-  @Output() toggleFavorites = new EventEmitter<boolean>();
-  @Output() hideTeamPlayers = new EventEmitter<boolean>();
-  @Output() favoritesClear = new EventEmitter<any>();
+export class HeaderComponent implements OnInit {
+  public isTeams: boolean;
 
-  isTeams = true;
-  isFavorites = false;
-  isTeamPlayers = false;
+  private routerLink: string;
+  private navStart: Observable<NavigationStart>;
 
-  constructor(private playersService: PlayersService) {}
+  constructor(private playersService: PlayersService, private router: Router) {
+    this.navStart = router.events.pipe(
+      filter(evt => evt instanceof NavigationStart)
+    ) as Observable<NavigationStart>; 
+  }
+
+  ngOnInit() {
+    this.navStart.subscribe(
+      event => {
+        this.routerLink = event.url;
+        this.isTeams = this.routerLink === '/teams';
+      } 
+    );
+  }
 
   clearFavorites() {
     const answer = confirm("Do you really want to clear your favorites list?")
 
-   if (answer) {
-     this.playersService.clear();
-     this.favoritesClear.emit();
-   }
+    if (answer) {
+      this.playersService.clear();
+    }
   }
 
   changeContent() {
+    this.routerLink = (this.isTeams) ? '/players' : '/teams'; 
     this.isTeams = !this.isTeams;
-    this.isFavorites = false;
-    this.hideTeamPlayers.emit(this.isTeamPlayers);
-    this.toggleFavorites.emit(this.isFavorites);
-    this.stateChanged.emit(this.isTeams);
-  }
 
-  toggleFavoritesShow() {
-    this.isFavorites = !this.isFavorites;
-    this.hideTeamPlayers.emit(this.isTeamPlayers);
-    this.toggleFavorites.emit(this.isFavorites);
+    if (this.routerLink === '/players' || this.routerLink === '/teams') {
+      this.router.navigate(
+        [this.routerLink]
+      );
+    }
   }
-
 }

@@ -1,0 +1,15 @@
+<app-loading *ngIf="showLoading" [withBackdrop]="withBackdrop"></app-loading>
+<div class="team-players">
+    <ng-container *ngIf="playersLoaded">
+        <app-player-card *ngFor="let player of teamPlayersList"
+                         [name]="player.name"
+                         [team]="player.team_name"
+                         [gamesPlayed]="player.games_played"
+                         [tpp]="player.three_point_percentage"
+                         [imageSrc]="player.image"
+                         (loading)="setLoadingStatus($event)"
+                         (backdrop)="showBackdrop($event)"
+                         (favoriteEvent)="toggleFavorites($event)">
+        </app-player-card>
+    </ng-container>
+</div>

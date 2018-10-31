@@ -1,14 +1,17 @@
 <div class="view">
   <app-header (stateChanged)="changeContent($event)" 
               (toggleFavorites)="toggleFavoritesShow($event)"
-              (favoritesClear)="clearFavorites()"></app-header>
+              (favoritesClear)="clearFavorites()">
+  </app-header>
   <mat-progress-bar class="progress-bar"
                     mode="determinate"
                     color="primary"
-                    [value]="progress"></mat-progress-bar>
+                    [value]="progress">
+  </mat-progress-bar>
   <app-content [isTeams]="isTeams"
                [isFavorites]="isFavorites"
                [isClearFavorites]="isClearFavorites"
-               (teamsLoaded)="teamsLoaded($event)"></app-content>
+               (teamsLoaded)="teamsLoaded($event)">
+  </app-content>
 </div>
 

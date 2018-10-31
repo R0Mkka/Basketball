@@ -8,8 +8,6 @@ import { HeaderComponent } from './header/header.component';
 import { ContentComponent } from './content/content.component';
 import { ViewComponent } from './view.component';
 
-import { LoadingModalComponent } from './content/loading-modal/loading-modal.component';
-
 import { AppRoutingModule } from '../app-routing.module';
 
 @NgModule({
@@ -27,8 +25,7 @@ import { AppRoutingModule } from '../app-routing.module';
   declarations: [
     HeaderComponent,
     ContentComponent,
-    ViewComponent,
-    LoadingModalComponent
+    ViewComponent
   ]
 })
 export class ViewModule { }

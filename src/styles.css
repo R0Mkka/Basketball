@@ -23,5 +23,6 @@ body {
 .mat-tooltip {
   font-size: 14px;
   font-weight: 300;
-  background-color: #888888;
+  color: #fff;
+  background-color: #000;
 }

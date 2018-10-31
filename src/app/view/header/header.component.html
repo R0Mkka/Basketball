@@ -1,12 +1,4 @@
 <div class="header">
-
-  <nav>
-      <button routerLink="">Home</button>
-      <button routerLink="/teams">Teams</button>
-      <button routerLink="/players">Players</button>
-      <button >Favorites</button>
-  </nav>
-
   <div class="menu-and-nba-stats">
     <button mat-button [matMenuTriggerFor]="menu" title="Menu">
       <img class="invert-color burger" src="/src/assets/images/menu_burger.svg" alt="Menu">
@@ -23,11 +15,11 @@
     <mat-slide-toggle class="slide-toggle"
                       color="primary"
                       [checked]="isTeams"
-                      (change)="changeContent()"></mat-slide-toggle>
+                      (change)="changeContent()">
+    </mat-slide-toggle>
     <p>Teams</p>
     <img class="favorites-button"
-        routerLink="/favorites"
-        src="/src/assets/images/favorites.png"
-        (click)="toggleFavoritesShow()">
+         routerLink="/favorites"
+         src="/src/assets/images/favorites.png">
   </div>
 </div>

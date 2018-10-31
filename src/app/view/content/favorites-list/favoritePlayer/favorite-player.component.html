@@ -1,8 +1,8 @@
 <div *ngIf="showModal" class="backdrop" (click)="closeModal()"></div>
-<!-- <app-player-modal *ngIf="showModal"
+<app-edit-modal *ngIf="showModal"
                   [player]="player"
                   (favoriteChanged)="changeIsFavorite($event)"
-                  (modalClosed)="closeModal()"></app-player-modal> -->
+                  (modalClosed)="closeModal()"></app-edit-modal>
 <mat-card class="card" appCardHover>
   <div *ngIf="!isImageLoaded" class="card__spinner">
     <mat-spinner [diameter]="50"></mat-spinner>
