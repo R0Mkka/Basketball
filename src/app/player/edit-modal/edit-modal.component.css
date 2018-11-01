@@ -36,14 +36,7 @@
 }
 
 .modal__content {
-  display: flex;
-  justify-content: space-between;
-  flex-wrap: wrap;
   margin-left: 330px;
-}
-
-.modal__content mat-form-field {
-  width: 21%;
 }
 
 .close, .favorite {

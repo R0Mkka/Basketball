@@ -14,6 +14,10 @@ export class TeamListComponent {
 
     public showLoading = false;
 
+    public progressBar = {
+        value: 0
+    }
+
     constructor(private teamListSerivce: TeamListService) {
         this.showLoading = true;
         this.initTeams();
@@ -30,6 +34,7 @@ export class TeamListComponent {
                     () => console.error('Error with getting teams!!!'),
                     () => {
                         this.showLoading = false;
+                        this.progressBar.value = 100;
                     }
                 ),
                 catchError(() => ([]))

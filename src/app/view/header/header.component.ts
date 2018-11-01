@@ -2,10 +2,12 @@ import { Component, OnInit } from '@angular/core';
 import { Router, NavigationStart } from '@angular/router';
 
 import { Observable } from 'rxjs';
-import { filter } from 'rxjs/operators';
+import { filter, retry, tap, catchError } from 'rxjs/operators';
 
 import { PlayerListService } from '../content/player-list/player-list.service';
 import { LocalStorageService } from 'src/app/core/local-storage/local-storage.service';
+
+import { Player } from 'src/app/dataTypes/player';
 
 @Component({
   selector: 'app-header',
@@ -16,18 +18,18 @@ export class HeaderComponent implements OnInit {
   public isTeams: boolean;
 
   private routerLink: string;
-  private navStart: Observable<NavigationStart>;
+  private navigationStart: Observable<NavigationStart>;
 
   constructor(private playerListService: PlayerListService,
               private storage: LocalStorageService,
               private router: Router) {
-    this.navStart = router.events.pipe(
+    this.navigationStart = router.events.pipe(
       filter(evt => evt instanceof NavigationStart)
     ) as Observable<NavigationStart>; 
   }
 
   ngOnInit() {
-    this.navStart.subscribe(
+    this.navigationStart.subscribe(
       event => {
         this.routerLink = event.url;
         this.isTeams = this.routerLink === '/teams';
@@ -35,15 +37,32 @@ export class HeaderComponent implements OnInit {
     );
   }
 
-  clearFavorites() {
+  public clearFavorites() {
     const answer = confirm("Do you really want to clear your favorites list?")
 
     if (answer) {
       this.storage.clear();
+      this.playerListService.getPlayers().pipe(
+        retry(3),
+        tap(
+          (playersList: Player[]) => {
+            const players = playersList;
+
+            players.forEach((player: Player) => {
+              player.is_favorite = false;
+            });
+          }
+        ),
+        catchError(() => ([]))
+      );
     }
   }
 
-  changeContent() {
+  public checkUrl() {
+    return !!~this.router.url.indexOf('favorites');
+  }
+
+  public changeContent() {
     this.routerLink = (this.isTeams) ? '/players' : '/teams'; 
     this.isTeams = !this.isTeams;
 

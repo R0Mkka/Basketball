@@ -1,4 +1,5 @@
 import { Component, EventEmitter, Input, Output, OnInit } from '@angular/core';
+
 import { Player } from 'src/app/dataTypes/player';
 
 @Component({
@@ -19,13 +20,13 @@ export class EditModalComponent implements OnInit {
       : '/src/assets/images/favorite-grey.png';
   }
 
-  favoriteToggle() {
+  public favoriteToggle() {
     this.player.is_favorite = !this.player.is_favorite;
     this.favoriteChanged.emit(this.player.is_favorite);
     this.toggleHeartColor();
   }
 
-  closeModal() {
+  public closeModal() {
     this.modalClosed.emit();
   }
 

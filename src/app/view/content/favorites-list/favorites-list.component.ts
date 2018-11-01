@@ -16,6 +16,10 @@ export class FavoritesListComponent {
     public showLoading = false;
     public withBackdrop = false;
 
+    public progressBar = {
+        value: 0
+    }
+
     constructor(private playerListService: PlayerListService, 
                 private storage: LocalStorageService) {
         this.showLoading = true;
@@ -69,6 +73,7 @@ export class FavoritesListComponent {
 
                     this.isFavoritesListEmpty = this.favoritesList.length === 0;
                     this.showLoading = false;
+                    this.progressBar.value = 100;
                 });  
     }
 

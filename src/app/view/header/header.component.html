@@ -4,7 +4,9 @@
       <img class="invert-color burger" src="/src/assets/images/menu_burger.svg" alt="Menu">
     </button>
     <mat-menu #menu="matMenu">
-      <button mat-menu-item (click)="clearFavorites()"> Clear favorites </button>
+      <button mat-menu-item 
+              (click)="clearFavorites()" 
+              [disabled]="checkUrl()"> Clear favorites </button>
     </mat-menu>
     <img class="logo" src="/src/assets/images/NBA_new.png">
     <p>Stats</p>

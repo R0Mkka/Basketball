@@ -18,6 +18,10 @@ export class TeamPlayersListComponent implements OnInit {
     public showLoading = false;
     public withBackdrop = false;
 
+    public progressBar = {
+        value: 0
+    }
+
     constructor(private teamListService: TeamListService,
                 private playerListService: PlayerListService,
                 private route: ActivatedRoute) {}
@@ -42,6 +46,7 @@ export class TeamPlayersListComponent implements OnInit {
 
                         this.playersLoaded = true;
                         this.showLoading = false;
+                        this.progressBar.value = 100;
                     });
         });
     }
