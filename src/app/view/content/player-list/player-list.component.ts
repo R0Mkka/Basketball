@@ -41,7 +41,7 @@ export class PlayerListComponent {
         this.showLoading = $event;
     }
 
-    public favoriteStateChange(player: Player) {
+    public toggleFavoriteState(player: Player) {
         if (!player.is_favorite) {
             this.storage.remove(player.name);
         } else {

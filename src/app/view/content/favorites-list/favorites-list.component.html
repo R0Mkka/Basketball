@@ -4,11 +4,7 @@
         <p class="clear-list">List of favorites is empty.</p>
     </ng-container>
     <ng-container *ngFor="let player of favoritesList">
-        <app-favorite [name]="player.name"
-                      [team]="player.team_name"
-                      [gamesPlayed]="player.games_played"
-                      [tpp]="player.three_point_percentage"
-                      [imageSrc]="player.image"
+        <app-favorite [player]="player"
                       (loading)="setLoadingStatus($event)"
                       (backdrop)="showBackdrop($event)"
                       (favoriteEvent)="favoriteStateChange($event)">

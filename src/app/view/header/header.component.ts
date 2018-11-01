@@ -24,7 +24,7 @@ export class HeaderComponent implements OnInit {
               private storage: LocalStorageService,
               private router: Router) {
     this.navigationStart = router.events.pipe(
-      filter(evt => evt instanceof NavigationStart)
+      filter(event => event instanceof NavigationStart)
     ) as Observable<NavigationStart>; 
   }
 
@@ -42,15 +42,12 @@ export class HeaderComponent implements OnInit {
 
     if (answer) {
       this.storage.clear();
+
       this.playerListService.getPlayers().pipe(
         retry(3),
         tap(
-          (playersList: Player[]) => {
-            const players = playersList;
-
-            players.forEach((player: Player) => {
-              player.is_favorite = false;
-            });
+          (players: Player[]) => {
+            players.forEach((player: Player) => player.is_favorite = false);
           }
         ),
         catchError(() => ([]))

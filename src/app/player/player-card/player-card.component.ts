@@ -5,6 +5,8 @@ import { LocalStorageService } from 'src/app/core/local-storage/local-storage.se
 import { PlayerListService } from '../../view/content/player-list/player-list.service';
 import { Player } from 'src/app/dataTypes/player';
 
+import { icons } from 'src/app/config/icons';
+
 @Component({
   selector: 'app-player-card',
   templateUrl: './player-card.component.html',
@@ -26,7 +28,7 @@ export class PlayerCardComponent implements OnInit {
   showEditModal = false;
   isImageLoaded = false;
   teamImage = '';
-  heartImage = '/src/assets/images/favorite-grey.png';
+  heartImage = icons.favorite.inactive;
 
   isEditDisabled = true;
 
@@ -38,7 +40,7 @@ export class PlayerCardComponent implements OnInit {
   ngOnInit() {
     if (this.storage.has(this.name)) {
       this.isFavorite = true;
-      this.heartImage = '/src/assets/images/favorite-pink.png';
+      this.heartImage = icons.favorite.active;
     }
   }
 
@@ -104,8 +106,8 @@ export class PlayerCardComponent implements OnInit {
     this.favoriteActionEvent.emit(this.player);
 
     this.heartImage = (this.isFavorite)
-      ? '/src/assets/images/favorite-pink.png'
-      : '/src/assets/images/favorite-grey.png';
+      ? icons.favorite.active
+      : icons.favorite.inactive;
   }
  
   editPlayer() {
@@ -141,10 +143,10 @@ export class PlayerCardComponent implements OnInit {
   }
 
   private toggleHeartColor() {
-    if (this.heartImage === '/src/assets/images/favorite-grey.png') {
-      this.heartImage = '/src/assets/images/favorite-pink.png';
+    if (this.heartImage === icons.favorite.inactive) {
+      this.heartImage = icons.favorite.active;
     } else {
-      this.heartImage = '/src/assets/images/favorite-grey.png';
+      this.heartImage = icons.favorite.inactive;
     }
   }
 

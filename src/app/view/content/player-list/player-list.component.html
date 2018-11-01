@@ -8,7 +8,7 @@
                          [imageSrc]="player.image"
                          (loading)="setLoadingStatus($event)"
                          (backdrop)="showBackdrop($event)"
-                         (favoriteEvent)="favoriteStateChange($event)">
+                         (favoriteEvent)="toggleFavoriteState($event)">
         </app-player-card>
     </ng-container>
 </div>

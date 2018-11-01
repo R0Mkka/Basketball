@@ -1,6 +1,7 @@
 import { Component, EventEmitter, Input, Output, OnInit } from '@angular/core';
 
 import { Player } from 'src/app/dataTypes/player';
+import { icons } from 'src/app/config/icons';
 
 @Component({
   selector: 'app-edit-modal',
@@ -16,11 +17,11 @@ export class EditModalComponent implements OnInit {
 
   ngOnInit() {
     this.heartImage = (this.player.is_favorite)
-      ? '/src/assets/images/favorite-pink.png'
-      : '/src/assets/images/favorite-grey.png';
+      ? icons.favorite.active
+      : icons.favorite.inactive;
   }
 
-  public favoriteToggle() {
+  public toggleFavoriteState() {
     this.player.is_favorite = !this.player.is_favorite;
     this.favoriteChanged.emit(this.player.is_favorite);
     this.toggleHeartColor();
@@ -31,10 +32,10 @@ export class EditModalComponent implements OnInit {
   }
 
   private toggleHeartColor() {
-    if (this.heartImage === '/src/assets/images/favorite-grey.png') {
-      this.heartImage = '/src/assets/images/favorite-pink.png';
+    if (this.heartImage === icons.favorite.inactive) {
+      this.heartImage = icons.favorite.active;
     } else {
-      this.heartImage = '/src/assets/images/favorite-grey.png';
+      this.heartImage = icons.favorite.inactive;
     }
   }
 }

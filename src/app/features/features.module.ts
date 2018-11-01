@@ -24,7 +24,9 @@ import { LoadingComponent } from './loading/loading.component';
     ],
     exports: [
         CommonModule,
+        MatCardModule,
         MatProgressSpinnerModule,
+        MatInputModule,
         CardHoverDirective,
         ShowImageDirective,
         LoadingComponent
