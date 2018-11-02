@@ -4,6 +4,6 @@
     flex-wrap: wrap;
 }
 
-.edit-form mat-form-field {
-    width: 21%;
+app-field {
+    max-width: 21%;
 }

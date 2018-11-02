@@ -5,7 +5,8 @@ import { FeaturesModule } from 'src/app/features/features.module';
 
 import { PlayerCardComponent } from './player-card/player-card.component';
 import { EditModalComponent } from './edit-modal/edit-modal.component';
-import { EditFormComponent } from './edit-modal/edit-form/edit-form.component';
+import { EditStatsFormComponent } from './edit-modal/edit-stats-form/edit-stats-form.component';
+import { FieldComponent } from './edit-modal/edit-stats-form/field/field.component';
 
 @NgModule({
     imports: [
@@ -15,11 +16,14 @@ import { EditFormComponent } from './edit-modal/edit-form/edit-form.component';
     declarations: [
         PlayerCardComponent,
         EditModalComponent,
-        EditFormComponent
+        EditStatsFormComponent,
+        FieldComponent
     ],
     exports: [
         PlayerCardComponent,
-        EditModalComponent
+        EditModalComponent,
+        EditStatsFormComponent,
+        FieldComponent
     ]
 })
 export class PlayerModule {}

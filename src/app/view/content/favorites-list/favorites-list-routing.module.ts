@@ -11,11 +11,7 @@ const favoritesRoutes: Routes = [
 ];
 
 @NgModule({
-    imports: [
-        RouterModule.forChild(favoritesRoutes)
-    ],
-    exports: [
-        RouterModule
-    ]
+    imports: [ RouterModule.forChild(favoritesRoutes) ],
+    exports: [ RouterModule ]
 })
 export class FavoritesListRoutingModule { }

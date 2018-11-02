@@ -21,16 +21,18 @@ export class FavoritePlayerComponent implements OnInit {
 
   public showModal: boolean;
   public isImageLoaded: boolean;
-  private isEditDisabled: boolean;
   public teamImage: string;
   public favoriteStateImage: string;
+
+  private isEditDisabled: boolean;
 
   constructor() {
     this.showModal = false;
     this.isImageLoaded = false;
-    this.isEditDisabled = true;
     this.teamImage = '';
     this.favoriteStateImage = '/src/assets/images/favorite-pink.png';
+
+    this.isEditDisabled = true;
       
     this.checkForPlayerImage();
   }
