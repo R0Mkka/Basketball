@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 
-import { FeaturesModule } from 'src/app/features/features.module';
-import { PlayerModule } from 'src/app/player/player.module';
+import { FeaturesModule } from 'src/app/shared-modules/features/features.module';
+import { PlayerCardModule } from 'src/app/shared-modules/player-card/player-card.module';
 import { TeamListRoutingModule } from './team-list-routing.module';
 
 import { MatCardModule } from '@angular/material/card';
@@ -15,7 +15,7 @@ import { TeamPlayersListComponent } from './team-players-list/team-players-list.
 @NgModule({
     imports: [
         FeaturesModule,
-        PlayerModule,
+        PlayerCardModule,
         TeamListRoutingModule,
         MatCardModule,
         MatProgressSpinnerModule,

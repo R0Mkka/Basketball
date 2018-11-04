@@ -1,6 +1,7 @@
-import { Component, DoCheck } from '@angular/core';
+import { Component } from '@angular/core';
 
 import { LocalStorageService } from 'src/app/core/local-storage/local-storage.service';
+
 import { PlayerListService } from '../player-list/player-list.service';
 import { Player } from 'src/app/dataTypes/player';
 
@@ -10,31 +11,30 @@ import { Player } from 'src/app/dataTypes/player';
     styleUrls: ['./favorites-list.component.css']
 })
 export class FavoritesListComponent {
-    public favoritesList: Player[] = [];
-    public isFavoritesListEmpty = false;
-
-    public showLoading = false;
-    public withBackdrop = false;
-
-    public progressBar = {
-        value: 0
-    }
+    public favoritesList: Player[];
+    public isFavoritesListEmpty: boolean;
+    public showLoading: boolean;
+    public withBackdrop: boolean;
+    public progressBar = { value: 0 }
 
     constructor(private playerListService: PlayerListService, 
                 private storage: LocalStorageService) {
+        this.favoritesList = [];
+        this.isFavoritesListEmpty = false;
         this.showLoading = true;
+        this.withBackdrop = false;
         this.initFavorites();
     }
 
-    public setLoadingStatus($event: boolean) {
+    public setLoadingStatus($event: boolean): void {
         this.showLoading = $event;
     }
 
-    public showBackdrop($event: boolean) {
+    public setBackdropStatus($event: boolean): void {
         this.withBackdrop = $event;
     }
 
-    public favoriteStateChange(player: Player) {
+    public favoriteStateChange(player: Player): void {
         if (!player.is_favorite) {
             this.storage.remove(player.name);
             this.removeFromFavorites(player.name);
@@ -42,10 +42,14 @@ export class FavoritesListComponent {
             this.storage.set(player.name, "0");
         }
 
-        this.isFavoritesListEmpty = this.favoritesList.length === 0;
+        this.isFavoritesListEmpty = this.checkIsEmpty();
     }
 
-    private removeFromFavorites(playerName: string) {
+    private checkIsEmpty(): boolean {
+        return this.favoritesList.length === 0;
+    }
+
+    private removeFromFavorites(playerName: string): void {
         this.favoritesList.forEach((favoritePlayer: Player, index: number) => {
             if (favoritePlayer.name === playerName) {
                 this.favoritesList.splice(index, 1);
@@ -54,12 +58,12 @@ export class FavoritesListComponent {
         });
     }
 
-    private initFavorites() : void {
+    private initFavorites(): void {
         let players = [];
     
         this.playerListService.getPlayers()
             .subscribe(
-                value => players = value,
+                playersList => players = playersList,
                 () => console.error('Error with getting players!!!'),
                 () => {
                     players.forEach((player: Player) => {
@@ -71,13 +75,13 @@ export class FavoritesListComponent {
                         }
                     });
 
-                    this.isFavoritesListEmpty = this.favoritesList.length === 0;
+                    this.isFavoritesListEmpty = this.checkIsEmpty();
                     this.showLoading = false;
                     this.progressBar.value = 100;
                 });  
     }
 
-    private getTeamImage(player: Player) : string {
+    private getTeamImage(player: Player): string {
         const splitTeamName = player.team_name.split(' ');
         const folderPath = '/src/assets/images/teams/';
         let imageName = '';

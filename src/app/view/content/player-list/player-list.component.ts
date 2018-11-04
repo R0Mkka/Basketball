@@ -2,10 +2,10 @@ import { Component } from '@angular/core';
 
 import { retry, tap, catchError } from 'rxjs/operators';
 
-import { Player } from 'src/app/dataTypes/player';
-import { PlayerListService } from './player-list.service';
-
 import { LocalStorageService } from 'src/app/core/local-storage/local-storage.service';
+
+import { PlayerListService } from './player-list.service';
+import { Player } from 'src/app/dataTypes/player';
 
 @Component({
     selector: 'app-players',
@@ -23,9 +23,7 @@ export class PlayerListComponent {
     public showLoading = false;
     public withBackdrop = false;
 
-    public progressBar = {
-        value: 0
-    }
+    public progressBar = { value: 0 }
 
     constructor(private playerListService: PlayerListService, 
                 private storage: LocalStorageService) {
@@ -33,15 +31,15 @@ export class PlayerListComponent {
         this.initPlayers();
     }
     
-    public showBackdrop($event: boolean) {
+    public setBackdropStatus($event: boolean): void {
         this.withBackdrop = $event;
     }
 
-    public setLoadingStatus($event: boolean) {
+    public setLoadingStatus($event: boolean): void {
         this.showLoading = $event;
     }
 
-    public toggleFavoriteState(player: Player) {
+    public toggleFavoriteState(player: Player): void {
         if (!player.is_favorite) {
             this.storage.remove(player.name);
         } else {
@@ -49,17 +47,16 @@ export class PlayerListComponent {
         }
     }
 
-    public setNewPageIndex($event) {
+    public setNewPageIndex($event): void {
         this.currentPageSetIndex = $event.pageIndex;
         this.currentPageSet = this.playersPageSets[this.currentPageSetIndex];
     }
 
-    private initPlayers() {
-        this.playerListService.getPlayers()
-        .pipe(
+    private initPlayers(): void {
+        this.playerListService.getPlayers().pipe(
             retry(3),
             tap(
-                (playersTotal: Array<any>) => {
+                (playersTotal: Player[]) => {
                     this.playersList = playersTotal;
                 },
                 () => console.error('Error with getting players!!!'),
@@ -67,7 +64,7 @@ export class PlayerListComponent {
                     this.playerListService.getPlayersImages(this.playersList).forEach((url, index) => {
                         this.playersList[index].image = url;
                     });
-                    this.getPageSetsFromPlayers();
+                    this.initPageSets();
                     this.currentPageSetIndex = 0;
                     this.currentPageSet = this.playersPageSets[this.currentPageSetIndex];
                     this.playersCount = this.playersList.length;
@@ -80,24 +77,23 @@ export class PlayerListComponent {
         ).subscribe();
     }
 
-    private getPageSetsFromPlayers() {
-        const playersForSet = 10;
+    private initPageSets(): void {
+        const playersForOneSet = 10;
 
         let startIndex = 0;
-        let endIndex = playersForSet;
+        let endIndex = playersForOneSet;
 
-        for (let i = 0; i < this.playersList.length; i += playersForSet) {
-
+        for (let i = 0; i < this.playersList.length; i += playersForOneSet) {
             if (endIndex > this.playersList.length) {
                 endIndex = this.playersList.length;
             }
 
-            const set = this.playersList.slice(startIndex, endIndex);
+            const singleSet = this.playersList.slice(startIndex, endIndex);
 
-            this.playersPageSets.push(set);
+            this.playersPageSets.push(singleSet);
 
-            startIndex += playersForSet;
-            endIndex += playersForSet;
+            startIndex += playersForOneSet;
+            endIndex += playersForOneSet;
         }
     }
 }

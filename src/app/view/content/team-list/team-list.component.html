@@ -3,7 +3,7 @@
     <ng-container *ngFor="let team of teamsNames">
         <app-team [teamName]="team"
                   [acronym]="teamList[team].acronym"
-                  [imageSrc]="teamList[team].image"
+                  [image]="teamList[team].image"
                   [info]="teamList[team].info"
                   (showTeam)="displayTeam($event)">
         </app-team>

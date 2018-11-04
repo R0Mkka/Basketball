@@ -37,7 +37,7 @@ export class HeaderComponent implements OnInit {
     );
   }
 
-  public clearFavorites() {
+  public clearFavorites(): void {
     const answer = confirm("Do you really want to clear your favorites list?")
 
     if (answer) {
@@ -55,11 +55,11 @@ export class HeaderComponent implements OnInit {
     }
   }
 
-  public checkUrl() {
+  public checkUrlForFavorites(): boolean {
     return !!~this.router.url.indexOf('favorites');
   }
 
-  public changeContent() {
+  public changeContent(): void {
     this.routerLink = (this.isTeams) ? '/players' : '/teams'; 
     this.isTeams = !this.isTeams;
 

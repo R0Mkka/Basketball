@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
+import { Observable } from 'rxjs';
 
 import { Player } from 'src/app/dataTypes/player';
 import { Team } from 'src/app/dataTypes/team';
@@ -12,11 +13,11 @@ export class TeamListService {
 
   constructor(private http: HttpClient) {}
 
-  getTeams() {
-    return this.http.get<Array<Team>>(this.baseUrl);
+  public getTeams(): Observable<Team[]> {
+    return this.http.get<Team[]>(this.baseUrl);
   }
 
-  getPlayersOfTheTeam(acronym: string) {
-    return this.http.get<Array<Player>>(`https://nba-players.herokuapp.com/players-stats-teams/${acronym}`);
+  public getPlayersOfTheTeam(acronym: string): Observable<Player[]> {
+    return this.http.get<Player[]>(`https://nba-players.herokuapp.com/players-stats-teams/${acronym}`);
   }
 }

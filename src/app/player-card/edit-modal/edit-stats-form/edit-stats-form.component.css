@@ -4,6 +4,6 @@
     flex-wrap: wrap;
 }
 
-app-field {
+mat-form-field {
     max-width: 21%;
 }

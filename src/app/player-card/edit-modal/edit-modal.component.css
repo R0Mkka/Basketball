@@ -39,19 +39,18 @@
   margin-left: 330px;
 }
 
-.close, .favorite {
+.modal__close, .modal__favorite {
   cursor: pointer;
   position: absolute;
   width: 25px;
   height: 25px;
+  bottom: 16px;
 }
 
-.close {
+.modal__close {
   right: 16px;
-  bottom: 16px;
 }
 
-.favorite {
+.modal__favorite {
   right: 66px;
-  bottom: 16px;
 }

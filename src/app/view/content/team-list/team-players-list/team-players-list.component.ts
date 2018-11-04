@@ -14,13 +14,9 @@ import { Player } from 'src/app/dataTypes/player';
 export class TeamPlayersListComponent implements OnInit {
     public teamPlayersList: Player[];
     public playersLoaded = false;
-
     public showLoading = false;
     public withBackdrop = false;
-
-    public progressBar = {
-        value: 0
-    }
+    public progressBar = { value: 0 }
 
     constructor(private teamListService: TeamListService,
                 private playerListService: PlayerListService,
@@ -51,11 +47,11 @@ export class TeamPlayersListComponent implements OnInit {
         });
     }
 
-    public showBackdrop($event: boolean) {
-        this.withBackdrop = $event;
+    public setLoadingStatus($event: boolean): void {
+        this.showLoading = $event;
     }
 
-    public setLoadingStatus($event: boolean) {
-        this.showLoading = $event;
+    public setBackdropStatus($event: boolean): void {
+        this.withBackdrop = $event;
     }
 }

@@ -1,27 +1,25 @@
 import { NgModule } from '@angular/core';
 
-import { FeaturesModule } from 'src/app/features/features.module';
-import { PlayerModule } from 'src/app/player/player.module';
+import { MatCardModule } from '@angular/material/card';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
+
+import { FeaturesModule } from 'src/app/shared-modules/features/features.module';
+import { PlayerCardModule } from 'src/app/shared-modules/player-card/player-card.module';
 import { FavoritesListRoutingModule } from './favorites-list-routing.module';
 
 import { FavoritesListComponent } from './favorites-list.component';
-import { FavoritePlayerComponent } from './favoritePlayer/favorite-player.component';
-
-import { MatCardModule } from '@angular/material/card';
-import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 
 @NgModule({
     imports: [
         FeaturesModule,
-        PlayerModule,
+        PlayerCardModule,
         FavoritesListRoutingModule,
         MatCardModule,
         MatProgressSpinnerModule
     ],
     exports: [],
     declarations: [
-        FavoritesListComponent,
-        FavoritePlayerComponent
+        FavoritesListComponent
     ]
 })
 export class FavoritesListModule { }

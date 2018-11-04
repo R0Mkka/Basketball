@@ -4,10 +4,10 @@
         <p class="clear-list">List of favorites is empty.</p>
     </ng-container>
     <ng-container *ngFor="let player of favoritesList">
-        <app-favorite [player]="player"
-                      (loading)="setLoadingStatus($event)"
-                      (backdrop)="showBackdrop($event)"
-                      (favoriteEvent)="favoriteStateChange($event)">
-        </app-favorite>
+        <app-player-card [player]="player"
+                         (loading)="setLoadingStatus($event)"
+                         (backdrop)="setBackdropStatus($event)"
+                         (favoriteActionEvent)="favoriteStateChange($event)">
+        </app-player-card>
     </ng-container>
 </div>

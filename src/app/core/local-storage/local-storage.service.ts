@@ -10,11 +10,11 @@ export class LocalStorageService {
         this.storage = localStorage;
     }
 
-    public get(key: string) {
+    public get(key: string): string {
         return this.storage.getItem(key);
     }
 
-    public set(key: string, value: string) {
+    public set(key: string, value: string): void {
         this.storage.setItem(key, value);
     }
     
@@ -24,11 +24,11 @@ export class LocalStorageService {
         return !!~storageKeys.indexOf(key);
     }
     
-    public remove(key: string) {
+    public remove(key: string): void {
         this.storage.removeItem(key);
     }
     
-    public clear() {
+    public clear(): void {
         this.storage.clear();
     }
 }

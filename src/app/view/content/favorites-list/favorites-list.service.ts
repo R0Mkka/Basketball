@@ -1,38 +1,16 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
+import { Observable } from 'rxjs';
+
+import { Player } from 'src/app/dataTypes/player';
 
 @Injectable()
 export class FavoritesService {
     private baseUrl = 'https://nba-players.herokuapp.com/';
-    private storage: Storage;
 
-    constructor(private http: HttpClient) {
-        this.storage = localStorage;
-    }
+    constructor(private http: HttpClient) {}
 
-    get(key: string) {
-        this.storage.getItem(key);
-    }
-    
-    set(key: string, value: string) {
-        this.storage.setItem(key, value);
-    }
-
-    has(key: string): boolean {
-        const storageKeys = Object.keys(this.storage);
-
-        return !!~storageKeys.indexOf(key);
-    }
-    
-    remove(key: string) {
-        this.storage.removeItem(key);
-    }
-    
-    clear() {
-        this.storage.clear();
-    }
-
-    getPlayersList() {
-        return this.http.get(this.baseUrl + 'players-stats');
+    public getPlayersList(): Observable<Player[]> {
+        return this.http.get<Player[]>(this.baseUrl + 'players-stats');
     }
 }

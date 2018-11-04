@@ -1,0 +1,9 @@
+.edit-form {
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+}
+
+mat-form-field {
+    max-width: 21%;
+}

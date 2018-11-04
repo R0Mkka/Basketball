@@ -3,10 +3,9 @@ import { ReactiveFormsModule } from '@angular/forms';
 
 import { FeaturesModule } from 'src/app/features/features.module';
 
-import { PlayerCardComponent } from './player-card/player-card.component';
+import { PlayerCardComponent } from './player-card.component';
 import { EditModalComponent } from './edit-modal/edit-modal.component';
 import { EditStatsFormComponent } from './edit-modal/edit-stats-form/edit-stats-form.component';
-import { FieldComponent } from './edit-modal/edit-stats-form/field/field.component';
 
 @NgModule({
     imports: [
@@ -16,14 +15,12 @@ import { FieldComponent } from './edit-modal/edit-stats-form/field/field.compone
     declarations: [
         PlayerCardComponent,
         EditModalComponent,
-        EditStatsFormComponent,
-        FieldComponent
+        EditStatsFormComponent
     ],
     exports: [
         PlayerCardComponent,
         EditModalComponent,
-        EditStatsFormComponent,
-        FieldComponent
+        EditStatsFormComponent
     ]
 })
-export class PlayerModule {}
+export class PlayerCardModule {}

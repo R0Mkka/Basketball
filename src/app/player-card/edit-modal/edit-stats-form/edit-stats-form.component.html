@@ -1,0 +1,11 @@
+<div [formGroup]="editPlayerForm" class="edit-form">
+    <ng-container *ngFor="let field of fieldsList">
+        <mat-form-field>
+            <input matInput
+                   type="text"
+                   [formControlName]="field"
+                   [title]="getTitle(field)" 
+                   [placeholder]="getPlaceholder(field)">
+        </mat-form-field>
+    </ng-container>
+</div>

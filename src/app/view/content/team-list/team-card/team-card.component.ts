@@ -1,7 +1,5 @@
-import { Component, Input, Output, EventEmitter } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { Router } from '@angular/router';
-
-import { Player } from 'src/app/dataTypes/player';
 
 @Component({
   selector: 'app-team',
@@ -9,23 +7,20 @@ import { Player } from 'src/app/dataTypes/player';
   styleUrls: ['./team-card.component.css']
 })
 export class TeamCardComponent {
-    @Input() teamName: string;
-    @Input() acronym: string;
-    @Input() imageSrc: string;
-    @Input() info: string;
+  @Input() teamName: string;
+  @Input() acronym: string;
+  @Input() image: string;
+  @Input() info: string;
 
-  @Output() showTeam = new EventEmitter<Array<Player>>();
+  public isTeamImageLoaded: boolean;
 
-  teamPlayers: Array<Player>;
-  isImageLoaded = false;
+  constructor(private router: Router) {
+    this.isTeamImageLoaded = false;
+  }
 
-  constructor(private router: Router) { }
-
-  showTeamPlayers() {
+  public showTeamPlayers(): void {
     const splitTeamName = this.teamName.split('_')
-      .map(word => {
-        return word.toLowerCase();
-      });
+      .map(word => word.toLowerCase());
 
     const teamUrl = splitTeamName.join('-');
 
@@ -39,27 +34,13 @@ export class TeamCardComponent {
     );
   }
 
-  getTeamImage() {
-    const splitTeamName = this.teamName.split('_');
-    const folderPath = '/src/assets/images/teams';
-    let imageName = '';
-
-    splitTeamName.forEach((word: string) => {
-      imageName += word;
-    });
-
-    imageName = `${imageName}.png`;
-
-    return `${folderPath}/${imageName}`;
-  }
-
-  getTeamName() {
+  public getTeamName(): string {
     const splitTeamName = this.teamName.split('_');
 
     return splitTeamName.join(' ');
   }
 
-  imageLoaded() {
-    this.isImageLoaded = true;
+  public teamImageLoaded(): void {
+    this.isTeamImageLoaded = true;
   }
 }

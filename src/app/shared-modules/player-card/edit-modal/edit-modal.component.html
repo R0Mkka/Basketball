@@ -1,0 +1,18 @@
+<div class="modal" appCardHover>
+  <img class="player-image" [src]="player.image" [alt]="player.name">
+  <img class="team-image" [src]="player.team_image">
+
+  <div class="modal__content">
+      <div class="modal__title"> {{player.name}} </div>
+      <app-edit-stats-form [formControl]="playerControl" ngDefaultControl></app-edit-stats-form>
+  </div>
+
+  <mat-card-actions>
+    <img class="modal__close"
+         src="/src/assets/images/close.png"
+         (click)="closeModal()">
+    <img class="modal__favorite"
+         [src]="favoriteStateImage"
+         (click)="toggleFavoriteState()">
+  </mat-card-actions>
+</div>

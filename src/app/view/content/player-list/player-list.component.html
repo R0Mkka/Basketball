@@ -1,16 +1,11 @@
 <app-loading *ngIf="showLoading" [withBackdrop]="withBackdrop"></app-loading>
 <div class="players">
-    <ng-container *ngFor="let player of currentPageSet">
-        <app-player-card [name]="player.name"
-                         [team]="player.team_name"
-                         [gamesPlayed]="player.games_played"
-                         [tpp]="player.three_point_percentage"
-                         [imageSrc]="player.image"
-                         (loading)="setLoadingStatus($event)"
-                         (backdrop)="showBackdrop($event)"
-                         (favoriteEvent)="toggleFavoriteState($event)">
-        </app-player-card>
-    </ng-container>
+    <app-player-card *ngFor="let player of currentPageSet"
+                     [player]="player"
+                     (loading)="setLoadingStatus($event)"
+                     (backdrop)="showBackdrop($event)"
+                     (favoriteEvent)="toggleFavoriteState($event)">
+    </app-player-card>
 </div>
 <mat-paginator class="paginator"
                [length]="playersCount"

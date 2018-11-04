@@ -23,7 +23,7 @@
 }
 
 mat-card-content p {
-  margin: 5px 0 0 0;
+  margin-top: 5px;
   padding: 0px;
 }
 
@@ -32,16 +32,15 @@ mat-card-content p {
   position: absolute;
   width: 25px;
   height: 25px;
+  bottom: 16px;
 }
 
 .edit {
   right: 56px;
-  bottom: 16px;
 }
 
 .favorite {
   right: 16px;
-  bottom: 16px;
 }
 
 .hovered {

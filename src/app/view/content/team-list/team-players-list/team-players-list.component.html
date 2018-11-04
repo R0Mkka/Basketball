@@ -2,13 +2,9 @@
 <div class="team-players">
     <ng-container *ngIf="playersLoaded">
         <app-player-card *ngFor="let player of teamPlayersList"
-                         [name]="player.name"
-                         [team]="player.team_name"
-                         [gamesPlayed]="player.games_played"
-                         [tpp]="player.three_point_percentage"
-                         [imageSrc]="player.image"
+                         [player]="player"
                          (loading)="setLoadingStatus($event)"
-                         (backdrop)="showBackdrop($event)"
+                         (backdrop)="setBackdropStatus($event)"
                          (favoriteEvent)="toggleFavorites($event)">
         </app-player-card>
     </ng-container>

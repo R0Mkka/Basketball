@@ -1,7 +1,0 @@
-<div [formGroup]="editForm" class="edit-form">
-    <ng-container *ngFor="let field of fieldsList">
-        <app-field [formControlName]="field"
-                   [title]="getTitle(field)" 
-                   [placeholder]="getPlaceholder(field)"></app-field>
-    </ng-container>
-</div>
