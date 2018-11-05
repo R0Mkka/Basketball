@@ -19,6 +19,7 @@ export class PlayerListComponent implements OnInit {
     public playersList: Player[];
     public playersCount: number;
     public playersPageSets: Array<Player[]> = [];
+    public playersLoaded: boolean;
 
     public currentPageSetIndex: number;
     public currentPageSet: Player[];
@@ -30,6 +31,7 @@ export class PlayerListComponent implements OnInit {
                 private sortPlayersService: SortPlayersService,
                 private progressBar: ProgressBarService,
                 private storage: LocalStorageService) {
+        this.playersLoaded = false;
         this.showLoading = true;
         this.initPlayers();
     }
@@ -38,6 +40,7 @@ export class PlayerListComponent implements OnInit {
         this.sortPlayersService.sortEvent.subscribe(
             players => {
                 this.showLoading = true;
+                this.playersLoaded = false;
                 this.playersList = players;
                 this.playerListService.getPlayersImages(this.playersList).forEach((url, index) => {
                     this.playersList[index].image = url;
@@ -46,6 +49,7 @@ export class PlayerListComponent implements OnInit {
                 this.currentPageSetIndex = 0;
                 this.currentPageSet = this.playersPageSets[this.currentPageSetIndex];
                 this.playersCount = this.playersList.length;
+                this.playersLoaded = true;
                 this.showLoading = false;
             }
         );
@@ -90,6 +94,7 @@ export class PlayerListComponent implements OnInit {
                     this.playersCount = this.playersList.length;
                     
                     this.progressBar.emitContentLoaded();
+                    this.playersLoaded = true;
                     this.showLoading = false;
                 }
             ),

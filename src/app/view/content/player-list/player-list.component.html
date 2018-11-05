@@ -7,11 +7,12 @@
                      (favoriteEvent)="toggleFavoriteState($event)">
     </app-player-card>
 </div>
-<mat-paginator class="paginator"
+<mat-paginator *ngIf="playersLoaded"
+               class="paginator"
                [length]="playersCount"
                [pageSize]="10"
                [hidePageSize]="true"
-               [pageIndex]="currentSetIndex"
+               [pageIndex]="currentPageSetIndex"
                [showFirstLastButtons]="true"
                (page)="setNewPageIndex($event)">
 </mat-paginator>
