@@ -35,7 +35,9 @@ export class EditStatsFormComponent implements OnInit, ControlValueAccessor {
     }
 
     registerOnChange(fn: any): void { }
+
     registerOnTouched(fn: any): void { }
+    
     setDisabledState?(isDisabled: boolean): void { }
 
     public getTitle(fieldName: string): string {

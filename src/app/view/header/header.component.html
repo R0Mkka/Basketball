@@ -7,6 +7,15 @@
       <button mat-menu-item 
               (click)="clearFavorites()" 
               [disabled]="checkUrlForFavorites()"> Clear favorites </button>
+      <button mat-menu-item 
+              (click)="sortPlayersByField('games_played')"
+              [disabled]="checkUrlForPlayers()"> Sort by games played amount </button>
+      <button mat-menu-item 
+              (click)="sortPlayersByField('team_name')"
+              [disabled]="checkUrlForPlayers()"> Sort by team </button>
+      <button mat-menu-item 
+              (click)="sortPlayersByField('three_point_percentage')"
+              [disabled]="checkUrlForPlayers()"> Sort by three point percentage </button>
     </mat-menu>
     <img class="logo" src="/src/assets/images/NBA.png">
     <p>Stats</p>

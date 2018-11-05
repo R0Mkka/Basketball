@@ -3,6 +3,7 @@ import { ActivatedRoute } from '@angular/router';
 
 import { TeamListService } from '../../team-list/team-list.service';
 import { PlayerListService } from '../../player-list/player-list.service';
+import { ProgressBarService } from 'src/app/shared-modules/progress-bar/progress-bar.service';
 
 import { Player } from 'src/app/dataTypes/player';
 
@@ -16,10 +17,10 @@ export class TeamPlayersListComponent implements OnInit {
     public playersLoaded = false;
     public showLoading = false;
     public withBackdrop = false;
-    public progressBar = { value: 0 }
 
     constructor(private teamListService: TeamListService,
                 private playerListService: PlayerListService,
+                private progressBar: ProgressBarService,
                 private route: ActivatedRoute) {}
 
     ngOnInit() {
@@ -41,8 +42,8 @@ export class TeamPlayersListComponent implements OnInit {
                         });
 
                         this.playersLoaded = true;
+                        this.progressBar.emitContentLoaded();
                         this.showLoading = false;
-                        this.progressBar.value = 100;
                     });
         });
     }

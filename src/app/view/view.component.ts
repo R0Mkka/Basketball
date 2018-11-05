@@ -1,59 +1,56 @@
 import { Component, OnInit } from '@angular/core';
 
+import { ProgressBarService } from 'src/app/shared-modules/progress-bar/progress-bar.service';
+
 @Component({
   selector: 'app-view',
   templateUrl: './view.component.html',
   styleUrls: ['./view.component.css']
 })
 export class ViewComponent implements OnInit {
-  progress = 0;
-  isTeams = true;
-  isFavorites = false;
-  isClearFavorites = false;
+  public progress: number;
+  public isTeams: boolean;
+  public isFavorites: boolean;
+  public isClearFavorites: boolean;
 
   private progressId: any;
 
+  constructor(private progressBar: ProgressBarService) {
+    this.progress = 0;
+    this.isTeams = true;
+    this.isFavorites = false;
+    this.isClearFavorites = false;
+  }
+
   ngOnInit() {
     this.runProgressBar();
+    this.progressBar.contentLoaded.subscribe(
+      value => this.progress = value
+    );
   }
 
-  onActivate($event) {
-    for (let key in $event) {
-      if (key === 'progressBar') {
-        const progressBar = $event[key];
-
-        const tempInterval = setInterval(() => {
-          if ($event[key].value === 100) {
-            this.teamsLoaded();
-            clearInterval(tempInterval);
-          }
-        }, 100);
-      }
-    }
-  }
-
-  changeContent($event: boolean) {
+  public changeContent($event: boolean): void {
     this.isTeams = $event;
   }
 
-  toggleFavoritesShow(favoritesState: boolean) {
+  public toggleFavoritesShow(favoritesState: boolean): void {
     this.isFavorites = favoritesState;
   }
 
-  clearFavorites() {
+  public clearFavorites(): void {
     this.isClearFavorites = true;
     setTimeout(() => {
       this.isClearFavorites = false;
     }, 1000);
   }
 
-  teamsLoaded() {
+  private contentLoaded(): void {
     this.progress = 100;
 
     clearInterval(this.progressId);
   }
 
-  private runProgressBar() {
+  private runProgressBar(): void {
     this.progressId = setInterval(() => {
       this.progress++;
 

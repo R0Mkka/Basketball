@@ -5,6 +5,7 @@ import { Observable } from 'rxjs';
 import { filter, retry, tap, catchError } from 'rxjs/operators';
 
 import { PlayerListService } from '../content/player-list/player-list.service';
+import { SortPlayersService } from 'src/app/core/sort-players/sort-players.service';
 import { LocalStorageService } from 'src/app/core/local-storage/local-storage.service';
 
 import { Player } from 'src/app/dataTypes/player';
@@ -21,19 +22,20 @@ export class HeaderComponent implements OnInit {
   private navigationStart: Observable<NavigationStart>;
 
   constructor(private playerListService: PlayerListService,
+              private sortPlayersService: SortPlayersService,
               private storage: LocalStorageService,
               private router: Router) {
     this.navigationStart = router.events.pipe(
       filter(event => event instanceof NavigationStart)
-    ) as Observable<NavigationStart>; 
+    ) as Observable<NavigationStart>;
   }
 
   ngOnInit() {
     this.navigationStart.subscribe(
       event => {
         this.routerLink = event.url;
-        this.isTeams = this.routerLink === '/teams';
-      } 
+        this.isTeams = this.routerLink === '/teams' || this.routerLink === '/';
+      }
     );
   }
 
@@ -55,8 +57,16 @@ export class HeaderComponent implements OnInit {
     }
   }
 
+  public sortPlayersByField(fieldName: string): void {
+    this.sortPlayersService.getSortedPlayersList(fieldName);
+  }
+
   public checkUrlForFavorites(): boolean {
     return !!~this.router.url.indexOf('favorites');
+  }
+
+  public checkUrlForPlayers(): boolean {
+    return !~this.router.url.indexOf('players');
   }
 
   public changeContent(): void {

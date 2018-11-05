@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 
 import { LocalStorageService } from 'src/app/core/local-storage/local-storage.service';
 
+import { ProgressBarService } from 'src/app/shared-modules/progress-bar/progress-bar.service';
 import { PlayerListService } from '../player-list/player-list.service';
 import { Player } from 'src/app/dataTypes/player';
 
@@ -15,9 +16,9 @@ export class FavoritesListComponent {
     public isFavoritesListEmpty: boolean;
     public showLoading: boolean;
     public withBackdrop: boolean;
-    public progressBar = { value: 0 }
 
-    constructor(private playerListService: PlayerListService, 
+    constructor(private progressBar: ProgressBarService,
+                private playerListService: PlayerListService, 
                 private storage: LocalStorageService) {
         this.favoritesList = [];
         this.isFavoritesListEmpty = false;
@@ -76,8 +77,8 @@ export class FavoritesListComponent {
                     });
 
                     this.isFavoritesListEmpty = this.checkIsEmpty();
+                    this.progressBar.emitContentLoaded();
                     this.showLoading = false;
-                    this.progressBar.value = 100;
                 });  
     }
 

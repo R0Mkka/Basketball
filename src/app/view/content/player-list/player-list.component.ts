@@ -1,21 +1,24 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 
 import { retry, tap, catchError } from 'rxjs/operators';
 
 import { LocalStorageService } from 'src/app/core/local-storage/local-storage.service';
 
+import { SortPlayersService } from 'src/app/core/sort-players/sort-players.service';
+import { ProgressBarService } from 'src/app/shared-modules/progress-bar/progress-bar.service';
 import { PlayerListService } from './player-list.service';
 import { Player } from 'src/app/dataTypes/player';
+
 
 @Component({
     selector: 'app-players',
     templateUrl: './player-list.component.html',
     styleUrls: ['./player-list.component.css']
 })
-export class PlayerListComponent {
+export class PlayerListComponent implements OnInit {
     public playersList: Player[];
     public playersCount: number;
-    public playersPageSets: any[] = [];
+    public playersPageSets: Array<Player[]> = [];
 
     public currentPageSetIndex: number;
     public currentPageSet: Player[];
@@ -23,12 +26,29 @@ export class PlayerListComponent {
     public showLoading = false;
     public withBackdrop = false;
 
-    public progressBar = { value: 0 }
-
     constructor(private playerListService: PlayerListService, 
+                private sortPlayersService: SortPlayersService,
+                private progressBar: ProgressBarService,
                 private storage: LocalStorageService) {
         this.showLoading = true;
         this.initPlayers();
+    }
+
+    ngOnInit() {
+        this.sortPlayersService.sortEvent.subscribe(
+            players => {
+                this.showLoading = true;
+                this.playersList = players;
+                this.playerListService.getPlayersImages(this.playersList).forEach((url, index) => {
+                    this.playersList[index].image = url;
+                });
+                this.initPageSets();
+                this.currentPageSetIndex = 0;
+                this.currentPageSet = this.playersPageSets[this.currentPageSetIndex];
+                this.playersCount = this.playersList.length;
+                this.showLoading = false;
+            }
+        );
     }
     
     public setBackdropStatus($event: boolean): void {
@@ -69,8 +89,8 @@ export class PlayerListComponent {
                     this.currentPageSet = this.playersPageSets[this.currentPageSetIndex];
                     this.playersCount = this.playersList.length;
                     
+                    this.progressBar.emitContentLoaded();
                     this.showLoading = false;
-                    this.progressBar.value = 100;
                 }
             ),
             catchError(() => ([]))
@@ -78,6 +98,7 @@ export class PlayerListComponent {
     }
 
     private initPageSets(): void {
+        this.playersPageSets = [];
         const playersForOneSet = 10;
 
         let startIndex = 0;

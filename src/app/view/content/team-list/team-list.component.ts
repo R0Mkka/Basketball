@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { tap, catchError } from 'rxjs/operators';
 
 import { TeamListService } from './team-list.service';
+import { ProgressBarService } from 'src/app/shared-modules/progress-bar/progress-bar.service';
 
 import { Team } from 'src/app/dataTypes/team';
 
@@ -14,9 +15,9 @@ export class TeamListComponent {
     public teamList: Team[];
     public teamsNames: string[];
     public showLoading = false;
-    public progressBar = { value: 0 }
 
-    constructor(private teamListSerivce: TeamListService) {
+    constructor(private teamListSerivce: TeamListService,
+                private progressBar: ProgressBarService) {
         this.showLoading = true;
         this.initTeams();
     }
@@ -30,8 +31,8 @@ export class TeamListComponent {
                 },
                 () => console.error('Error with getting teams!!!'),
                 () => {
+                    this.progressBar.emitContentLoaded();
                     this.showLoading = false;
-                    this.progressBar.value = 100;
                 }
             ),
             catchError(() => ([]))

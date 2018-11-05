@@ -3,7 +3,7 @@
     <app-player-card *ngFor="let player of currentPageSet"
                      [player]="player"
                      (loading)="setLoadingStatus($event)"
-                     (backdrop)="showBackdrop($event)"
+                     (backdrop)="setBackdropStatus($event)"
                      (favoriteEvent)="toggleFavoriteState($event)">
     </app-player-card>
 </div>
