@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Input, Output, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, Output, OnInit, ChangeDetectionStrategy } from '@angular/core';
 import { FormControl } from '@angular/forms';
 
 import { Player } from 'src/app/dataTypes/player';
@@ -7,7 +7,8 @@ import { icons } from 'src/app/config/icons';
 @Component({
   selector: 'app-edit-modal',
   templateUrl: './edit-modal.component.html',
-  styleUrls: ['./edit-modal.component.css']
+  styleUrls: ['./edit-modal.component.css'],
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class EditModalComponent implements OnInit {
   @Input() set playerSettings(player: Player) {

@@ -1,4 +1,4 @@
-import { Component, OnInit, forwardRef } from '@angular/core';
+import { Component, OnInit, forwardRef, ChangeDetectionStrategy } from '@angular/core';
 import { FormBuilder, ControlValueAccessor, FormGroup, NG_VALUE_ACCESSOR } from '@angular/forms';
 
 import { Player } from 'src/app/dataTypes/player';
@@ -13,7 +13,8 @@ import { Player } from 'src/app/dataTypes/player';
             useExisting: forwardRef(() => EditStatsFormComponent),
             multi: true
         }
-    ]
+    ],
+    changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class EditStatsFormComponent implements OnInit, ControlValueAccessor {
     public editPlayerForm: FormGroup;

@@ -7,8 +7,8 @@ import { LocalStorageService } from 'src/app/core/local-storage/local-storage.se
 import { SortPlayersService } from 'src/app/core/sort-players/sort-players.service';
 import { ProgressBarService } from 'src/app/shared-modules/progress-bar/progress-bar.service';
 import { PlayerListService } from './player-list.service';
-import { Player } from 'src/app/dataTypes/player';
 
+import { Player } from 'src/app/dataTypes/player';
 
 @Component({
     selector: 'app-players',
@@ -27,32 +27,34 @@ export class PlayerListComponent implements OnInit {
     public showLoading = false;
     public withBackdrop = false;
 
-    constructor(private playerListService: PlayerListService, 
-                private sortPlayersService: SortPlayersService,
-                private progressBar: ProgressBarService,
-                private storage: LocalStorageService) {
-        this.playersLoaded = false;
-        this.showLoading = true;
-        this.initPlayers();
-    }
+    constructor(
+        private playerListService: PlayerListService, 
+        private sortPlayersService: SortPlayersService,
+        private progressBar: ProgressBarService,
+        private storage: LocalStorageService) {
+            this.playersLoaded = false;
+            this.showLoading = true;
+        }
 
     ngOnInit() {
-        this.sortPlayersService.sortEvent.subscribe(
-            players => {
-                this.showLoading = true;
-                this.playersLoaded = false;
-                this.playersList = players;
-                this.playerListService.getPlayersImages(this.playersList).forEach((url, index) => {
-                    this.playersList[index].image = url;
-                });
-                this.initPageSets();
-                this.currentPageSetIndex = 0;
-                this.currentPageSet = this.playersPageSets[this.currentPageSetIndex];
-                this.playersCount = this.playersList.length;
-                this.playersLoaded = true;
-                this.showLoading = false;
-            }
-        );
+        this.initPlayers();
+
+        // this.sortPlayersService.sortEvent.subscribe(
+        //     players => {
+        //         this.showLoading = true;
+        //         this.playersLoaded = false;
+        //         this.playersList = players;
+        //         this.playerListService.getPlayersImages(this.playersList).forEach((url, index) => {
+        //             this.playersList[index].image = url;
+        //         });
+        //         this.initPageSets();
+        //         this.currentPageSetIndex = 0;
+        //         this.currentPageSet = this.playersPageSets[this.currentPageSetIndex];
+        //         this.playersCount = this.playersList.length;
+        //         this.playersLoaded = true;
+        //         this.showLoading = false;
+        //     }
+        // );
     }
     
     public setBackdropStatus($event: boolean): void {

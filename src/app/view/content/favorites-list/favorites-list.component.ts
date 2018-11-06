@@ -64,7 +64,9 @@ export class FavoritesListComponent {
     
         this.playerListService.getPlayers()
             .subscribe(
-                playersList => players = playersList,
+                playersList => {
+                    players = playersList;
+                },
                 () => console.error('Error with getting players!!!'),
                 () => {
                     players.forEach((player: Player) => {

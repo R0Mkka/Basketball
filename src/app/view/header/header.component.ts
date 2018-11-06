@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
 import { Router, NavigationStart } from '@angular/router';
 
 import { Observable } from 'rxjs';
@@ -13,7 +13,8 @@ import { Player } from 'src/app/dataTypes/player';
 @Component({
   selector: 'app-header',
   templateUrl: './header.component.html',
-  styleUrls: ['./header.component.css']
+  styleUrls: ['./header.component.css'],
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class HeaderComponent implements OnInit {
   public isTeams: boolean;
@@ -21,10 +22,11 @@ export class HeaderComponent implements OnInit {
   private routerLink: string;
   private navigationStart: Observable<NavigationStart>;
 
-  constructor(private playerListService: PlayerListService,
-              private sortPlayersService: SortPlayersService,
-              private storage: LocalStorageService,
-              private router: Router) {
+  constructor(
+    private playerListService: PlayerListService,
+    private sortPlayersService: SortPlayersService,
+    private storage: LocalStorageService,
+    private router: Router) {
     this.navigationStart = router.events.pipe(
       filter(event => event instanceof NavigationStart)
     ) as Observable<NavigationStart>;

@@ -1,10 +1,11 @@
-import { Component, Input } from '@angular/core';
+import { Component, Input, ChangeDetectionStrategy } from '@angular/core';
 import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-team',
   templateUrl: './team-card.component.html',
-  styleUrls: ['./team-card.component.css']
+  styleUrls: ['./team-card.component.css'],
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class TeamCardComponent {
   @Input() teamName: string;

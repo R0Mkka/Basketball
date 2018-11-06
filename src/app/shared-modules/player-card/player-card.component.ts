@@ -1,4 +1,5 @@
-import { Component, Input, Output, EventEmitter, OnInit } from '@angular/core';
+import { Component, Input, Output, EventEmitter, OnInit, ChangeDetectionStrategy } from '@angular/core';
+import { ChangeDetectorRef } from '@angular/core';
 
 import { LocalStorageService } from 'src/app/core/local-storage/local-storage.service';
 
@@ -8,7 +9,8 @@ import { icons } from 'src/app/config/icons';
 @Component({
   selector: 'app-player-card',
   templateUrl: './player-card.component.html',
-  styleUrls: ['./player-card.component.css']
+  styleUrls: ['./player-card.component.css'],
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class PlayerCardComponent implements OnInit {
   @Input() player: Player;
@@ -23,7 +25,7 @@ export class PlayerCardComponent implements OnInit {
 
   private isEditDisabled: boolean;
 
-  constructor(private storage: LocalStorageService) {
+  constructor(private storage: LocalStorageService, private cdr: ChangeDetectorRef) {
     this.isEditModal = false;
     this.isPlayerImageLoaded = false;
     this.isTeamImageLoaded = false;
@@ -107,6 +109,7 @@ export class PlayerCardComponent implements OnInit {
       if (!this.isPlayerImageLoaded) {
         this.player.image = '/src/assets/images/default_player.png';
         this.isPlayerImageLoaded = true;
+        this.cdr.detectChanges();
       }
     }, 10000);
   }

@@ -1,12 +1,12 @@
 import { NgModule } from '@angular/core';
 
-import { FeaturesModule } from 'src/app/shared-modules/features/features.module';
-import { PlayerCardModule } from 'src/app/shared-modules/player-card/player-card.module';
-import { TeamListRoutingModule } from './team-list-routing.module';
-
 import { MatCardModule } from '@angular/material/card';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { MatTooltipModule } from '@angular/material/tooltip';
+
+import { FeaturesModule } from 'src/app/shared-modules/features/features.module';
+import { PlayerCardModule } from 'src/app/shared-modules/player-card/player-card.module';
+import { TeamListRoutingModule } from './team-list-routing.module';
 
 import { TeamListComponent } from './team-list.component';
 import { TeamCardComponent } from './team-card/team-card.component';

@@ -9,15 +9,16 @@ import { Team } from 'src/app/dataTypes/team';
   providedIn: 'root'
 })
 export class TeamListService {
-  private baseUrl = '/src/assets/teams.json';
+  private baseUrl = 'src/assets/teams.json';
+  private backUrl = 'https://nba-players.herokuapp.com/players-stats-teams';
 
   constructor(private http: HttpClient) {}
 
-  public getTeams(): Observable<Team[]> {
+  public getTeamsAsArray(): Observable<Team[]> {
     return this.http.get<Team[]>(this.baseUrl);
   }
 
   public getPlayersOfTheTeam(acronym: string): Observable<Player[]> {
-    return this.http.get<Player[]>(`https://nba-players.herokuapp.com/players-stats-teams/${acronym}`);
+    return this.http.get<Player[]>(`${this.backUrl}/${acronym}`);
   }
 }
