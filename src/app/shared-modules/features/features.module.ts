@@ -8,8 +8,6 @@ import { MatInputModule } from '@angular/material/input';
 import { CardHoverDirective } from './directives/card-hover.directive';
 import { ShowImageDirective } from './directives/show-image.directive';
 
-import { LoadingComponent } from './loading/loading.component';
-
 @NgModule({
     imports: [
         CommonModule,
@@ -19,8 +17,7 @@ import { LoadingComponent } from './loading/loading.component';
     ],
     declarations: [
         CardHoverDirective,
-        ShowImageDirective,
-        LoadingComponent
+        ShowImageDirective
     ],
     exports: [
         CommonModule,
@@ -28,8 +25,7 @@ import { LoadingComponent } from './loading/loading.component';
         MatProgressSpinnerModule,
         MatInputModule,
         CardHoverDirective,
-        ShowImageDirective,
-        LoadingComponent
+        ShowImageDirective
     ]
 })
 export class FeaturesModule {}

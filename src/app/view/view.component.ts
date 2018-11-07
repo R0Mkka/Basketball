@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 
 import { ProgressBarService } from 'src/app/shared-modules/progress-bar/progress-bar.service';
+import { LoadingService } from 'src/app/shared-modules/loading/loading.service';
 
 @Component({
   selector: 'app-view',
@@ -13,20 +14,27 @@ export class ViewComponent implements OnInit {
   public isFavorites: boolean;
   public isClearFavorites: boolean;
 
+  public isLoading: boolean;
+  public isBackdrop: boolean;
+
   private progressId: any;
 
-  constructor(private progressBar: ProgressBarService) {
+  constructor(private progressBar: ProgressBarService, private loading: LoadingService) {
     this.progress = 0;
     this.isTeams = true;
     this.isFavorites = false;
     this.isClearFavorites = false;
+
+    this.isLoading = true;
+    this.isBackdrop = false;
   }
 
   ngOnInit() {
     this.runProgressBar();
     this.progressBar.contentLoaded.subscribe(
-      value => this.progress = value
+      (value: number) => this.progress = value
     );
+    this.subsribeOnLoadingEvent();
   }
 
   public changeContent($event: boolean): void {
@@ -44,20 +52,23 @@ export class ViewComponent implements OnInit {
     }, 1000);
   }
 
-  private contentLoaded(): void {
-    this.progress = 100;
-
-    clearInterval(this.progressId);
-  }
-
   private runProgressBar(): void {
     this.progressId = setInterval(() => {
-      this.progress++;
+      this.progress += Math.round(Math.random() * 5);
 
       if (this.progress >= 90) {
         clearInterval(this.progressId);
       }
-    }, 40);
+    }, 200);
+  }
+
+  private subsribeOnLoadingEvent(): void {
+    this.loading.changeLoadingState.subscribe(
+      loadingSettings => {
+        this.isLoading = loadingSettings.isLoading;
+        this.isBackdrop = loadingSettings.isBackdrop;
+      }
+    )
   }
 }
 

@@ -1,21 +1,24 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ChangeDetectionStrategy, ChangeDetectorRef, OnDestroy } from '@angular/core';
 
-import { retry, tap, catchError } from 'rxjs/operators';
+import { Subscription } from 'rxjs';
+import { retry, tap } from 'rxjs/operators';
 
 import { LocalStorageService } from 'src/app/core/local-storage/local-storage.service';
 
 import { SortPlayersService } from 'src/app/core/sort-players/sort-players.service';
 import { ProgressBarService } from 'src/app/shared-modules/progress-bar/progress-bar.service';
 import { PlayerListService } from './player-list.service';
+import { LoadingService } from 'src/app/shared-modules/loading/loading.service';
 
 import { Player } from 'src/app/dataTypes/player';
 
 @Component({
     selector: 'app-players',
     templateUrl: './player-list.component.html',
-    styleUrls: ['./player-list.component.css']
+    styleUrls: ['./player-list.component.css'],
+    changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class PlayerListComponent implements OnInit {
+export class PlayerListComponent implements OnInit, OnDestroy {
     public playersList: Player[];
     public playersCount: number;
     public playersPageSets: Array<Player[]> = [];
@@ -24,45 +27,25 @@ export class PlayerListComponent implements OnInit {
     public currentPageSetIndex: number;
     public currentPageSet: Player[];
 
-    public showLoading = false;
-    public withBackdrop = false;
+    private onSortSubscription: Subscription;
 
     constructor(
+        private cdRef: ChangeDetectorRef,
         private playerListService: PlayerListService, 
         private sortPlayersService: SortPlayersService,
         private progressBar: ProgressBarService,
-        private storage: LocalStorageService) {
+        private storage: LocalStorageService,
+        private loading: LoadingService) {
             this.playersLoaded = false;
-            this.showLoading = true;
         }
 
     ngOnInit() {
         this.initPlayers();
-
-        // this.sortPlayersService.sortEvent.subscribe(
-        //     players => {
-        //         this.showLoading = true;
-        //         this.playersLoaded = false;
-        //         this.playersList = players;
-        //         this.playerListService.getPlayersImages(this.playersList).forEach((url, index) => {
-        //             this.playersList[index].image = url;
-        //         });
-        //         this.initPageSets();
-        //         this.currentPageSetIndex = 0;
-        //         this.currentPageSet = this.playersPageSets[this.currentPageSetIndex];
-        //         this.playersCount = this.playersList.length;
-        //         this.playersLoaded = true;
-        //         this.showLoading = false;
-        //     }
-        // );
-    }
-    
-    public setBackdropStatus($event: boolean): void {
-        this.withBackdrop = $event;
+        this.subscribeOnSort();        
     }
 
-    public setLoadingStatus($event: boolean): void {
-        this.showLoading = $event;
+    ngOnDestroy() {
+        this.onSortSubscription.unsubscribe();
     }
 
     public toggleFavoriteState(player: Player): void {
@@ -79,28 +62,36 @@ export class PlayerListComponent implements OnInit {
     }
 
     private initPlayers(): void {
-        this.playerListService.getPlayers().pipe(
+        const tempSubscription = this.playerListService.getPlayers().pipe(
             retry(3),
-            tap(
-                (playersTotal: Player[]) => {
-                    this.playersList = playersTotal;
-                },
-                () => console.error('Error with getting players!!!'),
-                () => {
-                    this.playerListService.getPlayersImages(this.playersList).forEach((url, index) => {
-                        this.playersList[index].image = url;
+            tap({
+                next: (players: Player[]) => {
+                    players.map((player: Player) => {
+                        player.image = this.playerListService.getPlayerImage(player);
                     });
+
+                    this.playersList = players;
                     this.initPageSets();
+                },
+                error: (error) => {
+                    console.error('Error with getting players!!!');
+                    console.error('Error: ' + error);
+                },
+                complete: () => {
                     this.currentPageSetIndex = 0;
-                    this.currentPageSet = this.playersPageSets[this.currentPageSetIndex];
+                    this.currentPageSet = this.playersPageSets[0];
                     this.playersCount = this.playersList.length;
-                    
-                    this.progressBar.emitContentLoaded();
                     this.playersLoaded = true;
-                    this.showLoading = false;
+
+                    this.progressBar.emitContentLoaded();
+                    this.loading.hide();
+
+                    if (!this.cdRef['destroyed']) {
+                        this.cdRef.detectChanges();
+                    }
+                    tempSubscription.unsubscribe();
                 }
-            ),
-            catchError(() => ([]))
+            })
         ).subscribe();
     }
 
@@ -123,5 +114,35 @@ export class PlayerListComponent implements OnInit {
             startIndex += playersForOneSet;
             endIndex += playersForOneSet;
         }
+    }
+
+    private subscribeOnSort() {
+        this.onSortSubscription = this.sortPlayersService.sortEvent.subscribe({
+            next: (players: Player[]) => {
+                this.loading.show(true);
+                this.playersLoaded = false;
+
+                players.map((player: Player) => {
+                    player.image = this.playerListService.getPlayerImage(player);
+                });
+                
+                this.playersList = players;
+                this.initPageSets();
+
+                this.currentPageSetIndex = 0;
+                this.currentPageSet = this.playersPageSets[0];
+                this.playersCount = this.playersList.length;
+
+                this.playersLoaded = true;
+                this.loading.hide();
+                if (!this.cdRef['destroyed']) {
+                    this.cdRef.detectChanges();
+                }
+            },
+            error: (error) => {
+                console.error('Error with sorting players!!!');
+                console.error('Error: ' + error);
+            }
+        });
     }
 }

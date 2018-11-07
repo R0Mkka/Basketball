@@ -8,7 +8,6 @@ import { Player } from 'src/app/dataTypes/player';
 })
 export class SortPlayersService {
     private baseUrl: string;
-    private playerList: Player[];
     private sortedPlayersList: Player[];
     
     @Output() sortEvent = new EventEmitter<Player[]>();
@@ -17,16 +16,15 @@ export class SortPlayersService {
         this.baseUrl = 'https://nba-players.herokuapp.com/players-stats';
     }
 
-    public emitSorting() {
+    public emitSortEvent() {
         this.sortEvent.emit(this.sortedPlayersList);
     }
 
-    public getSortedPlayersList(fieldName: string): void {
+    public sortPlayersList(fieldName: string): void {
         this.http.get<Player[]>(this.baseUrl)
-            .subscribe(
-                players => {
-                    this.playerList = players;
-                    this.playerList.sort((a: Player, b: Player) => {
+            .subscribe({
+                next: (players: Player[]) => {
+                    players.sort((a: Player, b: Player) => {
                         switch(fieldName) {
                             case 'games_played': 
                             case 'three_point_percentage':
@@ -35,9 +33,14 @@ export class SortPlayersService {
                                 return a[fieldName].localeCompare(b[fieldName]);
                         }
                     });
-                    this.sortedPlayersList = this.playerList.reverse();
-                    this.emitSorting();
+
+                    this.sortedPlayersList = players.reverse();
+                    this.emitSortEvent();
+                },
+                error: (error) => {
+                    console.error('Error with getting players for sort!!!');
+                    console.error('Error: ' + error);
                 }
-            )
+            });
     }
 }

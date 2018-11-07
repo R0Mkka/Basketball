@@ -4,6 +4,7 @@ import { map } from 'rxjs/operators';
 
 import { TeamListService } from './team-list.service';
 import { ProgressBarService } from 'src/app/shared-modules/progress-bar/progress-bar.service';
+import { LoadingService } from 'src/app/shared-modules/loading/loading.service';
 
 import { Team } from 'src/app/dataTypes/team';
 
@@ -15,13 +16,11 @@ import { Team } from 'src/app/dataTypes/team';
 })
 export class TeamListComponent implements OnInit{
     public teamList$: Observable<Team[]>;
-    public showLoading: boolean;
 
     constructor(
         private teamListSerivce: TeamListService,
-        private progressBar: ProgressBarService) {
-            this.showLoading = true;
-        }
+        private progressBar: ProgressBarService,
+        private loading: LoadingService) { }
 
     ngOnInit() {
         this.initTeams();
@@ -31,7 +30,7 @@ export class TeamListComponent implements OnInit{
         this.teamList$ = this.teamListSerivce.getTeamsAsArray()
             .pipe(
                 map((teams: Team[]) => {
-                    this.showLoading = false;
+                    this.loading.hide();
                     this.progressBar.emitContentLoaded();
 
                     return teams;

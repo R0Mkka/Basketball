@@ -15,8 +15,6 @@ import { icons } from 'src/app/config/icons';
 export class PlayerCardComponent implements OnInit {
   @Input() player: Player;
   @Output() favoriteActionEvent = new EventEmitter<Player>();
-  @Output() loading = new EventEmitter<boolean>();
-  @Output() backdrop = new EventEmitter<boolean>();
 
   public isEditModal: boolean;
   public isPlayerImageLoaded: boolean;
@@ -51,14 +49,8 @@ export class PlayerCardComponent implements OnInit {
   }
 
   public toggleFavoriteState(): void {
-    this.loading.emit(true);
-    this.backdrop.emit(true);
-
     this.player.is_favorite = !this.player.is_favorite;
     this.changeFavoriteState(this.player.is_favorite);
-
-    this.loading.emit(false);
-    this.backdrop.emit(false);
   }
 
   public changeFavoriteState(isFavorite: boolean): void {
@@ -71,7 +63,7 @@ export class PlayerCardComponent implements OnInit {
     this.player.is_favorite = isFavorite;
     this.favoriteActionEvent.emit(this.player);
 
-    this.toggleHeartColor();    
+    this.toggleHeartColor();
   }
 
   private toggleHeartColor() {
@@ -109,7 +101,10 @@ export class PlayerCardComponent implements OnInit {
       if (!this.isPlayerImageLoaded) {
         this.player.image = '/src/assets/images/default_player.png';
         this.isPlayerImageLoaded = true;
-        this.cdr.detectChanges();
+
+        if (!this.cdr['destroyed']) {
+          this.cdr.detectChanges();
+        }
       }
     }, 10000);
   }

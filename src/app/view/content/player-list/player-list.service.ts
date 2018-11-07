@@ -12,8 +12,8 @@ export class PlayerListService {
 
   constructor(private http: HttpClient) { }
 
-  public getPlayers(): Observable<Array<Player[]>> {
-    return this.http.get<Array<Player[]>>(this.baseUrl + 'players-stats');
+  public getPlayers(): Observable<Player[]> {
+    return this.http.get<Player[]>(this.baseUrl + 'players-stats');
   }
 
   public getPlayersImages(players: Player[]): string[] {

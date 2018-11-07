@@ -1,12 +1,9 @@
-<app-loading *ngIf="showLoading" [withBackdrop]="withBackdrop"></app-loading>
 <div class="favorites">
     <ng-container *ngIf="isFavoritesListEmpty">
         <p class="clear-list">List of favorites is empty.</p>
     </ng-container>
     <ng-container *ngFor="let player of favoritesList">
         <app-player-card [player]="player"
-                         (loading)="setLoadingStatus($event)"
-                         (backdrop)="setBackdropStatus($event)"
                          (favoriteActionEvent)="favoriteStateChange($event)">
         </app-player-card>
     </ng-container>

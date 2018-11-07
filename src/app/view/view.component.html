@@ -1,3 +1,5 @@
+<app-loading *ngIf="isLoading" [withBackdrop]="isBackdrop"></app-loading>
+
 <div class="view">
   <app-header (stateChanged)="changeContent($event)" 
               (toggleFavorites)="toggleFavoritesShow($event)"

@@ -5,6 +5,7 @@ import { Observable } from 'rxjs';
 import { TeamListService } from '../../team-list/team-list.service';
 import { PlayerListService } from '../../player-list/player-list.service';
 import { ProgressBarService } from 'src/app/shared-modules/progress-bar/progress-bar.service';
+import { LoadingService } from 'src/app/shared-modules/loading/loading.service';
 
 import { Player } from 'src/app/dataTypes/player';
 import { map } from 'rxjs/operators';
@@ -16,29 +17,17 @@ import { map } from 'rxjs/operators';
     changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class TeamPlayersListComponent implements OnInit {
-    public showLoading: boolean;
-    public withBackdrop: boolean;
     public playerList$: Observable<Player[]>;
 
     constructor(
         private teamListService: TeamListService,
         private playerListService: PlayerListService,
         private progressBar: ProgressBarService,
-        private route: ActivatedRoute) {
-            this.showLoading = true;
-            this.withBackdrop = false;
-        }
+        private route: ActivatedRoute,
+        private loading: LoadingService) { }
 
     ngOnInit() {
         this.initTeamPlayers();
-    }
-
-    public setLoadingStatus($event: boolean): void {
-        this.showLoading = $event;
-    }
-
-    public setBackdropStatus($event: boolean): void {
-        this.withBackdrop = $event;
     }
 
     private initTeamPlayers(): void {
@@ -50,10 +39,9 @@ export class TeamPlayersListComponent implements OnInit {
                     map((players: Player[]) => {
                         players.map((player: Player) => {
                             player.image = this.playerListService.getPlayerImage(player);
-                            return player;
                         });
 
-                        this.showLoading = false;
+                        this.loading.hide();
                         this.progressBar.emitContentLoaded();
 
                         return players;

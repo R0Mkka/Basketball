@@ -1,6 +1,8 @@
 import { Component, Input, ChangeDetectionStrategy } from '@angular/core';
 import { Router } from '@angular/router';
 
+import { SlideToggleService } from 'src/app/core/slide-toggle/slide-toggle.serivce';
+
 @Component({
   selector: 'app-team',
   templateUrl: './team-card.component.html',
@@ -15,11 +17,13 @@ export class TeamCardComponent {
 
   public isTeamImageLoaded: boolean;
 
-  constructor(private router: Router) {
+  constructor(private router: Router, private slideToggle: SlideToggleService) {
     this.isTeamImageLoaded = false;
   }
 
   public showTeamPlayers(): void {
+    this.slideToggle.changeState(false);
+
     const splitTeamName = this.teamName.split('_')
       .map(word => word.toLowerCase());
 

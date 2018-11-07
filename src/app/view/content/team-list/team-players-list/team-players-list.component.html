@@ -1,9 +1,6 @@
-<app-loading *ngIf="showLoading" [withBackdrop]="withBackdrop"></app-loading>
 <div class="team-players">
     <app-player-card *ngFor="let player of (playerList$ | async)"
                      [player]="player"
-                     (loading)="setLoadingStatus($event)"
-                     (backdrop)="setBackdropStatus($event)"
                      (favoriteEvent)="toggleFavorites($event)">
     </app-player-card>
 </div>

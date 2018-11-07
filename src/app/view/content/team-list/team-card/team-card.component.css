@@ -12,29 +12,21 @@
     padding: 80px 0px;
   }
   
-  .title {
+  .card__title {
     text-align: center;
     font-size: 18px;
     font-weight: bold;
   }
   
-  .content {
-    font-size: 15px;
-  }
-  
-  .info {
+  .card__info {
     position: absolute;
     right: 16px;
     bottom: 16px;
     transition: .4s all ease-in-out;
   }
   
-  .info:hover {
+  .card__info:hover {
     transform: scale(1.2);
-  }
-  
-  .content span {
-    font-style: italic;
   }
   
   .hovered {

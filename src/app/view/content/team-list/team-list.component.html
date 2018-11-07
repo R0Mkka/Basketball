@@ -1,11 +1,9 @@
-<app-loading *ngIf="showLoading"></app-loading>
 <div class="teams">
     <div *ngFor="let team of (teamList$ | async)">
         <app-team [teamName]="team.name"
                   [acronym]="team.acronym"
                   [image]="team.image"
-                  [info]="team.info"
-                  (showTeam)="displayTeam($event)">
+                  [info]="team.info">
         </app-team>
     </div>
 </div>

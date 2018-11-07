@@ -6,9 +6,9 @@
          appShowImage
          [src]="image"
          (load)="teamImageLoaded()">
-    <mat-card-title class="title"> {{getTeamName()}} </mat-card-title>
+    <mat-card-title class="card__title"> {{getTeamName()}} </mat-card-title>
     <mat-card-content>
-        <img class="info" 
+        <img class="card__info" 
              appInfo 
              [matTooltip]="info" 
              [matTooltipShowDelay]="400"
