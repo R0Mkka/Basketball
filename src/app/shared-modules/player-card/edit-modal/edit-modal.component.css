@@ -39,7 +39,7 @@
   margin-left: 330px;
 }
 
-.modal__close, .modal__favorite {
+.modal__favorite, .modal__save {
   cursor: pointer;
   position: absolute;
   width: 25px;
@@ -47,10 +47,10 @@
   bottom: 16px;
 }
 
-.modal__close {
-  right: 16px;
+.modal__favorite {
+  right: 30px;
 }
 
-.modal__favorite {
-  right: 66px;
+.modal__save {
+  right: 80px;
 }

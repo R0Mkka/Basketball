@@ -42,7 +42,7 @@ export class HeaderComponent implements OnInit {
     const message = 'Do you really want to clear your favorites list?';
 
     if (confirm(message)) {
-      this.storage.clear();
+      this.storage.set('favorites', '[]');
     }
   }
 

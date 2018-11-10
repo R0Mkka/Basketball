@@ -23,21 +23,37 @@ export class PlayerCardComponent implements OnInit {
 
   private isEditDisabled: boolean;
 
-  constructor(private storage: LocalStorageService, private cdr: ChangeDetectorRef) {
-    this.isEditModal = false;
-    this.isPlayerImageLoaded = false;
-    this.isTeamImageLoaded = false;
-    this.favoriteStateImage = icons.favorite.inactive;
+  constructor(
+    private storage: LocalStorageService,
+    private cdRef: ChangeDetectorRef) {
+      this.isEditModal = false;
+      this.isPlayerImageLoaded = false;
+      this.isTeamImageLoaded = false;
+      this.favoriteStateImage = icons.favorite.inactive;
 
-    this.isEditDisabled = true;
-      
-    this.checkForPlayerImage();
-  }
+      this.isEditDisabled = true;
+        
+      this.checkForPlayerImage();
+    }
 
   ngOnInit() {
-    if (this.storage.has(this.player.name)) {
-      this.player.is_favorite = true;
-      this.favoriteStateImage = icons.favorite.active;
+    // console.log(this.player);
+
+    if (this.storage.has('favorites')) {
+      const favoritesList = JSON.parse(this.storage.get('favorites'));
+
+      favoritesList.forEach((player: Player) => {
+        if (player.name === this.player.name) {
+          this.player.is_favorite = true;
+          this.favoriteStateImage = icons.favorite.active;
+          return;
+        }
+      });
+    } else {
+      this.storage.set('favorites', '[]');
+
+      this.player.is_favorite = false;
+      this.favoriteStateImage = icons.favorite.inactive;
     }
   }
 
@@ -55,9 +71,34 @@ export class PlayerCardComponent implements OnInit {
 
   public changeFavoriteState(isFavorite: boolean): void {
     if (isFavorite) {
-      this.storage.set(this.player.name, "0");
+      if (this.storage.has('favorites')) {
+        const favoritesJSON = this.storage.get('favorites');
+        const favoritesArray: Player[] = JSON.parse(favoritesJSON);
+
+        favoritesArray.push(this.player);
+        this.storage.set('favorites', JSON.stringify(favoritesArray));
+      } else {
+        const favoritesArray: Player[] = [];
+
+        favoritesArray.push(this.player);
+        this.storage.set('favorites', JSON.stringify(favoritesArray));
+      }
+
+      // console.log(this.storage.get('favorites'));
     } else {
-      this.storage.remove(this.player.name);
+      if (this.storage.has('favorites')) {
+        const favoritesJSON = this.storage.get('favorites');
+        const favoritesArray: Player[] = JSON.parse(favoritesJSON);
+
+        favoritesArray.forEach((player: Player, index: number) => {
+          if (player.name === this.player.name) {
+            favoritesArray.splice(index, 1);
+          }
+        });
+
+        this.storage.set('favorites', JSON.stringify(favoritesArray));
+        // console.log(this.storage.get('favorites'));
+      }
     }
 
     this.player.is_favorite = isFavorite;
@@ -75,6 +116,10 @@ export class PlayerCardComponent implements OnInit {
   public showEditModal(): void {
     if (!this.isEditDisabled) {
       this.isEditModal = true;
+
+      if (this.storage.has(this.player.name)) {
+        this.player = JSON.parse(this.storage.get(this.player.name));
+      }
     }
   }
 
@@ -102,8 +147,8 @@ export class PlayerCardComponent implements OnInit {
         this.player.image = '/src/assets/images/default_player.png';
         this.isPlayerImageLoaded = true;
 
-        if (!this.cdr['destroyed']) {
-          this.cdr.detectChanges();
+        if (!this.cdRef['destroyed']) {
+          this.cdRef.detectChanges();
         }
       }
     }, 10000);

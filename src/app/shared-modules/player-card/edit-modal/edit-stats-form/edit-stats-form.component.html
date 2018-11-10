@@ -1,11 +1,13 @@
 <div [formGroup]="editPlayerForm" class="edit-form">
     <ng-container *ngFor="let field of fieldsList">
-        <mat-form-field>
+        <mat-form-field hideRequiredMarker>
             <input matInput
+                   validation
                    type="text"
                    [formControlName]="field"
                    [title]="getTitle(field)" 
-                   [placeholder]="getPlaceholder(field)">
+                   [placeholder]="getPlaceholder(field)"
+                   required>
         </mat-form-field>
     </ng-container>
 </div>

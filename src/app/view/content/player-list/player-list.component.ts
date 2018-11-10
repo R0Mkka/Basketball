@@ -66,11 +66,15 @@ export class PlayerListComponent implements OnInit, OnDestroy {
             retry(3),
             tap({
                 next: (players: Player[]) => {
-                    players.map((player: Player) => {
+                    this.playersList = players.map((player: Player) => {
+                        if (this.storage.has(player.name)) {
+                            player = JSON.parse(this.storage.get(player.name));
+                        }
                         player.image = this.playerListService.getPlayerImage(player);
+
+                        return player;
                     });
 
-                    this.playersList = players;
                     this.initPageSets();
                 },
                 error: (error) => {
@@ -115,6 +119,20 @@ export class PlayerListComponent implements OnInit, OnDestroy {
             endIndex += playersForOneSet;
         }
     }
+
+    // private getTeamImage(): string {
+    //     const splitTeamName = this.player.team_name.split(' ');
+    //     const folderPath = '/src/assets/images/teams/';
+    //     let imageName = '';
+
+    //     splitTeamName.forEach((word: string) => {
+    //         imageName += word;
+    //     });
+
+    //     imageName = `${imageName}.png`;
+
+    //     return `${folderPath}/${imageName}`;
+    // }
 
     private subscribeOnSort() {
         this.onSortSubscription = this.sortPlayersService.sortEvent.subscribe({

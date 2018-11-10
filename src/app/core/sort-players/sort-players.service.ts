@@ -1,6 +1,8 @@
 import { Injectable, Output, EventEmitter } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 
+import { LocalStorageService } from '../local-storage/local-storage.service';
+
 import { Player } from 'src/app/dataTypes/player';
 
 @Injectable({
@@ -12,7 +14,7 @@ export class SortPlayersService {
     
     @Output() sortEvent = new EventEmitter<Player[]>();
 
-    constructor(private http: HttpClient) {
+    constructor(private http: HttpClient, private storage: LocalStorageService) {
         this.baseUrl = 'https://nba-players.herokuapp.com/players-stats';
     }
 
@@ -24,11 +26,13 @@ export class SortPlayersService {
         this.http.get<Player[]>(this.baseUrl)
             .subscribe({
                 next: (players: Player[]) => {
+                    players = this.changePlayersWithEdited(players);
+
                     players.sort((a: Player, b: Player) => {
                         switch(fieldName) {
                             case 'games_played': 
                             case 'three_point_percentage':
-                                return parseInt(a[fieldName]) - parseInt(b[fieldName]);
+                                return parseFloat(a[fieldName]) - parseFloat(b[fieldName]);
                             default:
                                 return a[fieldName].localeCompare(b[fieldName]);
                         }
@@ -42,5 +46,18 @@ export class SortPlayersService {
                     console.error('Error: ' + error);
                 }
             });
+    }
+
+    private changePlayersWithEdited(players: Player[]): Player[] {
+        players = players.map((player: Player) => {
+            if (this.storage.has(player.name)) {
+                player = JSON.parse(this.storage.get(player.name));
+            }
+
+            return player;
+        });
+
+        console.log(players);
+        return players;
     }
 }

@@ -24,7 +24,7 @@ export class EditStatsFormComponent implements OnInit, ControlValueAccessor {
 
     ngOnInit() {
         this.setPlayerForm();
-        this.fieldsList = Object.keys(this.editPlayerForm.value);
+        this.fieldsList = Object.keys(this.editPlayerForm.value).slice(4);
     }
 
     writeValue(player: Player): void {
@@ -32,11 +32,16 @@ export class EditStatsFormComponent implements OnInit, ControlValueAccessor {
             return;
         }
 
+        const storage = sessionStorage;
+        storage.setItem(player.name, JSON.stringify(player));
+
         this.setPlayerForm(player);
     }
 
     registerOnChange(fn: any): void { }
+
     registerOnTouched(fn: any): void { }
+
     setDisabledState?(isDisabled: boolean): void { }
 
     public getTitle(fieldName: string): string {
@@ -58,6 +63,11 @@ export class EditStatsFormComponent implements OnInit, ControlValueAccessor {
     private setPlayerForm(player?: Player): void {
         if (!player) {
             this.editPlayerForm = this.formBuilder.group({
+                name: [''],
+                team_name: [''],
+                image: [''],
+                team_image: [''],
+                
                 assists_per_game: [''],
                 blocks_per_game: [''],
                 defensive_rebounds_per_game: [''],
@@ -79,6 +89,18 @@ export class EditStatsFormComponent implements OnInit, ControlValueAccessor {
             });
         } else {
             this.editPlayerForm.patchValue(player);
+            this.subscribeOnChanges();
         }
+    }
+
+    private subscribeOnChanges(): void {
+        const storage = sessionStorage;
+
+        this.editPlayerForm.valueChanges.subscribe({
+            next: (player: Player) => {
+    
+                storage.setItem(player.name, JSON.stringify(player));
+            }
+        });
     }
 }

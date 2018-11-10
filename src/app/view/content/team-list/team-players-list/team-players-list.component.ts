@@ -6,6 +6,7 @@ import { TeamListService } from '../../team-list/team-list.service';
 import { PlayerListService } from '../../player-list/player-list.service';
 import { ProgressBarService } from 'src/app/shared-modules/progress-bar/progress-bar.service';
 import { LoadingService } from 'src/app/shared-modules/loading/loading.service';
+import { LocalStorageService } from 'src/app/core/local-storage/local-storage.service';
 
 import { Player } from 'src/app/dataTypes/player';
 import { map } from 'rxjs/operators';
@@ -24,7 +25,8 @@ export class TeamPlayersListComponent implements OnInit {
         private playerListService: PlayerListService,
         private progressBar: ProgressBarService,
         private route: ActivatedRoute,
-        private loading: LoadingService) { }
+        private loading: LoadingService,
+        private storage: LocalStorageService) { }
 
     ngOnInit() {
         this.initTeamPlayers();
@@ -37,10 +39,16 @@ export class TeamPlayersListComponent implements OnInit {
             this.playerList$ = this.teamListService.getPlayersOfTheTeam(acronym)
                 .pipe(
                     map((players: Player[]) => {
-                        players.map((player: Player) => {
+                        players = players.map((player: Player) => {
+                            if (this.storage.has(player.name)) {
+                                return JSON.parse(this.storage.get(player.name));
+                            }
+                            
                             player.image = this.playerListService.getPlayerImage(player);
+                            
+                            return player;
                         });
-
+                        
                         this.loading.hide();
                         this.progressBar.emitContentLoaded();
 

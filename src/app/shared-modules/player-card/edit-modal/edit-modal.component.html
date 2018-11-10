@@ -8,11 +8,13 @@
   </div>
 
   <mat-card-actions>
-    <img class="modal__close"
-         src="/src/assets/images/close.png"
-         (click)="closeModal()">
+    <img class="modal__save"
+         [src]="saveImage"
+         title="Save changes"
+         (click)="savePlayerStats()">
     <img class="modal__favorite"
          [src]="favoriteStateImage"
+         title="Add to favorites"
          (click)="toggleFavoriteState()">
   </mat-card-actions>
 </div>

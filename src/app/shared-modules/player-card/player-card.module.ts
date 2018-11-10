@@ -7,6 +7,8 @@ import { PlayerCardComponent } from './player-card.component';
 import { EditModalComponent } from './edit-modal/edit-modal.component';
 import { EditStatsFormComponent } from './edit-modal/edit-stats-form/edit-stats-form.component';
 
+import { ValidationDirective } from './edit-modal/edit-stats-form/validation.directive';
+
 @NgModule({
     imports: [
         FeaturesModule,
@@ -15,7 +17,8 @@ import { EditStatsFormComponent } from './edit-modal/edit-stats-form/edit-stats-
     declarations: [
         PlayerCardComponent,
         EditModalComponent,
-        EditStatsFormComponent
+        EditStatsFormComponent,
+        ValidationDirective
     ],
     exports: [
         PlayerCardComponent,

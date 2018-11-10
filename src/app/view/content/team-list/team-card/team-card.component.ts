@@ -17,9 +17,10 @@ export class TeamCardComponent {
 
   public isTeamImageLoaded: boolean;
 
-  constructor(private router: Router, private slideToggle: SlideToggleService) {
-    this.isTeamImageLoaded = false;
-  }
+  constructor(
+    private router: Router, private slideToggle: SlideToggleService) {
+      this.isTeamImageLoaded = false;
+    }
 
   public showTeamPlayers(): void {
     this.slideToggle.changeState(false);
